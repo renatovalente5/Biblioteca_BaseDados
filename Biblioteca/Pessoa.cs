@@ -12,7 +12,7 @@ namespace Biblioteca
         private String _first_name;
         private String _last_name;
         private DateTime _data_nascimento;
-        private int _telefone;
+        private Double _telefone;
 
         public Pessoa() : base() { }
         public Pessoa(int id, String first_name, String last_name) : base() {
@@ -27,14 +27,14 @@ namespace Biblioteca
             this.Last_name = last_name;
             this.Data_nascimento = date;
         }
-        public Pessoa(int id, String first_name, String last_name, int telefone) : base()
+        public Pessoa(int id, String first_name, String last_name, Double telefone) : base()
         {
             this.Id = id;
             this.First_name = first_name;
             this.Last_name = last_name;
             this.Telefone = telefone;
         }
-        public Pessoa(int id, String first_name, String last_name, DateTime date, int telefone) : base()
+        public Pessoa(int id, String first_name, String last_name, DateTime date, Double telefone) : base()
         {
             this.Id = id;
             this.First_name = first_name;
@@ -64,7 +64,7 @@ namespace Biblioteca
             get { return _data_nascimento; }
             set { _data_nascimento = value; }
         }
-        public int Telefone
+        public Double Telefone
         {
             get { return _telefone; }
             set { _telefone = value; }

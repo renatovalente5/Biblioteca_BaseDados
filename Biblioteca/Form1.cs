@@ -28,7 +28,7 @@ namespace Biblioteca
             if (!verifySGBDConnection())
                 return;
 
-            SqlCommand cmd = new SqlCommand("SELECT * FROM Pessoa", cn);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM Biblioteca.Pessoa", cn);
             SqlDataReader reader = cmd.ExecuteReader();
             listBox1.Items.Clear();
 
@@ -38,8 +38,8 @@ namespace Biblioteca
                 p.Id = (int) reader["id"];
                 p.First_name = reader["first_name"].ToString();
                 p.Last_name = reader["last_name"].ToString();
-                p.Data_nascimento = (DateTime) reader["_data_nascimento"];
-                p.Telefone = (int) reader["telefone"];
+                p.Data_nascimento = (DateTime) reader["data_nascimento"];
+                //p.Telefone = (Double) reader["telefone"];
                 listBox1.Items.Add(p);
             }
 
@@ -52,7 +52,7 @@ namespace Biblioteca
 
         private SqlConnection getSGBDConnection()
         {
-            return new SqlConnection("Server=tcp:mednat.ieeta.pt\\SQLSERVER,8101;Database=Biblioteca;User Id=p1g2;Password=Sqlgang.99;");
+            return new SqlConnection("data source= localhost;integrated security=true;initial catalog=Biblioteca");
 
         }
         private bool verifySGBDConnection()
