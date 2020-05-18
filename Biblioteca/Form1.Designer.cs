@@ -31,7 +31,7 @@ namespace Biblioteca
         private void InitializeComponent()
         {
             this.listBox1 = new System.Windows.Forms.ListBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonSearch = new System.Windows.Forms.Button();
             this.textID = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.buttonAdd = new System.Windows.Forms.Button();
@@ -47,6 +47,7 @@ namespace Biblioteca
             this.buttonRemove = new System.Windows.Forms.Button();
             this.buttonOk = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.textSearch = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // listBox1
@@ -59,15 +60,15 @@ namespace Biblioteca
             this.listBox1.TabIndex = 0;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
-            // button1
+            // buttonSearch
             // 
-            this.button1.Location = new System.Drawing.Point(232, 399);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(118, 39);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Search";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Search_Click);
+            this.buttonSearch.Location = new System.Drawing.Point(232, 399);
+            this.buttonSearch.Name = "buttonSearch";
+            this.buttonSearch.Size = new System.Drawing.Size(118, 39);
+            this.buttonSearch.TabIndex = 1;
+            this.buttonSearch.Text = "Search";
+            this.buttonSearch.UseVisualStyleBackColor = true;
+            this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
             // 
             // textID
             // 
@@ -204,11 +205,20 @@ namespace Biblioteca
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
+            // textSearch
+            // 
+            this.textSearch.Location = new System.Drawing.Point(24, 407);
+            this.textSearch.Name = "textSearch";
+            this.textSearch.Size = new System.Drawing.Size(202, 22);
+            this.textSearch.TabIndex = 18;
+            this.textSearch.TextChanged += new System.EventHandler(this.textSearch_TextChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.textSearch);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOk);
             this.Controls.Add(this.buttonRemove);
@@ -224,7 +234,7 @@ namespace Biblioteca
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textID);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.buttonSearch);
             this.Controls.Add(this.listBox1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -237,7 +247,7 @@ namespace Biblioteca
         #endregion
 
         private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonSearch;
         private System.Windows.Forms.TextBox textID;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button buttonAdd;
@@ -253,6 +263,7 @@ namespace Biblioteca
         private System.Windows.Forms.Button buttonRemove;
         private System.Windows.Forms.Button buttonOk;
         private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.TextBox textSearch;
     }
 }
 

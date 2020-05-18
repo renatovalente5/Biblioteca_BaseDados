@@ -54,7 +54,8 @@ namespace Biblioteca
 
         private SqlConnection getSGBDConnection()
         {
-            return new SqlConnection("data source= localhost;integrated security=true;initial catalog=Biblioteca");
+            //return new SqlConnection("data source= localhost;integrated security=true;initial catalog=Biblioteca");
+            return new SqlConnection("Data Source = tcp:mednat.ieeta.pt\\SQLSERVER,8101; Initial Catalog = p1g2; uid = p1g2;" + "password = Sqlgang.99");
 
         }
         private bool verifySGBDConnection()
@@ -146,7 +147,7 @@ namespace Biblioteca
                 return;
             SqlCommand cmd = new SqlCommand();
 
-            cmd.CommandText = "UPDATE Biblioteca.Pessoa " + "SET id = @id, " + "    first_name = @first_name, " + "    last_name = @last_name, " + "    data_nascimento = @data_nascimento, " + "    telefone = @telefone";
+            cmd.CommandText = "UPDATE Biblioteca.Pessoa " + "SET first_name = @first_name, " + "    last_name = @last_name, " + "    data_nascimento = @data_nascimento, " + "    telefone = @telefone " + " WHERE id = @id";
             cmd.Parameters.Clear();
             cmd.Parameters.AddWithValue("@id", p.Id);
             cmd.Parameters.AddWithValue("@first_name", p.First_name);
@@ -276,7 +277,7 @@ namespace Biblioteca
         private void buttonEdit_Click(object sender, EventArgs e)
         {
             currentPessoa = listBox1.SelectedIndex;
-            if (currentPessoa <= 0)
+            if (currentPessoa > 0)
             {
                 MessageBox.Show("Please select a contact to edit");
                 return;
@@ -374,6 +375,54 @@ namespace Biblioteca
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void textSearch_TextChanged(object sender, EventArgs e)
+        {
+          
+        }
+
+        private void buttonSearch_Click(object sender, EventArgs e)
+        {
+
+            if (!verifySGBDConnection())
+                return;
+
+            if (textSearch.Text == "")
+            {
+                Form1_Load(sender, e);
+            }
+            else
+            {
+
+                SqlCommand cmd = new SqlCommand();
+
+                cmd.CommandText = "SELECT * FROM Biblioteca.Pessoa WHERE first_name = @varSearch";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@varSearch", textSearch.Text);
+                cmd.Connection = cn;
+                SqlDataReader reader = cmd.ExecuteReader();
+                listBox1.Items.Clear();
+
+                while (reader.Read())
+                {
+                    Pessoa p = new Pessoa();
+                    p.Id = (int)reader["id"];
+                    p.First_name = reader["first_name"].ToString();
+                    p.Last_name = reader["last_name"].ToString();
+                    p.Data_nascimento = (DateTime)reader["data_nascimento"];
+                    p.Telefone = (decimal)reader["telefone"];
+                    listBox1.Items.Add(p);
+                }
+
+
+                cn.Close();
+
+
+                currentPessoa = 0;
+                ShowPessoa();
+                ShowButtons();
+            }
         }
     }
 }
