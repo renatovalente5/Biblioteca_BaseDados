@@ -44,8 +44,9 @@ namespace Biblioteca
             this.labelDataNascimento = new System.Windows.Forms.Label();
             this.labelTelefone = new System.Windows.Forms.Label();
             this.buttonEdit = new System.Windows.Forms.Button();
-            this.buttonDelete = new System.Windows.Forms.Button();
+            this.buttonRemove = new System.Windows.Forms.Button();
             this.buttonOk = new System.Windows.Forms.Button();
+            this.buttonCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listBox1
@@ -173,14 +174,15 @@ namespace Biblioteca
             this.buttonEdit.UseVisualStyleBackColor = true;
             this.buttonEdit.Click += new System.EventHandler(this.buttonEdit_Click);
             // 
-            // buttonDelete
+            // buttonRemove
             // 
-            this.buttonDelete.Location = new System.Drawing.Point(586, 399);
-            this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(101, 34);
-            this.buttonDelete.TabIndex = 15;
-            this.buttonDelete.Text = "Delete";
-            this.buttonDelete.UseVisualStyleBackColor = true;
+            this.buttonRemove.Location = new System.Drawing.Point(586, 399);
+            this.buttonRemove.Name = "buttonRemove";
+            this.buttonRemove.Size = new System.Drawing.Size(101, 34);
+            this.buttonRemove.TabIndex = 15;
+            this.buttonRemove.Text = "Remove";
+            this.buttonRemove.UseVisualStyleBackColor = true;
+            this.buttonRemove.Click += new System.EventHandler(this.buttonRemove_Click);
             // 
             // buttonOk
             // 
@@ -192,13 +194,24 @@ namespace Biblioteca
             this.buttonOk.UseVisualStyleBackColor = true;
             this.buttonOk.Click += new System.EventHandler(this.buttonOk_Click);
             // 
+            // buttonCancel
+            // 
+            this.buttonCancel.Location = new System.Drawing.Point(693, 359);
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Size = new System.Drawing.Size(101, 34);
+            this.buttonCancel.TabIndex = 17;
+            this.buttonCancel.Text = "Cancel";
+            this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOk);
-            this.Controls.Add(this.buttonDelete);
+            this.Controls.Add(this.buttonRemove);
             this.Controls.Add(this.buttonEdit);
             this.Controls.Add(this.labelTelefone);
             this.Controls.Add(this.labelDataNascimento);
@@ -237,8 +250,9 @@ namespace Biblioteca
         private System.Windows.Forms.Label labelDataNascimento;
         private System.Windows.Forms.Label labelTelefone;
         private System.Windows.Forms.Button buttonEdit;
-        private System.Windows.Forms.Button buttonDelete;
+        private System.Windows.Forms.Button buttonRemove;
         private System.Windows.Forms.Button buttonOk;
+        private System.Windows.Forms.Button buttonCancel;
     }
 }
 

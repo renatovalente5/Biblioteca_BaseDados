@@ -80,68 +80,6 @@ namespace Biblioteca
             textTelefone.Text = pessoa.Telefone.ToString();
         }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (listBox1.SelectedIndex >= 0)
-            {
-                currentPessoa = listBox1.SelectedIndex;
-                ShowPessoa();
-            }
-        }
-
-        private void Search_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textID_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void buttonAdd_Click(object sender, EventArgs e)
-        {
-            adding = true;
-            ClearFields();
-            HideButtons();
-            listBox1.Enabled = false;
-        }
-
-        private void textFirstName_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textLastName_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textTelefone_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void buttonOk_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                SavePessoa();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            listBox1.Enabled = true;
-            int idx = listBox1.FindString(textID.Text);
-            listBox1.SelectedIndex = idx;
-            ShowButtons();
-        }
         private bool SavePessoa()
         {
             Pessoa pessoa = new Pessoa();
@@ -236,6 +174,32 @@ namespace Biblioteca
             }
         }
 
+        private void RemovePessoa(int id)
+        {
+            if (!verifySGBDConnection())
+                return;
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.CommandText = "DELETE Biblioteca.Pessoa WHERE id=@id ";
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.Connection = cn;
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to delete contact in database. \n ERROR MESSAGE: \n" + ex.Message);
+            }
+            finally
+            {
+                cn.Close();
+            }
+        }
+       
+
         public void ClearFields()
         {
             textID.Text = "";
@@ -249,20 +213,21 @@ namespace Biblioteca
         {
             LockControls();
             buttonAdd.Visible = true;
-            buttonOk.Visible = false;
             buttonEdit.Visible = true;
-            buttonDelete.Visible = true;
-            //bttnCancel.Visible = false;
+            buttonRemove.Visible = true;
+            buttonOk.Visible = false;
+            buttonCancel.Visible = false;
+
         }
 
         public void HideButtons()
         {
             UnlockControls();
             buttonAdd.Visible = false;
-            buttonOk.Visible = true;
             buttonEdit.Visible = false;
-            buttonDelete.Visible = false;
-            //bttnCancel.Visible = true;
+            buttonRemove.Visible = false;
+            buttonOk.Visible = true;
+            buttonCancel.Visible = true;
         }
 
         public void LockControls()
@@ -283,6 +248,31 @@ namespace Biblioteca
             textTelefone.ReadOnly = false;
         }
 
+        private void buttonAdd_Click(object sender, EventArgs e)
+        {
+            adding = true;
+            ClearFields();
+            HideButtons();
+            listBox1.Enabled = false;
+        }
+
+
+        private void buttonOk_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SavePessoa();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            listBox1.Enabled = true;
+            int idx = listBox1.FindString(textID.Text);
+            listBox1.SelectedIndex = idx;
+            ShowButtons();
+        }
+
         private void buttonEdit_Click(object sender, EventArgs e)
         {
             currentPessoa = listBox1.SelectedIndex;
@@ -294,6 +284,96 @@ namespace Biblioteca
             adding = false;
             HideButtons();
             listBox1.Enabled = false;
+        }
+
+        private void buttonRemove_Click(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedIndex > -1)
+            {
+                try
+                {
+                    RemovePessoa(((Pessoa)listBox1.SelectedItem).Id);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return;
+                }
+
+                listBox1.Items.RemoveAt(listBox1.SelectedIndex);
+                if (currentPessoa == listBox1.Items.Count)
+                    currentPessoa = listBox1.Items.Count - 1;
+                if (currentPessoa == -1)
+                {
+                    ClearFields();
+                    MessageBox.Show("There are no more contacts");
+                }
+                else
+                {
+                    ShowPessoa();
+                }
+            }
+        }
+
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            listBox1.Enabled = true;
+            if (listBox1.Items.Count > 0)
+            {
+                currentPessoa = listBox1.SelectedIndex;
+                if (currentPessoa < 0)
+                    currentPessoa = 0;
+                ShowPessoa();
+            }
+            else
+            {
+                ClearFields();
+                LockControls();
+            }
+            ShowButtons();
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedIndex >= 0)
+            {
+                currentPessoa = listBox1.SelectedIndex;
+                ShowPessoa();
+            }
+        }
+
+        private void Search_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textID_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void textFirstName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textLastName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textTelefone_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
