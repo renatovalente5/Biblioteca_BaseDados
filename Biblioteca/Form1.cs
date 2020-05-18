@@ -55,8 +55,8 @@ namespace Biblioteca
         private SqlConnection getSGBDConnection()
         {
             //return new SqlConnection("data source= localhost;integrated security=true;initial catalog=Biblioteca");
-            return new SqlConnection("Data Source = tcp:mednat.ieeta.pt\\SQLSERVER,8101; Initial Catalog = p1g2; uid = p1g2;" + "password = Sqlgang.99");
-
+            //return new SqlConnection("Data Source = tcp:mednat.ieeta.pt\\SQLSERVER,8101; Initial Catalog = p1g2; uid = p1g2;" + "password = Sqlgang.99");
+            return new SqlConnection("data source= localhost;integrated security=true;");// initial catalog=Biblioteca");
         }
         private bool verifySGBDConnection()
         {
@@ -86,7 +86,7 @@ namespace Biblioteca
             Pessoa pessoa = new Pessoa();
             try
             {
-                pessoa.Id = int.Parse(textID.Text);
+                //pessoa.Id = int.Parse(textID.Text);
                 pessoa.First_name = textFirstName.Text;
                 pessoa.Last_name = textLastName.Text;
                 pessoa.Data_nascimento = DateTime.Parse(textDataNascimento.Text);
@@ -99,7 +99,7 @@ namespace Biblioteca
             }
             if (adding)
             {
-                SubmitPessoa(pessoa);
+                pessoa = SubmitPessoa(pessoa);
                 listBox1.Items.Add(pessoa);
             }
             else
@@ -110,15 +110,14 @@ namespace Biblioteca
             return true;
         }
 
-        private void SubmitPessoa(Pessoa p)
+        private Pessoa SubmitPessoa(Pessoa p)
         {
             if (!verifySGBDConnection())
-                return;
+                return null;
             SqlCommand cmd = new SqlCommand();
 
-            cmd.CommandText = "INSERT Biblioteca.Pessoa (id, first_name, last_name, data_nascimento, telefone) " + "VALUES (@id, @first_name, @last_name, @data_nascimento, @telefone) ";
+            cmd.CommandText = "INSERT Biblioteca.Pessoa (first_name, last_name, data_nascimento, telefone) output INSERTED.ID VALUES ( @first_name, @last_name, @data_nascimento, @telefone); ";
             cmd.Parameters.Clear();
-            cmd.Parameters.AddWithValue("@id", p.Id);
             cmd.Parameters.AddWithValue("@first_name", p.First_name);
             cmd.Parameters.AddWithValue("@last_name", p.Last_name);
             cmd.Parameters.AddWithValue("@data_nascimento", p.Data_nascimento);
@@ -127,7 +126,8 @@ namespace Biblioteca
 
             try
             {
-                cmd.ExecuteNonQuery();
+                int id = (int)cmd.ExecuteScalar();
+                p.Id = id;
             }
             catch (Exception ex)
             {
@@ -137,6 +137,7 @@ namespace Biblioteca
             {
                 cn.Close();
             }
+            return p;
         }
 
         private void UpdatePessoa(Pessoa p)
