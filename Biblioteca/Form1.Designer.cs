@@ -34,7 +34,7 @@ namespace Biblioteca
             this.button1 = new System.Windows.Forms.Button();
             this.textID = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
+            this.buttonAdd = new System.Windows.Forms.Button();
             this.textFirstName = new System.Windows.Forms.TextBox();
             this.textLastName = new System.Windows.Forms.TextBox();
             this.labelFirstName = new System.Windows.Forms.Label();
@@ -45,6 +45,7 @@ namespace Biblioteca
             this.labelTelefone = new System.Windows.Forms.Label();
             this.buttonEdit = new System.Windows.Forms.Button();
             this.buttonDelete = new System.Windows.Forms.Button();
+            this.buttonOk = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listBox1
@@ -84,15 +85,15 @@ namespace Biblioteca
             this.label2.TabIndex = 4;
             this.label2.Text = "ID";
             // 
-            // button2
+            // buttonAdd
             // 
-            this.button2.Location = new System.Drawing.Point(409, 399);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(101, 34);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "Add";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.buttonAdd_Click);
+            this.buttonAdd.Location = new System.Drawing.Point(372, 399);
+            this.buttonAdd.Name = "buttonAdd";
+            this.buttonAdd.Size = new System.Drawing.Size(101, 34);
+            this.buttonAdd.TabIndex = 5;
+            this.buttonAdd.Text = "Add";
+            this.buttonAdd.UseVisualStyleBackColor = true;
+            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
             // textFirstName
             // 
@@ -149,7 +150,7 @@ namespace Biblioteca
             this.labelDataNascimento.AutoSize = true;
             this.labelDataNascimento.Location = new System.Drawing.Point(397, 140);
             this.labelDataNascimento.Name = "labelDataNascimento";
-            this.labelDataNascimento.Size = new System.Drawing.Size(170, 21);
+            this.labelDataNascimento.Size = new System.Drawing.Size(136, 17);
             this.labelDataNascimento.TabIndex = 12;
             this.labelDataNascimento.Text = "Data de Nascimento";
             // 
@@ -158,33 +159,45 @@ namespace Biblioteca
             this.labelTelefone.AutoSize = true;
             this.labelTelefone.Location = new System.Drawing.Point(397, 196);
             this.labelTelefone.Name = "labelTelefone";
-            this.labelTelefone.Size = new System.Drawing.Size(80, 21);
+            this.labelTelefone.Size = new System.Drawing.Size(64, 17);
             this.labelTelefone.TabIndex = 13;
             this.labelTelefone.Text = "Telefone";
             // 
             // buttonEdit
             // 
-            this.buttonEdit.Location = new System.Drawing.Point(518, 399);
+            this.buttonEdit.Location = new System.Drawing.Point(479, 399);
             this.buttonEdit.Name = "buttonEdit";
             this.buttonEdit.Size = new System.Drawing.Size(101, 34);
             this.buttonEdit.TabIndex = 14;
             this.buttonEdit.Text = "Edit";
             this.buttonEdit.UseVisualStyleBackColor = true;
+            this.buttonEdit.Click += new System.EventHandler(this.buttonEdit_Click);
             // 
             // buttonDelete
             // 
-            this.buttonDelete.Location = new System.Drawing.Point(625, 401);
+            this.buttonDelete.Location = new System.Drawing.Point(586, 399);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(101, 34);
             this.buttonDelete.TabIndex = 15;
             this.buttonDelete.Text = "Delete";
             this.buttonDelete.UseVisualStyleBackColor = true;
             // 
+            // buttonOk
+            // 
+            this.buttonOk.Location = new System.Drawing.Point(693, 399);
+            this.buttonOk.Name = "buttonOk";
+            this.buttonOk.Size = new System.Drawing.Size(101, 34);
+            this.buttonOk.TabIndex = 16;
+            this.buttonOk.Text = "Ok";
+            this.buttonOk.UseVisualStyleBackColor = true;
+            this.buttonOk.Click += new System.EventHandler(this.buttonOk_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.buttonOk);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.buttonEdit);
             this.Controls.Add(this.labelTelefone);
@@ -195,7 +208,7 @@ namespace Biblioteca
             this.Controls.Add(this.labelFirstName);
             this.Controls.Add(this.textLastName);
             this.Controls.Add(this.textFirstName);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textID);
             this.Controls.Add(this.button1);
@@ -214,7 +227,7 @@ namespace Biblioteca
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox textID;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.TextBox textFirstName;
         private System.Windows.Forms.TextBox textLastName;
         private System.Windows.Forms.Label labelFirstName;
@@ -225,6 +238,7 @@ namespace Biblioteca
         private System.Windows.Forms.Label labelTelefone;
         private System.Windows.Forms.Button buttonEdit;
         private System.Windows.Forms.Button buttonDelete;
+        private System.Windows.Forms.Button buttonOk;
     }
 }
 

@@ -12,7 +12,7 @@ namespace Biblioteca
         private String _first_name;
         private String _last_name;
         private DateTime _data_nascimento;
-        private Double _telefone;
+        private decimal _telefone;
 
         public Pessoa() : base() { }
         public Pessoa(int id, String first_name, String last_name) : base() {
@@ -27,14 +27,14 @@ namespace Biblioteca
             this.Last_name = last_name;
             this.Data_nascimento = date;
         }
-        public Pessoa(int id, String first_name, String last_name, Double telefone) : base()
+        public Pessoa(int id, String first_name, String last_name, decimal telefone) : base()
         {
             this.Id = id;
             this.First_name = first_name;
             this.Last_name = last_name;
             this.Telefone = telefone;
         }
-        public Pessoa(int id, String first_name, String last_name, DateTime date, Double telefone) : base()
+        public Pessoa(int id, String first_name, String last_name, DateTime date, decimal telefone) : base()
         {
             this.Id = id;
             this.First_name = first_name;
@@ -43,6 +43,10 @@ namespace Biblioteca
             this.Telefone = telefone;
         }
 
+        public override String ToString()
+        {
+            return _id + " " + _first_name + " " + _last_name;
+        }
 
 
         public int Id {
@@ -64,7 +68,7 @@ namespace Biblioteca
             get { return _data_nascimento; }
             set { _data_nascimento = value; }
         }
-        public Double Telefone
+        public decimal Telefone
         {
             get { return _telefone; }
             set { _telefone = value; }
