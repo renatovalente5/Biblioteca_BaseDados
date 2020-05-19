@@ -54,9 +54,9 @@ namespace Biblioteca
 
         private SqlConnection getSGBDConnection()
         {
-            //return new SqlConnection("data source= localhost;integrated security=true;initial catalog=Biblioteca");
+            return new SqlConnection("data source= localhost;integrated security=true;initial catalog=Biblioteca");
             //return new SqlConnection("Data Source = tcp:mednat.ieeta.pt\\SQLSERVER,8101; Initial Catalog = p1g2; uid = p1g2;" + "password = Sqlgang.99");
-            return new SqlConnection("data source= localhost;integrated security=true;");// initial catalog=Biblioteca");
+            //return new SqlConnection("data source= localhost;integrated security=true;");// initial catalog=Biblioteca");
         }
         private bool verifySGBDConnection()
         {
@@ -278,7 +278,7 @@ namespace Biblioteca
         private void buttonEdit_Click(object sender, EventArgs e)
         {
             currentPessoa = listBox1.SelectedIndex;
-            if (currentPessoa > 0)
+            if (currentPessoa < 0)
             {
                 MessageBox.Show("Please select a contact to edit");
                 return;
@@ -424,6 +424,16 @@ namespace Biblioteca
                 ShowPessoa();
                 ShowButtons();
             }
+        }
+
+        private void buttonEmprestimo_Click(object sender, EventArgs e)
+        {
+            var form2 = new Form2();
+            form2.Show();
+
+            //currentPessoa = 0;
+            //ShowPessoa();
+            //ShowButtons();
         }
     }
 }

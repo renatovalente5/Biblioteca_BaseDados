@@ -3,7 +3,7 @@ CREATE SCHEMA BIBLIOTECA
 GO
 
 CREATE TABLE BIBLIOTECA.Editora(
-	id_editora		INT PRIMARY KEY NOT NULL,
+	id_editora		INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
 	nome_editora		VARCHAR(50) NOT NULL,
 	endereco		VARCHAR(255),
 	telefone		DECIMAL(9,0) UNIQUE CHECK(telefone > 0)
@@ -18,7 +18,7 @@ CREATE TABLE BIBLIOTECA.Livro(
 );
 
 CREATE TABLE BIBLIOTECA.Pessoa(
-	id			INT PRIMARY KEY NOT NULL,
+	id			INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
 	first_name			VARCHAR(100) NOT NULL,
 	last_name			VARCHAR(100) NOT NULL,
 	data_nascimento 	DATE,
@@ -60,7 +60,7 @@ CREATE TABLE BIBLIOTECA.Funcionario(
 );
 
 CREATE TABLE BIBLIOTECA.Emprestimo(
-	n_emprestimo		INT PRIMARY KEY NOT NULL,
+	n_emprestimo		INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
 	data_saida		DATE NOT NULL,
 	data_entrega		DATE NOT NULL,
 	data_chegada		DATE,
@@ -69,7 +69,7 @@ CREATE TABLE BIBLIOTECA.Emprestimo(
 );
 
 CREATE TABLE BIBLIOTECA.Livros_Exemplares(
-	numero_exemplar		INT NOT NULL,
+	numero_exemplar		INT IDENTITY(1,1) NOT NULL,
 	n_emprestimo		INT REFERENCES BIBLIOTECA.Emprestimo(n_emprestimo) NOT NULL,
 	ISBN			VARCHAR(50) REFERENCES BIBLIOTECA.Livro(ISBN) NOT NULL,
 	data_de_aquisicao 	DATE NOT NULL,

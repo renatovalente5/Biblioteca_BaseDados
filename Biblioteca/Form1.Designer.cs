@@ -48,6 +48,7 @@ namespace Biblioteca
             this.buttonOk = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.textSearch = new System.Windows.Forms.TextBox();
+            this.buttonEmprestimo = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listBox1
@@ -213,11 +214,22 @@ namespace Biblioteca
             this.textSearch.TabIndex = 18;
             this.textSearch.TextChanged += new System.EventHandler(this.textSearch_TextChanged);
             // 
+            // buttonEmprestimo
+            // 
+            this.buttonEmprestimo.Location = new System.Drawing.Point(400, 267);
+            this.buttonEmprestimo.Name = "buttonEmprestimo";
+            this.buttonEmprestimo.Size = new System.Drawing.Size(101, 34);
+            this.buttonEmprestimo.TabIndex = 19;
+            this.buttonEmprestimo.Text = "Emprestimo";
+            this.buttonEmprestimo.UseVisualStyleBackColor = true;
+            this.buttonEmprestimo.Click += new System.EventHandler(this.buttonEmprestimo_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1073, 450);
+            this.Controls.Add(this.buttonEmprestimo);
             this.Controls.Add(this.textSearch);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOk);
@@ -264,6 +276,7 @@ namespace Biblioteca
         private System.Windows.Forms.Button buttonOk;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.TextBox textSearch;
+        private System.Windows.Forms.Button buttonEmprestimo;
     }
 }
 
