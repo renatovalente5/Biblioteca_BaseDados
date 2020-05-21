@@ -13,12 +13,14 @@ namespace Biblioteca
         private int _ano;
         private int _id_editora;
         private String _categoria;
+        private int _countTilulos;
+        private String _nome_editora;
 
         public Livro() : base() { }
 
         public override String ToString()
         {
-            return _titulo;
+            return _countTilulos + " - " + _titulo;
         }
 
         public String ISBN
@@ -45,6 +47,16 @@ namespace Biblioteca
         {
             get { return _categoria; }
             set { _categoria = value; }
+        }
+        public int CountTilulos
+        {
+            get { return _countTilulos; }
+            set { _countTilulos = value; }
+        }
+        public String Nome_editora
+        {
+            get { return _nome_editora; }
+            set { _nome_editora = value; }
         }
     }
 }

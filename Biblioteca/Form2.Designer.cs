@@ -35,6 +35,12 @@
             this.buttonRemove = new System.Windows.Forms.Button();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.buttonOk = new System.Windows.Forms.Button();
+            this.textDisponiveis = new System.Windows.Forms.TextBox();
+            this.labelDisponiveis = new System.Windows.Forms.Label();
+            this.textCategoria = new System.Windows.Forms.TextBox();
+            this.textEditora = new System.Windows.Forms.TextBox();
+            this.labelCategoria = new System.Windows.Forms.Label();
+            this.labelEditora = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // listBox1
@@ -66,7 +72,7 @@
             // 
             // buttonAdd
             // 
-            this.buttonAdd.Location = new System.Drawing.Point(411, 151);
+            this.buttonAdd.Location = new System.Drawing.Point(411, 267);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(98, 38);
             this.buttonAdd.TabIndex = 3;
@@ -76,7 +82,7 @@
             // 
             // buttonRemove
             // 
-            this.buttonRemove.Location = new System.Drawing.Point(673, 151);
+            this.buttonRemove.Location = new System.Drawing.Point(673, 267);
             this.buttonRemove.Name = "buttonRemove";
             this.buttonRemove.Size = new System.Drawing.Size(98, 38);
             this.buttonRemove.TabIndex = 4;
@@ -88,7 +94,7 @@
             // 
             this.listBox2.FormattingEnabled = true;
             this.listBox2.ItemHeight = 16;
-            this.listBox2.Location = new System.Drawing.Point(411, 26);
+            this.listBox2.Location = new System.Drawing.Point(411, 147);
             this.listBox2.Name = "listBox2";
             this.listBox2.Size = new System.Drawing.Size(360, 100);
             this.listBox2.TabIndex = 5;
@@ -104,11 +110,65 @@
             this.buttonOk.UseVisualStyleBackColor = true;
             this.buttonOk.Click += new System.EventHandler(this.buttonOk_Click);
             // 
+            // textDisponiveis
+            // 
+            this.textDisponiveis.Location = new System.Drawing.Point(494, 29);
+            this.textDisponiveis.Name = "textDisponiveis";
+            this.textDisponiveis.Size = new System.Drawing.Size(42, 22);
+            this.textDisponiveis.TabIndex = 7;
+            // 
+            // labelDisponiveis
+            // 
+            this.labelDisponiveis.AutoSize = true;
+            this.labelDisponiveis.Location = new System.Drawing.Point(408, 29);
+            this.labelDisponiveis.Name = "labelDisponiveis";
+            this.labelDisponiveis.Size = new System.Drawing.Size(80, 17);
+            this.labelDisponiveis.TabIndex = 8;
+            this.labelDisponiveis.Text = "Disponiveis";
+            // 
+            // textCategoria
+            // 
+            this.textCategoria.Location = new System.Drawing.Point(494, 63);
+            this.textCategoria.Name = "textCategoria";
+            this.textCategoria.Size = new System.Drawing.Size(208, 22);
+            this.textCategoria.TabIndex = 9;
+            // 
+            // textEditora
+            // 
+            this.textEditora.Location = new System.Drawing.Point(494, 98);
+            this.textEditora.Name = "textEditora";
+            this.textEditora.Size = new System.Drawing.Size(208, 22);
+            this.textEditora.TabIndex = 10;
+            // 
+            // labelCategoria
+            // 
+            this.labelCategoria.AutoSize = true;
+            this.labelCategoria.Location = new System.Drawing.Point(408, 63);
+            this.labelCategoria.Name = "labelCategoria";
+            this.labelCategoria.Size = new System.Drawing.Size(69, 17);
+            this.labelCategoria.TabIndex = 11;
+            this.labelCategoria.Text = "Categoria";
+            // 
+            // labelEditora
+            // 
+            this.labelEditora.AutoSize = true;
+            this.labelEditora.Location = new System.Drawing.Point(408, 101);
+            this.labelEditora.Name = "labelEditora";
+            this.labelEditora.Size = new System.Drawing.Size(53, 17);
+            this.labelEditora.TabIndex = 12;
+            this.labelEditora.Text = "Editora";
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(813, 450);
+            this.Controls.Add(this.labelEditora);
+            this.Controls.Add(this.labelCategoria);
+            this.Controls.Add(this.textEditora);
+            this.Controls.Add(this.textCategoria);
+            this.Controls.Add(this.labelDisponiveis);
+            this.Controls.Add(this.textDisponiveis);
             this.Controls.Add(this.buttonOk);
             this.Controls.Add(this.listBox2);
             this.Controls.Add(this.buttonRemove);
@@ -133,5 +193,11 @@
         private System.Windows.Forms.Button buttonRemove;
         private System.Windows.Forms.ListBox listBox2;
         private System.Windows.Forms.Button buttonOk;
+        private System.Windows.Forms.TextBox textDisponiveis;
+        private System.Windows.Forms.Label labelDisponiveis;
+        private System.Windows.Forms.TextBox textCategoria;
+        private System.Windows.Forms.TextBox textEditora;
+        private System.Windows.Forms.Label labelCategoria;
+        private System.Windows.Forms.Label labelEditora;
     }
 }

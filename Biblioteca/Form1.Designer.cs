@@ -228,7 +228,7 @@ namespace Biblioteca
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1073, 450);
+            this.ClientSize = new System.Drawing.Size(801, 450);
             this.Controls.Add(this.buttonEmprestimo);
             this.Controls.Add(this.textSearch);
             this.Controls.Add(this.buttonCancel);
