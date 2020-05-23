@@ -41,21 +41,22 @@
             this.textEditora = new System.Windows.Forms.TextBox();
             this.labelCategoria = new System.Windows.Forms.Label();
             this.labelEditora = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 16;
-            this.listBox1.Location = new System.Drawing.Point(25, 26);
+            this.listBox1.Location = new System.Drawing.Point(25, 58);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(300, 340);
+            this.listBox1.Size = new System.Drawing.Size(310, 324);
             this.listBox1.TabIndex = 0;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // buttonSearch
             // 
-            this.buttonSearch.Location = new System.Drawing.Point(207, 391);
+            this.buttonSearch.Location = new System.Drawing.Point(237, 400);
             this.buttonSearch.Name = "buttonSearch";
             this.buttonSearch.Size = new System.Drawing.Size(98, 38);
             this.buttonSearch.TabIndex = 1;
@@ -65,14 +66,14 @@
             // 
             // textSearch
             // 
-            this.textSearch.Location = new System.Drawing.Point(25, 399);
+            this.textSearch.Location = new System.Drawing.Point(25, 408);
             this.textSearch.Name = "textSearch";
-            this.textSearch.Size = new System.Drawing.Size(176, 22);
+            this.textSearch.Size = new System.Drawing.Size(195, 22);
             this.textSearch.TabIndex = 2;
             // 
             // buttonAdd
             // 
-            this.buttonAdd.Location = new System.Drawing.Point(411, 267);
+            this.buttonAdd.Location = new System.Drawing.Point(411, 286);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(98, 38);
             this.buttonAdd.TabIndex = 3;
@@ -82,7 +83,7 @@
             // 
             // buttonRemove
             // 
-            this.buttonRemove.Location = new System.Drawing.Point(673, 267);
+            this.buttonRemove.Location = new System.Drawing.Point(693, 286);
             this.buttonRemove.Name = "buttonRemove";
             this.buttonRemove.Size = new System.Drawing.Size(98, 38);
             this.buttonRemove.TabIndex = 4;
@@ -94,15 +95,15 @@
             // 
             this.listBox2.FormattingEnabled = true;
             this.listBox2.ItemHeight = 16;
-            this.listBox2.Location = new System.Drawing.Point(411, 147);
+            this.listBox2.Location = new System.Drawing.Point(411, 171);
             this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(360, 100);
+            this.listBox2.Size = new System.Drawing.Size(380, 100);
             this.listBox2.TabIndex = 5;
             this.listBox2.SelectedIndexChanged += new System.EventHandler(this.listBox2_SelectedIndexChanged);
             // 
             // buttonOk
             // 
-            this.buttonOk.Location = new System.Drawing.Point(673, 383);
+            this.buttonOk.Location = new System.Drawing.Point(693, 400);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(98, 38);
             this.buttonOk.TabIndex = 6;
@@ -112,7 +113,7 @@
             // 
             // textDisponiveis
             // 
-            this.textDisponiveis.Location = new System.Drawing.Point(494, 29);
+            this.textDisponiveis.Location = new System.Drawing.Point(494, 58);
             this.textDisponiveis.Name = "textDisponiveis";
             this.textDisponiveis.Size = new System.Drawing.Size(42, 22);
             this.textDisponiveis.TabIndex = 7;
@@ -120,7 +121,7 @@
             // labelDisponiveis
             // 
             this.labelDisponiveis.AutoSize = true;
-            this.labelDisponiveis.Location = new System.Drawing.Point(408, 29);
+            this.labelDisponiveis.Location = new System.Drawing.Point(408, 58);
             this.labelDisponiveis.Name = "labelDisponiveis";
             this.labelDisponiveis.Size = new System.Drawing.Size(80, 17);
             this.labelDisponiveis.TabIndex = 8;
@@ -128,14 +129,14 @@
             // 
             // textCategoria
             // 
-            this.textCategoria.Location = new System.Drawing.Point(494, 63);
+            this.textCategoria.Location = new System.Drawing.Point(494, 92);
             this.textCategoria.Name = "textCategoria";
             this.textCategoria.Size = new System.Drawing.Size(208, 22);
             this.textCategoria.TabIndex = 9;
             // 
             // textEditora
             // 
-            this.textEditora.Location = new System.Drawing.Point(494, 98);
+            this.textEditora.Location = new System.Drawing.Point(494, 127);
             this.textEditora.Name = "textEditora";
             this.textEditora.Size = new System.Drawing.Size(208, 22);
             this.textEditora.TabIndex = 10;
@@ -143,7 +144,7 @@
             // labelCategoria
             // 
             this.labelCategoria.AutoSize = true;
-            this.labelCategoria.Location = new System.Drawing.Point(408, 63);
+            this.labelCategoria.Location = new System.Drawing.Point(408, 92);
             this.labelCategoria.Name = "labelCategoria";
             this.labelCategoria.Size = new System.Drawing.Size(69, 17);
             this.labelCategoria.TabIndex = 11;
@@ -152,17 +153,27 @@
             // labelEditora
             // 
             this.labelEditora.AutoSize = true;
-            this.labelEditora.Location = new System.Drawing.Point(408, 101);
+            this.labelEditora.Location = new System.Drawing.Point(408, 130);
             this.labelEditora.Name = "labelEditora";
             this.labelEditora.Size = new System.Drawing.Size(53, 17);
             this.labelEditora.TabIndex = 12;
             this.labelEditora.Text = "Editora";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(66, 19);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(207, 17);
+            this.label1.TabIndex = 32;
+            this.label1.Text = "Livros Disponíveis na Biblioteca";
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(813, 450);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.labelEditora);
             this.Controls.Add(this.labelCategoria);
             this.Controls.Add(this.textEditora);
@@ -199,5 +210,6 @@
         private System.Windows.Forms.TextBox textEditora;
         private System.Windows.Forms.Label labelCategoria;
         private System.Windows.Forms.Label labelEditora;
+        private System.Windows.Forms.Label label1;
     }
 }

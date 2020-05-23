@@ -77,7 +77,8 @@ namespace Biblioteca
             textID.Text = pessoa.Id.ToString();
             textFirstName.Text = pessoa.First_name;
             textLastName.Text = pessoa.Last_name;
-            textDataNascimento.Text = pessoa.Data_nascimento.ToString();
+            string[] str = pessoa.Data_nascimento.ToString().Split(' '); //Para tirar as Horas à data
+            textDataNascimento.Text = str[0];
             textTelefone.Text = pessoa.Telefone.ToString();
         }
 
@@ -434,6 +435,12 @@ namespace Biblioteca
             //currentPessoa = 0;
             //ShowPessoa();
             //ShowButtons();
+        }
+
+        private void buttonHistorico_Click(object sender, EventArgs e)
+        {
+            var form3 = new Form3();
+            form3.Show();
         }
     }
 }
