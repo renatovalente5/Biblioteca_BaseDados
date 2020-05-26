@@ -28,10 +28,10 @@ namespace Biblioteca
 
             SqlCommand cmd = new SqlCommand();
 
-            cmd.CommandText = " SELECT li.ISBN, li.titulo, li.ano, li.id_editora, ed.nome_editora , li.categoria, COUNT(li.titulo) as countTitulos " +
+            cmd.CommandText = " SELECT li.ISBN, li.titulo, li.ano, li.id_editora, ed.nome_editora , li.categoria,le.cota, le.estado,le.numero_exemplar " +
                               " FROM Biblioteca.Livros_Exemplares as le JOIN Biblioteca.Livro as li ON li.ISBN = le.ISBN " +
                               "                                         JOIN Biblioteca.Editora as ed ON li.id_editora = ed.id_editora " +
-                              " GROUP BY li.ISBN, li.titulo, li.ano, li.id_editora, ed.nome_editora, li.categoria ";
+                              "where li.ISBN in (select le.ISBN from BIBLIOTECA.Emprestimo as e join BIBLIOTECA.Livros_Exemplares le on e.n_emprestimo = le.n_emprestimo where e.data_chegada IS NOT null)";
             cmd.Connection = cn;
             SqlDataReader reader = cmd.ExecuteReader();
             listBox1.Items.Clear();
@@ -44,19 +44,23 @@ namespace Biblioteca
                 l.Ano = (int)reader["ano"];
                 l.Id_editora = (int)reader["id_editora"];
                 l.Categoria = (String)reader["categoria"];
-                l.CountTilulos = (int)reader["countTitulos"];
+                //l.CountTilulos = (int)reader["countTitulos"];
                 l.Nome_editora = (String)reader["nome_editora"];
+                l.Estado = (String)reader["estado"];
+                l.Cota = (String)reader["cota"];
+                l.Numero_exemplar = (int)reader["numero_exemplar"];
                 listBox1.Items.Add(l);
             }
+            listBox1.Sorted = true;
             cn.Close();
             buttonRemove.Visible = false;
         }
 
         public static SqlConnection getSGBDConnection()
         {
-            return new SqlConnection("data source= localhost;integrated security=true;initial catalog=Biblioteca");
+            //return new SqlConnection("data source= localhost;integrated security=true;initial catalog=Biblioteca");
             //return new SqlConnection("Data Source = tcp:mednat.ieeta.pt\\SQLSERVER,8101; Initial Catalog = p1g2; uid = p1g2;" + "password = Sqlgang.99");
-            //return new SqlConnection("data source= localhost;integrated security=true;");// initial catalog=Biblioteca");
+            return new SqlConnection("data source= localhost;integrated security=true;");// initial catalog=Biblioteca");
         }
         private bool verifySGBDConnection()
         {
@@ -82,11 +86,18 @@ namespace Biblioteca
             else
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.CommandText = " SELECT li.ISBN, li.titulo, li.ano, li.id_editora, ed.nome_editora , li.categoria, COUNT(li.titulo) as countTitulos " +
+                //cmd.CommandText = " SELECT li.ISBN, li.titulo, li.ano, li.id_editora, ed.nome_editora , li.categoria, COUNT(li.titulo) as countTitulos " +
+                //             " FROM Biblioteca.Livros_Exemplares as le JOIN Biblioteca.Livro as li ON li.ISBN = le.ISBN " +
+                //             "                                         JOIN Biblioteca.Editora as ed ON li.id_editora = ed.id_editora " +
+                //             " WHERE titulo LIKE '%"+textSearch.Text+"%' " +
+                //             " GROUP BY li.ISBN, li.titulo, li.ano, li.id_editora, ed.nome_editora, li.categoria ";
+                cmd.CommandText = " SELECT li.ISBN, li.titulo, li.ano, li.id_editora, ed.nome_editora , li.categoria, le.cota, le.estado, le.numero_exemplar " +
                              " FROM Biblioteca.Livros_Exemplares as le JOIN Biblioteca.Livro as li ON li.ISBN = le.ISBN " +
                              "                                         JOIN Biblioteca.Editora as ed ON li.id_editora = ed.id_editora " +
-                             " WHERE titulo LIKE '%" + textSearch.Text + "%' " +
-                             " GROUP BY li.ISBN, li.titulo, li.ano, li.id_editora, ed.nome_editora, li.categoria ";
+                             " WHERE titulo LIKE @varSearch";
+                            
+
+                cmd.Parameters.AddWithValue("@varSearch", "%"+textSearch.Text+"%");
                 //cmd.CommandText = "SELECT * FROM Biblioteca.Livro WHERE titulo LIKE '%" + textSearch.Text + "%'";
                 cmd.Connection = cn;
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -100,13 +111,16 @@ namespace Biblioteca
                     l.Ano = (int)reader["ano"];
                     l.Id_editora = (int)reader["id_editora"];
                     l.Categoria = (String)reader["categoria"];
-                    l.CountTilulos = (int)reader["countTitulos"];
-                    l.CountTilulos = (int)reader["countTitulos"];
+                    //l.CountTilulos = (int)reader["countTitulos"];
+                    //l.CountTilulos = (int)reader["countTitulos"];
                     l.Nome_editora = (String)reader["nome_editora"];
+                    l.Estado = (String)reader["estado"];
+                    l.Cota = (String)reader["cota"];
+                    l.Numero_exemplar = (int)reader["numero_exemplar"];
                     listBox1.Items.Add(l);
                 }
                 cn.Close();
-
+                listBox1.Sorted = true;
                 currentLivro = 0;
                 //ShowLivro();
                 //ShowButtons();
@@ -119,9 +133,22 @@ namespace Biblioteca
             if (listBox1.Items.Count == 0 | currentLivro < 0) return;
             Livro livro = new Livro();
             livro = (Livro)listBox1.Items[currentLivro];
-            textDisponiveis.Text = livro.CountTilulos.ToString();
+            textCota.Text = livro.Cota.ToString();
             textCategoria.Text = livro.Categoria.ToString();
             textEditora.Text = livro.Nome_editora.ToString();
+            textBoxEstado.Text = livro.Estado.ToString();
+        }
+        
+        public void ShowLivro2()
+        {
+            currentLivro = listBox2.SelectedIndex;
+            if (listBox1.Items.Count == 0 | currentLivro < 0) return;
+            Livro livro = new Livro();
+            livro = (Livro)listBox2.Items[currentLivro];
+            textCota.Text = livro.Cota.ToString();
+            textCategoria.Text = livro.Categoria.ToString();
+            textEditora.Text = livro.Nome_editora.ToString();
+            textBoxEstado.Text = livro.Estado.ToString();
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
@@ -136,13 +163,14 @@ namespace Biblioteca
             }
             Livro livro = new Livro();
             livro = (Livro)listBox1.Items[currentLivro];
-            if (livro.CountTilulos > 0)
-            {
+            //if (livro.CountTilulos > 0)
+            //{
                 listBox2.Items.Add(livro);
+            listBox1.Items.Remove(livro);
 
-                livro.CountTilulos--;
+                //livro.CountTilulos--;
                 ShowLivro();
-            }
+            //}
         }
 
         private void buttonRemove_Click(object sender, EventArgs e)
@@ -151,8 +179,10 @@ namespace Biblioteca
             currentLivroAdded = listBox2.SelectedIndex;
             Livro livro = new Livro();
             livro = (Livro)listBox2.Items[currentLivroAdded];
-            livro.CountTilulos++;
+            //livro.CountTilulos++;
             listBox2.Items.Remove(livro);
+            listBox1.Items.Add(livro);
+            listBox1.Sorted = true;
             ShowLivro();
         }
 
@@ -180,6 +210,7 @@ namespace Biblioteca
                 buttonAdd.Visible = false;
                 buttonRemove.Visible = true;
             }
+            ShowLivro2();
         }
     }
 }
