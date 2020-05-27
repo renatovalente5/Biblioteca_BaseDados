@@ -54,9 +54,9 @@ namespace Biblioteca
 
         private SqlConnection getSGBDConnection()
         {
-            //return new SqlConnection("data source= localhost;integrated security=true;initial catalog=Biblioteca");
+            return new SqlConnection("data source= localhost;integrated security=true;initial catalog=Biblioteca");
             //return new SqlConnection("Data Source = tcp:mednat.ieeta.pt\\SQLSERVER,8101; Initial Catalog = p1g2; uid = p1g2;" + "password = Sqlgang.99");
-            return new SqlConnection("data source= localhost;integrated security=true;");// initial catalog=Biblioteca");
+            //return new SqlConnection("data source= localhost;integrated security=true;");// initial catalog=Biblioteca");
         }
         private bool verifySGBDConnection()
         {
@@ -441,6 +441,12 @@ namespace Biblioteca
         {
             var form3 = new Form3();
             form3.Show();
+        }
+
+        private void buttonInventartio_Click(object sender, EventArgs e)
+        {
+            var form4 = new Form4();
+            form4.Show();
         }
     }
 }

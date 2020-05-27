@@ -50,15 +50,17 @@ namespace Biblioteca
             this.textSearch = new System.Windows.Forms.TextBox();
             this.buttonEmprestimo = new System.Windows.Forms.Button();
             this.buttonHistorico = new System.Windows.Forms.Button();
+            this.buttonInventartio = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 16;
-            this.listBox1.Location = new System.Drawing.Point(24, 23);
+            this.listBox1.Location = new System.Drawing.Point(24, 55);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(326, 356);
+            this.listBox1.Size = new System.Drawing.Size(326, 324);
             this.listBox1.TabIndex = 0;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
@@ -74,7 +76,7 @@ namespace Biblioteca
             // 
             // textID
             // 
-            this.textID.Location = new System.Drawing.Point(400, 43);
+            this.textID.Location = new System.Drawing.Point(404, 75);
             this.textID.Name = "textID";
             this.textID.Size = new System.Drawing.Size(133, 22);
             this.textID.TabIndex = 3;
@@ -83,7 +85,7 @@ namespace Biblioteca
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(397, 23);
+            this.label2.Location = new System.Drawing.Point(401, 55);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(21, 17);
             this.label2.TabIndex = 4;
@@ -101,7 +103,7 @@ namespace Biblioteca
             // 
             // textFirstName
             // 
-            this.textFirstName.Location = new System.Drawing.Point(400, 97);
+            this.textFirstName.Location = new System.Drawing.Point(404, 129);
             this.textFirstName.Name = "textFirstName";
             this.textFirstName.Size = new System.Drawing.Size(133, 22);
             this.textFirstName.TabIndex = 6;
@@ -110,7 +112,7 @@ namespace Biblioteca
             // textLastName
             // 
             this.textLastName.BackColor = System.Drawing.SystemColors.Window;
-            this.textLastName.Location = new System.Drawing.Point(577, 97);
+            this.textLastName.Location = new System.Drawing.Point(581, 129);
             this.textLastName.Name = "textLastName";
             this.textLastName.Size = new System.Drawing.Size(110, 22);
             this.textLastName.TabIndex = 7;
@@ -119,7 +121,7 @@ namespace Biblioteca
             // labelFirstName
             // 
             this.labelFirstName.AutoSize = true;
-            this.labelFirstName.Location = new System.Drawing.Point(397, 77);
+            this.labelFirstName.Location = new System.Drawing.Point(401, 109);
             this.labelFirstName.Name = "labelFirstName";
             this.labelFirstName.Size = new System.Drawing.Size(76, 17);
             this.labelFirstName.TabIndex = 8;
@@ -128,7 +130,7 @@ namespace Biblioteca
             // labelLastName
             // 
             this.labelLastName.AutoSize = true;
-            this.labelLastName.Location = new System.Drawing.Point(574, 77);
+            this.labelLastName.Location = new System.Drawing.Point(578, 109);
             this.labelLastName.Name = "labelLastName";
             this.labelLastName.Size = new System.Drawing.Size(76, 17);
             this.labelLastName.TabIndex = 9;
@@ -136,14 +138,14 @@ namespace Biblioteca
             // 
             // textDataNascimento
             // 
-            this.textDataNascimento.Location = new System.Drawing.Point(400, 153);
+            this.textDataNascimento.Location = new System.Drawing.Point(404, 185);
             this.textDataNascimento.Name = "textDataNascimento";
             this.textDataNascimento.Size = new System.Drawing.Size(133, 22);
             this.textDataNascimento.TabIndex = 10;
             // 
             // textTelefone
             // 
-            this.textTelefone.Location = new System.Drawing.Point(400, 207);
+            this.textTelefone.Location = new System.Drawing.Point(404, 239);
             this.textTelefone.Name = "textTelefone";
             this.textTelefone.Size = new System.Drawing.Size(133, 22);
             this.textTelefone.TabIndex = 11;
@@ -152,7 +154,7 @@ namespace Biblioteca
             // labelDataNascimento
             // 
             this.labelDataNascimento.AutoSize = true;
-            this.labelDataNascimento.Location = new System.Drawing.Point(397, 133);
+            this.labelDataNascimento.Location = new System.Drawing.Point(401, 165);
             this.labelDataNascimento.Name = "labelDataNascimento";
             this.labelDataNascimento.Size = new System.Drawing.Size(136, 17);
             this.labelDataNascimento.TabIndex = 12;
@@ -161,7 +163,7 @@ namespace Biblioteca
             // labelTelefone
             // 
             this.labelTelefone.AutoSize = true;
-            this.labelTelefone.Location = new System.Drawing.Point(397, 187);
+            this.labelTelefone.Location = new System.Drawing.Point(401, 219);
             this.labelTelefone.Name = "labelTelefone";
             this.labelTelefone.Size = new System.Drawing.Size(64, 17);
             this.labelTelefone.TabIndex = 13;
@@ -217,7 +219,7 @@ namespace Biblioteca
             // 
             // buttonEmprestimo
             // 
-            this.buttonEmprestimo.Location = new System.Drawing.Point(400, 259);
+            this.buttonEmprestimo.Location = new System.Drawing.Point(404, 292);
             this.buttonEmprestimo.Name = "buttonEmprestimo";
             this.buttonEmprestimo.Size = new System.Drawing.Size(101, 34);
             this.buttonEmprestimo.TabIndex = 19;
@@ -227,7 +229,7 @@ namespace Biblioteca
             // 
             // buttonHistorico
             // 
-            this.buttonHistorico.Location = new System.Drawing.Point(507, 259);
+            this.buttonHistorico.Location = new System.Drawing.Point(511, 292);
             this.buttonHistorico.Name = "buttonHistorico";
             this.buttonHistorico.Size = new System.Drawing.Size(101, 34);
             this.buttonHistorico.TabIndex = 20;
@@ -235,11 +237,32 @@ namespace Biblioteca
             this.buttonHistorico.UseVisualStyleBackColor = true;
             this.buttonHistorico.Click += new System.EventHandler(this.buttonHistorico_Click);
             // 
+            // buttonInventartio
+            // 
+            this.buttonInventartio.Location = new System.Drawing.Point(619, 12);
+            this.buttonInventartio.Name = "buttonInventartio";
+            this.buttonInventartio.Size = new System.Drawing.Size(175, 34);
+            this.buttonInventartio.TabIndex = 21;
+            this.buttonInventartio.Text = "Inventário da Biblioteca";
+            this.buttonInventartio.UseVisualStyleBackColor = true;
+            this.buttonInventartio.Click += new System.EventHandler(this.buttonInventartio_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(63, 17);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(240, 17);
+            this.label1.TabIndex = 33;
+            this.label1.Text = "Clientes e Funcionários da Biblioteca";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(801, 450);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.buttonInventartio);
             this.Controls.Add(this.buttonHistorico);
             this.Controls.Add(this.buttonEmprestimo);
             this.Controls.Add(this.textSearch);
@@ -290,6 +313,8 @@ namespace Biblioteca
         private System.Windows.Forms.TextBox textSearch;
         private System.Windows.Forms.Button buttonEmprestimo;
         private System.Windows.Forms.Button buttonHistorico;
+        private System.Windows.Forms.Button buttonInventartio;
+        private System.Windows.Forms.Label label1;
     }
 }
 

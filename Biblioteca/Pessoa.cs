@@ -44,7 +44,7 @@ namespace Biblioteca
 
         public override String ToString()
         {
-            return _id + " " + _first_name + " " + _last_name;
+            return _first_name + " " + _last_name;
         }
 
 
