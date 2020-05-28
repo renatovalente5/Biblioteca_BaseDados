@@ -65,7 +65,7 @@ CREATE TABLE BIBLIOTECA.Emprestimo(
 	data_entrega		DATE NOT NULL,
 	data_chegada		DATE,
 	funcionario		INT REFERENCES BIBLIOTECA.Funcionario(id_funcionario) NOT NULL,
-	cliente			INT REFERENCES BIBLIOTECA.Cliente(id_cliente) NOT NULL
+	cliente			INT REFERENCES BIBLIOTECA.Cliente(id_cliente)
 );
 
 CREATE TABLE BIBLIOTECA.Livros_Exemplares(
