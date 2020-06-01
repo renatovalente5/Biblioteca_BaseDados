@@ -35,13 +35,13 @@ namespace Biblioteca
 
             while (reader.Read())
             {
-                Pessoa p = new Pessoa();
-                p.Id = (int) reader["id"];
-                p.First_name = reader["first_name"].ToString();
-                p.Last_name = reader["last_name"].ToString();
-                p.Data_nascimento = (DateTime) reader["data_nascimento"];
-                p.Telefone = (decimal) reader["telefone"];
-                listBox1.Items.Add(p);
+                Cliente c = new Cliente();
+                c.Id = (int) reader["id"];
+                c.First_name = reader["first_name"].ToString();
+                c.Last_name = reader["last_name"].ToString();
+                c.Data_nascimento = (DateTime) reader["data_nascimento"];
+                c.Telefone = (decimal) reader["telefone"];
+                listBox1.Items.Add(c);
             }
 
             cn.Close();
@@ -72,26 +72,26 @@ namespace Biblioteca
         public void ShowPessoa()
         {
             if (listBox1.Items.Count == 0 | currentPessoa < 0) return;
-            Pessoa pessoa = new Pessoa();
-            pessoa = (Pessoa)listBox1.Items[currentPessoa];
-            textID.Text = pessoa.Id.ToString();
-            textFirstName.Text = pessoa.First_name;
-            textLastName.Text = pessoa.Last_name;
-            string[] str = pessoa.Data_nascimento.ToString().Split(' '); //Para tirar as Horas à data
+            Cliente cliente = new Cliente();
+            cliente = (Cliente)listBox1.Items[currentPessoa];
+            textID.Text = cliente.Id.ToString();
+            textFirstName.Text = cliente.First_name;
+            textLastName.Text = cliente.Last_name;
+            string[] str = cliente.Data_nascimento.ToString().Split(' '); //Para tirar as Horas à data
             textDataNascimento.Text = str[0];
-            textTelefone.Text = pessoa.Telefone.ToString();
+            textTelefone.Text = cliente.Telefone.ToString();
         }
 
         private bool SavePessoa()
         {
-            Pessoa pessoa = new Pessoa();
+            Cliente cliente = new Cliente();
             try
             {
-                //pessoa.Id = int.Parse(textID.Text);
-                pessoa.First_name = textFirstName.Text;
-                pessoa.Last_name = textLastName.Text;
-                pessoa.Data_nascimento = DateTime.Parse(textDataNascimento.Text);
-                pessoa.Telefone = decimal.Parse(textTelefone.Text);
+                //cliente.Id = int.Parse(textID.Text);
+                cliente.First_name = textFirstName.Text;
+                cliente.Last_name = textLastName.Text;
+                cliente.Data_nascimento = DateTime.Parse(textDataNascimento.Text);
+                cliente.Telefone = decimal.Parse(textTelefone.Text);
             }
             catch (Exception ex)
             {
@@ -100,18 +100,18 @@ namespace Biblioteca
             }
             if (adding)
             {
-                pessoa = SubmitPessoa(pessoa);
-                listBox1.Items.Add(pessoa);
+                cliente = SubmitPessoa(cliente);
+                listBox1.Items.Add(cliente);
             }
             else
             {
-                UpdatePessoa(pessoa);
-                listBox1.Items[currentPessoa] = pessoa;
+                UpdatePessoa(cliente);
+                listBox1.Items[currentPessoa] = cliente;
             }
             return true;
         }
 
-        private Pessoa SubmitPessoa(Pessoa p)
+        private Cliente SubmitPessoa(Cliente c)
         {
             if (!verifySGBDConnection())
                 return null;
@@ -119,16 +119,16 @@ namespace Biblioteca
 
             cmd.CommandText = "INSERT Biblioteca.Pessoa (first_name, last_name, data_nascimento, telefone) output INSERTED.ID VALUES ( @first_name, @last_name, @data_nascimento, @telefone); ";
             cmd.Parameters.Clear();
-            cmd.Parameters.AddWithValue("@first_name", p.First_name);
-            cmd.Parameters.AddWithValue("@last_name", p.Last_name);
-            cmd.Parameters.AddWithValue("@data_nascimento", p.Data_nascimento);
-            cmd.Parameters.AddWithValue("@telefone", p.Telefone);
+            cmd.Parameters.AddWithValue("@first_name", c.First_name);
+            cmd.Parameters.AddWithValue("@last_name", c.Last_name);
+            cmd.Parameters.AddWithValue("@data_nascimento", c.Data_nascimento);
+            cmd.Parameters.AddWithValue("@telefone", c.Telefone);
             cmd.Connection = cn;
 
             try
             {
                 int id = (int)cmd.ExecuteScalar();
-                p.Id = id;
+                c.Id = id;
             }
             catch (Exception ex)
             {
@@ -138,10 +138,10 @@ namespace Biblioteca
             {
                 cn.Close();
             }
-            return p;
+            return c;
         }
 
-        private void UpdatePessoa(Pessoa p)
+        private void UpdatePessoa(Cliente c)
         {
             int rows = 0;
 
@@ -149,13 +149,31 @@ namespace Biblioteca
                 return;
             SqlCommand cmd = new SqlCommand();
 
-            cmd.CommandText = "UPDATE Biblioteca.Pessoa " + "SET first_name = @first_name, " + "    last_name = @last_name, " + "    data_nascimento = @data_nascimento, " + "    telefone = @telefone " + " WHERE id = @id";
+            cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Clear();
-            cmd.Parameters.AddWithValue("@id", p.Id);
-            cmd.Parameters.AddWithValue("@first_name", p.First_name);
-            cmd.Parameters.AddWithValue("@last_name", p.Last_name);
-            cmd.Parameters.AddWithValue("@data_nascimento", p.Data_nascimento);
-            cmd.Parameters.AddWithValue("@telefone", p.Telefone);
+
+            //cmd.CommandText = "CREATE PROC BIBLIOTECA.EditCliente (@pessoaId int, @first_Name varchar(100), @last_Name varchar(100), @nas_Data date = null, @telemovel decimal(9,0) = null, @morada varchar(255), @mail varchar(100), @nif decimal(9,0)) " +
+            //    " as " +
+            //    "	    begin Transaction " +
+            //    "	    update BIBLIOTECA.Pessoa SET first_name=@first_Name, last_name=@last_Name, data_nascimento=@nas_Data, telefone=@telemovel WHERE id=@pessoaId; " +
+            //    "     update BIBLIOTECA.Cliente SET mail=@mail, morada=@morada, nif= @nif WHERE id_cliente = @pessoaId; " +
+            //    "     if @@ERROR !=0 " +
+            //    "         rollback tran " +
+            //    "     else " +
+            //    "         commit tran " +
+            //    "     go " +
+
+            cmd.CommandText = " EXECUTE Biblioteca.EditCliente @id, @first_name, @last_name, @data_nascimento, @telefone, @morada, @mail, @nif; ";
+                //"UPDATE Biblioteca.Pessoa " + "SET first_name = @first_name, " + "    last_name = @last_name, " + "    data_nascimento = @data_nascimento, " + "    telefone = @telefone " + " WHERE id = @id";
+
+            cmd.Parameters.AddWithValue("@id", c.Id);
+            cmd.Parameters.AddWithValue("@first_name", c.First_name);
+            cmd.Parameters.AddWithValue("@last_name", c.Last_name);
+            cmd.Parameters.AddWithValue("@data_nascimento", c.Data_nascimento);
+            cmd.Parameters.AddWithValue("@telefone", c.Telefone);
+            cmd.Parameters.AddWithValue("@morada", "ola");
+            cmd.Parameters.AddWithValue("@mail", "ole");
+            cmd.Parameters.AddWithValue("@nif", (int) 273363620);
             cmd.Connection = cn;
 
             try
@@ -408,13 +426,13 @@ namespace Biblioteca
 
                 while (reader.Read())
                 {
-                    Pessoa p = new Pessoa();
-                    p.Id = (int)reader["id"];
-                    p.First_name = reader["first_name"].ToString();
-                    p.Last_name = reader["last_name"].ToString();
-                    p.Data_nascimento = (DateTime)reader["data_nascimento"];
-                    p.Telefone = (decimal)reader["telefone"];
-                    listBox1.Items.Add(p);
+                    Cliente c = new Cliente();
+                    c.Id = (int)reader["id"];
+                    c.First_name = reader["first_name"].ToString();
+                    c.Last_name = reader["last_name"].ToString();
+                    c.Data_nascimento = (DateTime)reader["data_nascimento"];
+                    c.Telefone = (decimal)reader["telefone"];
+                    listBox1.Items.Add(c);
                 }
 
 

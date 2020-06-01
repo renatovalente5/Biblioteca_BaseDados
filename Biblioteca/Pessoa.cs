@@ -15,7 +15,7 @@ namespace Biblioteca
         private decimal _telefone;
 
         public Pessoa() : base() { }
-        public Pessoa(String first_name, String last_name) : base() {
+        public Pessoa(int id, String first_name, String last_name) : base() {
             this.First_name = first_name;
             this.Last_name = last_name;
         }

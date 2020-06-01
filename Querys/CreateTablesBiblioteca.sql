@@ -74,7 +74,7 @@ CREATE TABLE BIBLIOTECA.Livros_Exemplares(
 	ISBN			VARCHAR(50) REFERENCES BIBLIOTECA.Livro(ISBN) NOT NULL,
 	data_de_aquisicao 	DATE NOT NULL,
 	estado			VARCHAR(50),
-	cota			DECIMAL NOT NULL
+	cota			VARCHAR(10) NOT NULL
 	PRIMARY KEY(numero_exemplar, n_emprestimo, ISBN)
 );
 

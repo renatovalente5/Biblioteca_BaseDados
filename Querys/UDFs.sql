@@ -9,3 +9,14 @@ create function Biblioteca.GetClientHistorico(@clienteId int) returns Table
 				join BIBLIOTECA.Editora as ed on li.id_editora=ed.id_editora
 			where cliente = @clienteId )
 go
+
+--UDF to get todos os livros exemplare de um determinado livro
+CREATE FUNCTION Biblioteca.listarExemplaresDeUmLivro(@ISBN varchar(50)) returns Table
+as
+	return(select * from BIBLIOTECA.Livros_Exemplares as le where le.ISBN=@ISBN)
+
+go
+
+--select * from Biblioteca.listarExemplaresDeUmLivro('008813803-8');
+--go
+
