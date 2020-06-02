@@ -36,31 +36,22 @@ go
 
 
 
-CREATE PROC BIBLIOTECA.CreateEmprestimo (@data_saida date, @data_entrega date, @data_chegada date, @funcionario int, @cliente int)
+CREATE PROC BIBLIOTECA.CreateEmprestimo (@numero_exemplar int out, @funcionario int, @cliente int)
 as
-
-
+	insert into BIBLIOTECA.Emprestimo(data_saida,data_entrega,data_chegada,funcionario,cliente) values (GETDATE(),GETDATE(),null,@funcionario,@cliente);
+	set @numero_exemplar = SCOPE_IDENTITY()
 go
 
-
-CREATE PROC BIBLIOTECA.FazerEmprestimo (@numero_exemplar int, @n_emprestimo int, @ISBN varchar(50), @data_de_aquisicao date, @estado varchar(50)=null, @cota decimal(18,0) = null, @id_funcionario int, @id_cliente int)
+CREATE PROC BIBLIOTECA.FazerEmprestimo (@n_emprestimo int, @id_funcionario int, @id_cliente int)
 as
 	begin Transaction
-	--Criar PROC BIBLIOTECA.CreateEmprestimo
-	--exec BIBLIOTECA.CreateEmprestimo @firstName = @first_Name,@lastName=@last_Name,@nasData=@nas_Data,@tele=@telemovel,@id=@pessoaId out;
-	select * from BIBLIOTECA.Livro as empretadar where @n_emprestimo=@numero_exemplar;
-	update BIBLIOTECA.Emprestimo set data_saida=GETDATE(), data_entrega=GETDATE(), funcionario=@id_funcionario, cliente=@id_cliente; --falta meter as datas bem
-	
-	if @@ERROR !=0
-		rollback tran
-	else
-		commit tran
-
-	declare @pessoaId as int;
-	--exec  @firstName = @first_Name,@lastName=@last_Name,@nasData=@nas_Data,@tele=@telemovel,@id=@pessoaId out;
-	insert into BIBLIOTECA.Cliente (id_cliente,mail,morada,nif) values (@pessoaId,@mail,@morada,@nif)
+	declare @numero_exemplar as int;
+	exec BIBLIOTECA.CreateEmprestimo @numero_exemplar=@numero_exemplar out, @funcionario=@id_funcionario , @cliente=@id_cliente;
 	if @@ERROR !=0
 		rollback tran
 	else
 		commit tran
 go
+
+--EXECUTE BIBLIOTECA.FazerEmprestimo '1', '101', '1';
+--go

@@ -44,18 +44,19 @@ namespace Biblioteca
 
             SqlCommand cmd = new SqlCommand();
 
-            cmd.CommandText = " DROP FUNCTION GetLivrosEmprestados " +
-                " GO " +
-                " CREATE FUNCTION GetLivrosEmprestados(@idCliente INT) RETURNS TABLE " +
-                " AS " +
-                " RETURN ( Select c.id_cliente, count(e.cliente) as numero " +
-                " FROM Biblioteca.Cliente as c JOIN Biblioteca.Emprestimo as e ON c.id_cliente=e.cliente " +
-                " WHERE c.id_cliente=@idCliente " +
-                " GROUP BY c.id_cliente " +
-                " ) " +
-                " GO " +
-                " SELECT * FROM GetLivrosEmprestados(5) " + //Tens de passar aqui o clienteID
-                " GO ";
+            //cmd.CommandText = " DROP FUNCTION GetLivrosEmprestados " +
+            //    " GO " +
+            //    " CREATE FUNCTION GetLivrosEmprestados(@idCliente INT) RETURNS TABLE " +
+            //    " AS " +
+            //    " RETURN ( Select c.id_cliente, count(e.cliente) as numero " +
+            //    " FROM Biblioteca.Cliente as c JOIN Biblioteca.Emprestimo as e ON c.id_cliente=e.cliente " +
+            //    " WHERE c.id_cliente=@idCliente " +
+            //    " GROUP BY c.id_cliente " +
+            //    " ) " +
+            //    " GO " +
+            //    " SELECT * FROM GetLivrosEmprestados(5) " + //Tens de passar aqui o clienteID
+            //    " GO ";
+            cmd.CommandText = "SELECT * FROM BIBLIOTECA.GetLivrosEmprestados(5)";
             cmd.Connection = cn;
             SqlDataReader reader = cmd.ExecuteReader();
             listBox1.Items.Clear();
