@@ -119,6 +119,43 @@ namespace Biblioteca
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            currentLivro = listBox1.SelectedIndex;
+            if (listBox1.Items.Count == 0 | currentLivro < 0) return;
+            Livro livro = new Livro();
+            livro = (Livro)listBox1.Items[currentLivro];
+
+            cn = getSGBDConnection();
+
+            if (!verifySGBDConnection())
+                return;
+
+            SqlCommand cmd = new SqlCommand("SELECT * FROM BIBLIOTECA.listarExemplaresDeUmLivro(@ISBN)", cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@ISBN", livro.ISBN);
+            cmd.Connection = cn;
+            SqlDataReader reader = cmd.ExecuteReader();
+            listBox2.Items.Clear();
+
+            while (reader.Read())
+            {
+                Emprestimo em = new Emprestimo();
+                em.ISBN = (String)reader["ISBN"];
+                //em.Titulo = (String)reader["titulo"];
+                //em.Ano = (int)reader["ano"];
+                //em.Id_editora = (int)reader["id_editora"];
+                //em.Categoria = (String)reader["categoria"];
+                //em.CountTilulos = (int)reader["countTitulos"];
+                //em.Nome_editora = (String)reader["nome_editora"];
+                //fazer data de aquisição?? no Livro
+                em.Estado = (String)reader["estado"];
+                em.Cota = (String)reader["cota"];
+                em.Numero_exemplar = (int)reader["numero_exemplar"];
+                em.N_emprestimo = (int)reader["n_emprestimo"];
+                listBox2.Items.Add(em);
+            }
+
+            cn.Close();
+
             ShowLivro();
         }
         public void ShowLivro()

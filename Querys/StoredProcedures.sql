@@ -26,9 +26,15 @@ as
 	update BIBLIOTECA.Cliente SET mail=@mail, morada=@morada, nif= @nif
 							  WHERE id_cliente=@pessoaId;
 	if @@ERROR !=0
+	begin
 		rollback tran
+		return 0
+	end
 	else
+	begin
 		commit tran
+		return 1
+	end
 go
 
 --EXECUTE Biblioteca.EditCliente '1', 'Rina2', 'Cruz2', '2003-09-08', '988247615', '0162 Valley Edge Drive', 'fmumford0@parallels.com', '339451477';

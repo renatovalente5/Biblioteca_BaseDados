@@ -49,6 +49,7 @@ namespace Biblioteca
 
             currentPessoa = 0;
             ShowPessoa();
+            ClearFields();
             ShowButtons();
         }
 
@@ -87,7 +88,7 @@ namespace Biblioteca
             Cliente cliente = new Cliente();
             try
             {
-                //cliente.Id = int.Parse(textID.Text);
+                cliente.Id = int.Parse(textID.Text);
                 cliente.First_name = textFirstName.Text;
                 cliente.Last_name = textLastName.Text;
                 cliente.Data_nascimento = DateTime.Parse(textDataNascimento.Text);
@@ -147,7 +148,7 @@ namespace Biblioteca
 
             if (!verifySGBDConnection())
                 return;
-            SqlCommand cmd = new SqlCommand();
+            SqlCommand cmd = new SqlCommand("BIBLIOTECA.EditCliente", cn);
 
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Clear();
@@ -163,17 +164,18 @@ namespace Biblioteca
             //    "         commit tran " +
             //    "     go " +
 
-            cmd.CommandText = " EXECUTE Biblioteca.EditCliente @id, @first_name, @last_name, @data_nascimento, @telefone, @morada, @mail, @nif; ";
-                //"UPDATE Biblioteca.Pessoa " + "SET first_name = @first_name, " + "    last_name = @last_name, " + "    data_nascimento = @data_nascimento, " + "    telefone = @telefone " + " WHERE id = @id";
+            //cmd.CommandText = " Biblioteca.EditCliente @id, @first_name, @last_name, @data_nascimento, @telefone, @morada, @mail, @nif; ";
+            //"UPDATE Biblioteca.Pessoa " + "SET first_name = @first_name, " + "    last_name = @last_name, " + "    data_nascimento = @data_nascimento, " + "    telefone = @telefone " + " WHERE id = @id";
 
-            cmd.Parameters.AddWithValue("@id", c.Id);
-            cmd.Parameters.AddWithValue("@first_name", c.First_name);
-            cmd.Parameters.AddWithValue("@last_name", c.Last_name);
-            cmd.Parameters.AddWithValue("@data_nascimento", c.Data_nascimento);
-            cmd.Parameters.AddWithValue("@telefone", c.Telefone);
-            cmd.Parameters.AddWithValue("@morada", "ola");
-            cmd.Parameters.AddWithValue("@mail", "ole");
-            cmd.Parameters.AddWithValue("@nif", (int) 273363620);
+            cmd.Parameters.Add("@pessoaId", SqlDbType.Int).Value = c.Id;
+            cmd.Parameters.Add("@first_name", SqlDbType.VarChar).Value = c.First_name;
+            cmd.Parameters.Add("@last_name", SqlDbType.VarChar).Value = c.Last_name;
+            cmd.Parameters.Add("@nas_Data", SqlDbType.Date).Value = c.Data_nascimento;
+            cmd.Parameters.Add("@telemovel", SqlDbType.Decimal).Value = c.Telefone;
+            cmd.Parameters.Add("@morada", SqlDbType.VarChar).Value = "ola";
+            cmd.Parameters.Add("@mail", SqlDbType.VarChar).Value = "ole";
+            cmd.Parameters.Add("@nif", SqlDbType.Decimal).Value = 273363620;
+
             cmd.Connection = cn;
 
             try
@@ -186,7 +188,7 @@ namespace Biblioteca
             }
             finally
             {
-                if (rows == 1)
+                if (rows == 2)
                     MessageBox.Show("Update OK");
                 else
                     MessageBox.Show("Update NOT OK");
@@ -457,7 +459,11 @@ namespace Biblioteca
 
         private void buttonHistorico_Click(object sender, EventArgs e)
         {
-            var form3 = new Form3();
+            if (listBox1.Items.Count == 0 | currentPessoa < 0) return;
+            Cliente cliente = new Cliente();
+            cliente = (Cliente)listBox1.Items[currentPessoa];
+
+            var form3 = new Form3(cliente);
             form3.Show();
         }
 

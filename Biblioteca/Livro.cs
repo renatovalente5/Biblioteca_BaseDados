@@ -23,7 +23,7 @@ namespace Biblioteca
 
         public override String ToString()
         {
-            return /*_countTilulos + " - " +*/ _numero_exemplar + " - "+ _titulo;
+            return Titulo != null ? Titulo : "";
         }
 
         public String ISBN

@@ -15,11 +15,15 @@ namespace Biblioteca
     {
         private SqlConnection cn;
         private int currentLivro;
+        private Cliente c;
+        private int selectedIndex;
 
-        public Form3()
+        public Form3(Cliente c = null)
         {
             InitializeComponent();
+            this.c = c;
         }
+
         public static SqlConnection getSGBDConnection()
         {
             return new SqlConnection("data source= localhost;integrated security=true;initial catalog=Biblioteca");
@@ -56,24 +60,54 @@ namespace Biblioteca
             //    " GO " +
             //    " SELECT * FROM GetLivrosEmprestados(5) " + //Tens de passar aqui o clienteID
             //    " GO ";
-            cmd.CommandText = "SELECT * FROM BIBLIOTECA.GetLivrosEmprestados(5)";
+            cmd.CommandText = "SELECT * FROM Biblioteca.GetClientHistorico(@id_cliente)";
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@id_cliente", c.Id);
             cmd.Connection = cn;
             SqlDataReader reader = cmd.ExecuteReader();
             listBox1.Items.Clear();
 
             while (reader.Read())
             {
-                Livro l = new Livro();
-                l.ISBN = (String)reader["ISBN"];
-                l.Titulo = (String)reader["titulo"];
-                l.Ano = (int)reader["ano"];
-                l.Id_editora = (int)reader["id_editora"];
-                l.Categoria = (String)reader["categoria"];
-                l.CountTilulos = (int)reader["countTitulos"];
-                l.Nome_editora = (String)reader["nome_editora"];
-                listBox1.Items.Add(l);
+                Emprestimo em = new Emprestimo();
+                em.N_emprestimo = (int)reader["n_emprestimo"];
+                em.Data_Saida = (DateTime)reader["data_Saida"];
+                em.Data_entrega = (DateTime)reader["data_entrega"];
+                em.Data_Saida = (DateTime)reader["data_Saida"];
+                em.ISBN = (String)reader["ISBN"];
+                em.Titulo = (String)reader["titulo"];
+                em.Ano = (int)reader["ano"];
+                //e.Id_editora = (int)reader["id_editora"];
+                em.Categoria = (String)reader["categoria"];
+                //e.CountTilulos = (int)reader["countTitulos"];
+                em.Nome_editora = (String)reader["nome_editora"];
+                listBox1.Items.Add(em);
             }
             cn.Close();
+
+            ShowEmprestimo();
+            ClearFields();
+        }
+
+        private void ClearFields()
+        {
+            textEditora.Text = "";
+            textBoxDataSaida.Text = "";
+            textBoxDataEntrada.Text = "";
+            textBoxDataChegada.Text = "";
+            textCategoria.Text = "";
+        }
+
+        private void ShowEmprestimo()
+        {
+            if (listBox1.Items.Count == 0 | currentLivro < 0) return;
+            Emprestimo emprestimo = new Emprestimo();
+            emprestimo = (Emprestimo)listBox1.Items[currentLivro];
+            textEditora.Text = emprestimo.Nome_editora;
+            textBoxDataSaida.Text = emprestimo.Data_Saida.ToString().Split(' ')[0];
+            textBoxDataEntrada.Text = emprestimo.Data_entrega.ToString().Split(' ')[0];
+            textBoxDataChegada.Text = emprestimo.Data_chegada.ToString().Split(' ')[0];
+            textCategoria.Text = emprestimo.Categoria;
         }
 
         private void buttonSearch_Click(object sender, EventArgs e)
@@ -126,11 +160,21 @@ namespace Biblioteca
             livro = (Livro)listBox1.Items[currentLivro];
             textCategoria.Text = livro.Categoria.ToString();
             textEditora.Text = livro.Nome_editora.ToString();
+
         }
 
         private void buttonOk_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedIndex >= 0)
+            {
+                currentLivro = listBox1.SelectedIndex;
+                ShowEmprestimo();
+            }
         }
     }
 }

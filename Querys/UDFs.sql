@@ -10,6 +10,12 @@ create function Biblioteca.GetClientHistorico(@clienteId int) returns Table
 			where cliente = @clienteId )
 go
 
+CREATE FUNCTION Biblioteca.listarExemplaresDeUmLivro(@ISBN varchar(50)) returns Table
+as
+	return(select * from BIBLIOTECA.Livros_Exemplares as le where le.ISBN=@ISBN)
+go
+
+
 --UDF to get todos os livros exemplare de um determinado livro
 DROP FUNCTION BIBLIOTECA.GetLivrosEmprestados
 GO

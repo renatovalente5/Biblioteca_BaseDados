@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Biblioteca
 {
-    class Pessoa
+    public class Pessoa
     {
         private int _id;
         private String _first_name;
