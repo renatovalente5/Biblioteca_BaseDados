@@ -449,7 +449,12 @@ namespace Biblioteca
 
         private void buttonEmprestimo_Click(object sender, EventArgs e)
         {
-            var form2 = new Form2();
+            currentPessoa = listBox1.SelectedIndex;
+            if (listBox1.Items.Count == 0 | currentPessoa < 0) return;
+            Cliente cliente = new Cliente();
+            cliente = (Cliente)listBox1.Items[currentPessoa];
+
+            var form2 = new Form2(cliente);
             form2.Show();
 
             //currentPessoa = 0;
@@ -459,6 +464,7 @@ namespace Biblioteca
 
         private void buttonHistorico_Click(object sender, EventArgs e)
         {
+            currentPessoa = listBox1.SelectedIndex;
             if (listBox1.Items.Count == 0 | currentPessoa < 0) return;
             Cliente cliente = new Cliente();
             cliente = (Cliente)listBox1.Items[currentPessoa];

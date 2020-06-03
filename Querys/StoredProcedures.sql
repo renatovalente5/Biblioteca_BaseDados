@@ -41,18 +41,23 @@ go
 --go
 
 
+drop proc BIBLIOTECA.CreateEmprestimo
+drop PROC BIBLIOTECA.FazerEmprestimo
 
-CREATE PROC BIBLIOTECA.CreateEmprestimo (@numero_exemplar int out, @funcionario int, @cliente int)
+CREATE PROC BIBLIOTECA.CreateEmprestimo (@n_emprestimo int out, @funcionario int, @cliente int)
 as
 	insert into BIBLIOTECA.Emprestimo(data_saida,data_entrega,data_chegada,funcionario,cliente) values (GETDATE(),GETDATE(),null,@funcionario,@cliente);
-	set @numero_exemplar = SCOPE_IDENTITY()
+	set @n_emprestimo = SCOPE_IDENTITY()
 go
 
-CREATE PROC BIBLIOTECA.FazerEmprestimo (@n_emprestimo int, @id_funcionario int, @id_cliente int)
+CREATE PROC BIBLIOTECA.FazerEmprestimo (@numero_exemplar int, @id_funcionario int, @id_cliente int)
 as
 	begin Transaction
-	declare @numero_exemplar as int;
-	exec BIBLIOTECA.CreateEmprestimo @numero_exemplar=@numero_exemplar out, @funcionario=@id_funcionario , @cliente=@id_cliente;
+	declare @nu_emprestimo as int;
+	
+	exec BIBLIOTECA.CreateEmprestimo @n_emprestimo=@nu_emprestimo out, @funcionario=@id_funcionario , @cliente=@id_cliente;
+	update BIBLIOTECA.Livros_Exemplares SET n_emprestimo=@nu_emprestimo
+					    WHERE numero_exemplar=@numero_exemplar;
 	if @@ERROR !=0
 		rollback tran
 	else

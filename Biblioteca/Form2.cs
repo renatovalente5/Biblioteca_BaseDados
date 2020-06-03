@@ -16,9 +16,11 @@ namespace Biblioteca
         private SqlConnection cn;
         private int currentLivro;
         private int currentLivroAdded = 0;
-        public Form2()
+        Cliente c;
+        public Form2(Cliente c = null)
         {
             InitializeComponent();
+            this.c = c;
         }
 
         private void Form2_Load(object sender, EventArgs e)
@@ -188,7 +190,40 @@ namespace Biblioteca
 
         private void buttonOk_Click(object sender, EventArgs e)
         {
+            int rows = 0;
+            if (!verifySGBDConnection())
+                return;
+            SqlCommand cmd = new SqlCommand("BIBLIOTECA.FazerEmprestimo", cn);
 
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Clear();
+
+            Livro livro = new Livro();
+            livro = (Livro)listBox2.Items[listBox2.SelectedIndex]; //Falta fazer um ciclo for aqui ou na query
+
+            cmd.Parameters.Add("@numero_exemplar", SqlDbType.Int).Value = livro.Numero_exemplar;
+            cmd.Parameters.Add("@id_funcionario", SqlDbType.Int).Value = "101"; //Falta ver qual o funcionario
+            cmd.Parameters.Add("@id_cliente", SqlDbType.Int).Value = c.Id;
+
+            cmd.Connection = cn;
+
+            try
+            {
+                rows = cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed fazendo emprestimo in database. \n ERROR MESSAGE: \n" + ex.Message);
+            }
+            finally
+            {
+                if (rows == 2)
+                    MessageBox.Show("Update OK");
+                else
+                    MessageBox.Show("Update NOT OK");
+
+                cn.Close();
+            }
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
