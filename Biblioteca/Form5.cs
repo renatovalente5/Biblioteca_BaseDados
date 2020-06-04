@@ -74,11 +74,11 @@ namespace Biblioteca
 
             SqlCommand cmd2 = new SqlCommand();
             cmd2.CommandText = " SELECT DISTINCT e.nome_editora, e.id_editora " +
-                               " FROM Biblioteca.Editora as e JOIN Biblioteca.Livro as l ON e.id_editora=l.id_editora " +
+                               " FROM Biblioteca.Editora as e " +
                                " ORDER BY e.nome_editora, e.id_editora ";
             cmd2.Connection = cn;
             SqlDataReader reader2 = cmd2.ExecuteReader();
-            comboBoxAutores.Items.Clear();
+            comboBoxNomeEditora.Items.Clear();
 
             while (reader2.Read())
             {
@@ -137,6 +137,45 @@ namespace Biblioteca
         {
             HideCreateEditora();
             //Falta Adicionar a Editora à BD e atualizar o ComboBox
+            if (!verifySGBDConnection())
+                return;
+
+            int rows = 0;
+
+            if(textBoxCreateNomeEditora.Text == "")
+                MessageBox.Show("Adiciona nome da editora", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else
+            {
+                SqlCommand cmd = new SqlCommand("dbo.CreateEditora", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add("@nome", SqlDbType.VarChar).Value = textBoxCreateNomeEditora.Text;
+                if (textBoxCreateEditoraEndereco.Text != "")
+                    cmd.Parameters.Add("@morada", SqlDbType.VarChar).Value = textBoxCreateEditoraEndereco.Text;
+                if(textBoxCreateEditoraTelefone.Text !="")
+                    cmd.Parameters.Add("@telefone",SqlDbType.Decimal).Value = Decimal.Parse(textBoxCreateEditoraTelefone.Text);
+                cmd.Connection = cn;
+                try
+                {
+                    rows = cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Failed to create editora in database. \n ERROR MESSAGE: \n" + ex.Message);
+                }
+                finally
+                {
+                    if (rows == 1)
+                        MessageBox.Show("Create OK");
+                    else
+                        MessageBox.Show("Create NOT OK");
+
+                    cn.Close();
+
+                    comboBoxNomeEditora_Click(sender, e);
+                }
+            }
+
         }
         private void HideCreateEditora()
         {
@@ -164,7 +203,7 @@ namespace Biblioteca
             labelCreateTelefoneAutor.Show();
             textBoxCreateNomeAutor.Show();
             textBoxCreateApelidoAutor.Show();
-            textBoxCreateEnderecoAutor.Show();
+            textBoxCreateDataAutor.Show();
             textBoxCreateTelefoneAutor.Show();
             buttonAddCreateAutor.Show();
         }
@@ -172,7 +211,44 @@ namespace Biblioteca
         private void buttonAddCreateAutor_Click(object sender, EventArgs e)
         {
             HideCreateAutor();
-            //Falta Adicionar o noo Autor à BD e atualizar o ComboBox
+
+            if (!verifySGBDConnection())
+                return;
+            int rows = 0;
+            if (textBoxCreateNomeAutor.Text == "" || textBoxCreateApelidoAutor.Text == "")
+                MessageBox.Show("Adiciona nome e apelido do autor", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else
+            {
+                SqlCommand cmd = new SqlCommand("dbo.CreateAutor", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add("@first_name", SqlDbType.VarChar).Value = textBoxCreateNomeAutor.Text;
+                cmd.Parameters.Add("@last_name", SqlDbType.VarChar).Value = textBoxCreateApelidoAutor.Text;
+                if (textBoxCreateDataAutor.Text != "")
+                    cmd.Parameters.Add("@nas_data", SqlDbType.Date).Value = DateTime.Parse(textBoxCreateDataAutor.Text);
+                if (textBoxCreateTelefoneAutor.Text != "")
+                    cmd.Parameters.Add("@telemovel", SqlDbType.Decimal).Value = Decimal.Parse(textBoxCreateTelefoneAutor.Text);
+                cmd.Connection = cn;
+
+                try
+                {
+                    rows = cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Failed to create author in database. \n ERROR MESSAGE: \n" + ex.Message);
+                }
+                finally
+                {
+                    if (rows == 2)
+                        MessageBox.Show("Create OK");
+                    else
+                        MessageBox.Show("Create NOT OK");
+
+                    cn.Close();
+                }
+            }
+
         }
         private void HideCreateAutor()
         {
@@ -183,7 +259,7 @@ namespace Biblioteca
             labelCreateTelefoneAutor.Hide();
             textBoxCreateNomeAutor.Hide();
             textBoxCreateApelidoAutor.Hide();
-            textBoxCreateEnderecoAutor.Hide();
+            textBoxCreateDataAutor.Hide();
             textBoxCreateTelefoneAutor.Hide();
             buttonAddCreateAutor.Hide();
         }

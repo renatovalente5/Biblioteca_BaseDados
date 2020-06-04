@@ -6,7 +6,7 @@ CREATE TABLE BIBLIOTECA.Editora(
 	id_editora		INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
 	nome_editora		VARCHAR(50) NOT NULL,
 	endereco		VARCHAR(255),
-	telefone		DECIMAL(9,0) UNIQUE CHECK(telefone > 0)
+	telefone		DECIMAL(9,0)
 );
 
 CREATE TABLE BIBLIOTECA.Livro(

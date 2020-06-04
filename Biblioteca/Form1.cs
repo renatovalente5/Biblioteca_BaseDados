@@ -39,8 +39,10 @@ namespace Biblioteca
                 c.Id = (int) reader["id"];
                 c.First_name = reader["first_name"].ToString();
                 c.Last_name = reader["last_name"].ToString();
-                c.Data_nascimento = (DateTime) reader["data_nascimento"];
-                c.Telefone = (decimal) reader["telefone"];
+                if (reader["data_nascimento"].ToString() != "")
+                    c.Data_nascimento = (DateTime) reader["data_nascimento"];
+                if(reader["telefone"].ToString() !="")
+                    c.Telefone = (decimal) reader["telefone"];
                 listBox1.Items.Add(c);
             }
 

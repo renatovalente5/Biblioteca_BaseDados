@@ -8,6 +8,8 @@ as
 	delete from BIBLIOTECA.Nao_Socio where id_cliente=@id;
 	update BIBLIOTECA.Emprestimo set cliente=null where cliente=@id
 	delete from BIBLIOTECA.Cliente where id_cliente=@id
+	delete from BIBLIOTECA.Autor where id_autor=@id;
+	delete from BIBLIOTECA.Funcionario where id_funcionario=@id;
 	delete from BIBLIOTECA.Pessoa where id=@id
 
 go
