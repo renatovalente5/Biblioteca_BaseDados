@@ -29,7 +29,7 @@ namespace Biblioteca
             if (!verifySGBDConnection())
                 return;
 
-            SqlCommand cmd = new SqlCommand("SELECT * FROM Biblioteca.Pessoa", cn);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM Biblioteca.Pessoa as p join Biblioteca.Cliente as c on p.id=c.id_cliente", cn);
             SqlDataReader reader = cmd.ExecuteReader();
             listBox1.Items.Clear();
 
@@ -43,6 +43,9 @@ namespace Biblioteca
                     c.Data_nascimento = (DateTime) reader["data_nascimento"];
                 if(reader["telefone"].ToString() !="")
                     c.Telefone = (decimal) reader["telefone"];
+                c.Morada = reader["morada"].ToString();
+                c.Mail = reader["mail"].ToString();
+                c.Nif = (decimal)reader["nif"];
                 listBox1.Items.Add(c);
             }
 
@@ -83,6 +86,9 @@ namespace Biblioteca
             string[] str = cliente.Data_nascimento.ToString().Split(' '); //Para tirar as Horas à data
             textDataNascimento.Text = str[0];
             textTelefone.Text = cliente.Telefone.ToString();
+            textBoxNIF.Text = cliente.Nif.ToString();
+            textBoxMorada.Text = cliente.Morada;
+            textBoxMail.Text = cliente.Mail;
         }
 
         private bool SavePessoa()
@@ -90,11 +96,15 @@ namespace Biblioteca
             Cliente cliente = new Cliente();
             try
             {
+                if(textID.Text != "")
                 cliente.Id = int.Parse(textID.Text);
                 cliente.First_name = textFirstName.Text;
                 cliente.Last_name = textLastName.Text;
                 cliente.Data_nascimento = DateTime.Parse(textDataNascimento.Text);
                 cliente.Telefone = decimal.Parse(textTelefone.Text);
+                cliente.Mail = textBoxMail.Text;
+                cliente.Morada = textBoxMorada.Text;
+                cliente.Nif = decimal.Parse(textBoxNIF.Text);
             }
             catch (Exception ex)
             {
@@ -118,20 +128,24 @@ namespace Biblioteca
         {
             if (!verifySGBDConnection())
                 return null;
-            SqlCommand cmd = new SqlCommand();
-
-            cmd.CommandText = "INSERT Biblioteca.Pessoa (first_name, last_name, data_nascimento, telefone) output INSERTED.ID VALUES ( @first_name, @last_name, @data_nascimento, @telefone); ";
+            SqlCommand cmd = new SqlCommand("dbo.CreateCliente",cn);
+            cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Clear();
-            cmd.Parameters.AddWithValue("@first_name", c.First_name);
-            cmd.Parameters.AddWithValue("@last_name", c.Last_name);
-            cmd.Parameters.AddWithValue("@data_nascimento", c.Data_nascimento);
-            cmd.Parameters.AddWithValue("@telefone", c.Telefone);
+
+            cmd.Parameters.Add("@first_name", SqlDbType.VarChar).Value = c.First_name;
+            cmd.Parameters.Add("@last_name", SqlDbType.VarChar).Value = c.Last_name;
+            cmd.Parameters.Add("@nas_Data", SqlDbType.Date).Value = c.Data_nascimento;
+            cmd.Parameters.Add("@telemovel", SqlDbType.Decimal).Value = c.Telefone;
+            cmd.Parameters.Add("@morada", SqlDbType.VarChar).Value = c.Morada;
+            cmd.Parameters.Add("@mail", SqlDbType.VarChar).Value = c.Mail;
+            cmd.Parameters.Add("@nif", SqlDbType.Decimal).Value = c.Nif;
+            cmd.Parameters.Add("@id", SqlDbType.Int).Direction = ParameterDirection.Output;
             cmd.Connection = cn;
 
             try
             {
-                int id = (int)cmd.ExecuteScalar();
-                c.Id = id;
+                cmd.ExecuteNonQuery();
+                c.Id = Convert.ToInt32(cmd.Parameters["@id"].Value);
             }
             catch (Exception ex)
             {
@@ -174,9 +188,9 @@ namespace Biblioteca
             cmd.Parameters.Add("@last_name", SqlDbType.VarChar).Value = c.Last_name;
             cmd.Parameters.Add("@nas_Data", SqlDbType.Date).Value = c.Data_nascimento;
             cmd.Parameters.Add("@telemovel", SqlDbType.Decimal).Value = c.Telefone;
-            cmd.Parameters.Add("@morada", SqlDbType.VarChar).Value = "ola";
-            cmd.Parameters.Add("@mail", SqlDbType.VarChar).Value = "ole";
-            cmd.Parameters.Add("@nif", SqlDbType.Decimal).Value = 273363620;
+            cmd.Parameters.Add("@morada", SqlDbType.VarChar).Value = c.Morada;
+            cmd.Parameters.Add("@mail", SqlDbType.VarChar).Value = c.Mail;
+            cmd.Parameters.Add("@nif", SqlDbType.Decimal).Value = c.Nif;
 
             cmd.Connection = cn;
 
@@ -232,6 +246,9 @@ namespace Biblioteca
             textLastName.Text = "";
             textDataNascimento.Text = "";
             textTelefone.Text = "";
+            textBoxNIF.Text = "";
+            textBoxMail.Text = "";
+            textBoxMorada.Text = "";
         }
 
         public void ShowButtons()
@@ -262,6 +279,10 @@ namespace Biblioteca
             textLastName.ReadOnly = true;
             textDataNascimento.ReadOnly = true;
             textTelefone.ReadOnly = true;
+            textTelefone.ReadOnly = true;
+            textBoxMail.ReadOnly = true;
+            textBoxMorada.ReadOnly = true;
+            textBoxNIF.ReadOnly = true;
         }
 
         public void UnlockControls()
@@ -271,6 +292,9 @@ namespace Biblioteca
             textLastName.ReadOnly = false;
             textDataNascimento.ReadOnly = false;
             textTelefone.ReadOnly = false;
+            textBoxMail.ReadOnly = false;
+            textBoxMorada.ReadOnly = false;
+            textBoxNIF.ReadOnly = false;
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
@@ -421,7 +445,7 @@ namespace Biblioteca
 
                 SqlCommand cmd = new SqlCommand();
 
-                cmd.CommandText = "SELECT * FROM Biblioteca.Pessoa WHERE first_name = @varSearch";
+                cmd.CommandText = "SELECT * FROM Biblioteca.Pessoa as p join Biblioteca.Cliente as c on c.id_cliente=p.id WHERE first_name = @varSearch";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@varSearch", textSearch.Text);
                 cmd.Connection = cn;
@@ -436,6 +460,9 @@ namespace Biblioteca
                     c.Last_name = reader["last_name"].ToString();
                     c.Data_nascimento = (DateTime)reader["data_nascimento"];
                     c.Telefone = (decimal)reader["telefone"];
+                    c.Morada = reader["morada"].ToString();
+                    c.Mail = reader["mail"].ToString();
+                    c.Nif = (decimal)reader["nif"];
                     listBox1.Items.Add(c);
                 }
 
@@ -480,5 +507,7 @@ namespace Biblioteca
             var form4 = new Form4();
             form4.Show();
         }
+
+        
     }
 }
