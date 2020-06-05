@@ -53,7 +53,13 @@ namespace Biblioteca
 
         private void comboBoxAutores_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (comboBoxAutores.Items.Count == 0 | comboBoxAutores.SelectedIndex == -1) return;
 
+            currentLivro = comboBoxAutores.SelectedIndex;
+
+            Pessoa pessoa = new Pessoa();
+            pessoa = (Pessoa)comboBoxAutores.Items[currentLivro];
+            textBoxIDPessoa.Text = pessoa.Id.ToString();
         }
 
         private void comboBoxNomeEditora_SelectedIndexChanged(object sender, EventArgs e)
@@ -98,7 +104,7 @@ namespace Biblioteca
                 return;
 
             SqlCommand cmd = new SqlCommand();
-            cmd.CommandText = " SELECT DISTINCT p.first_name, p.last_name " +
+            cmd.CommandText = " SELECT DISTINCT p.first_name, p.last_name, a.id_autor " +
                               " FROM Biblioteca.Autor as a JOIN Biblioteca.Pessoa as p ON p.id = a.id_autor " +
                               " ORDER BY p.first_name, p.last_name";
             cmd.Connection = cn;
@@ -110,6 +116,7 @@ namespace Biblioteca
                 Pessoa p = new Pessoa();
                 p.First_name = (String)reader["first_name"];
                 p.Last_name = (String)reader["last_name"];
+                p.Id = (int)reader["id_autor"];
                 comboBoxAutores.Items.Add(p);
             }
             //comboBoxAutores.Sorted = true;

@@ -74,6 +74,8 @@ namespace Biblioteca
                 em.Data_Saida = (DateTime)reader["data_Saida"];
                 em.Data_entrega = (DateTime)reader["data_entrega"];
                 em.Data_Saida = (DateTime)reader["data_Saida"];
+                if (reader["data_chegada"].ToString() != "")
+                    em.Data_chegada = (DateTime)reader["data_chegada"];
                 em.ISBN = (String)reader["ISBN"];
                 em.Titulo = (String)reader["titulo"];
                 em.Ano = (int)reader["ano"];

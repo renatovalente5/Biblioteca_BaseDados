@@ -65,12 +65,14 @@
             this.buttonAddCreateEditora = new System.Windows.Forms.Button();
             this.buttonAddCreateAutor = new System.Windows.Forms.Button();
             this.buttonAddExemplares = new System.Windows.Forms.Button();
+            this.textBoxIDPessoa = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // textBoxTitulo
             // 
             this.textBoxTitulo.Location = new System.Drawing.Point(68, 82);
-            this.textBoxTitulo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxTitulo.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxTitulo.Name = "textBoxTitulo";
             this.textBoxTitulo.Size = new System.Drawing.Size(188, 20);
             this.textBoxTitulo.TabIndex = 8;
@@ -128,7 +130,7 @@
             // textBoxAno
             // 
             this.textBoxAno.Location = new System.Drawing.Point(68, 110);
-            this.textBoxAno.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxAno.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxAno.Name = "textBoxAno";
             this.textBoxAno.Size = new System.Drawing.Size(56, 20);
             this.textBoxAno.TabIndex = 15;
@@ -136,7 +138,7 @@
             // textBoxIdEditora
             // 
             this.textBoxIdEditora.Location = new System.Drawing.Point(79, 169);
-            this.textBoxIdEditora.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxIdEditora.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxIdEditora.Name = "textBoxIdEditora";
             this.textBoxIdEditora.Size = new System.Drawing.Size(50, 20);
             this.textBoxIdEditora.TabIndex = 16;
@@ -144,7 +146,7 @@
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(68, 50);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(88, 20);
             this.textBox1.TabIndex = 18;
@@ -152,7 +154,7 @@
             // textBoxQuantidade
             // 
             this.textBoxQuantidade.Location = new System.Drawing.Point(171, 284);
-            this.textBoxQuantidade.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxQuantidade.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxQuantidade.Name = "textBoxQuantidade";
             this.textBoxQuantidade.Size = new System.Drawing.Size(49, 20);
             this.textBoxQuantidade.TabIndex = 19;
@@ -171,7 +173,7 @@
             // 
             this.comboBoxCategoria.FormattingEnabled = true;
             this.comboBoxCategoria.Location = new System.Drawing.Point(76, 196);
-            this.comboBoxCategoria.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBoxCategoria.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxCategoria.Name = "comboBoxCategoria";
             this.comboBoxCategoria.Size = new System.Drawing.Size(103, 21);
             this.comboBoxCategoria.TabIndex = 17;
@@ -191,7 +193,7 @@
             // 
             this.comboBoxAutores.FormattingEnabled = true;
             this.comboBoxAutores.Location = new System.Drawing.Point(64, 226);
-            this.comboBoxAutores.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBoxAutores.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxAutores.Name = "comboBoxAutores";
             this.comboBoxAutores.Size = new System.Drawing.Size(220, 21);
             this.comboBoxAutores.TabIndex = 23;
@@ -201,7 +203,7 @@
             // buttonAddAutor
             // 
             this.buttonAddAutor.Location = new System.Drawing.Point(298, 225);
-            this.buttonAddAutor.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonAddAutor.Margin = new System.Windows.Forms.Padding(2);
             this.buttonAddAutor.Name = "buttonAddAutor";
             this.buttonAddAutor.Size = new System.Drawing.Size(129, 20);
             this.buttonAddAutor.TabIndex = 24;
@@ -222,7 +224,7 @@
             // textBoxCreateNomeEditora
             // 
             this.textBoxCreateNomeEditora.Location = new System.Drawing.Point(574, 108);
-            this.textBoxCreateNomeEditora.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxCreateNomeEditora.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxCreateNomeEditora.Name = "textBoxCreateNomeEditora";
             this.textBoxCreateNomeEditora.Size = new System.Drawing.Size(112, 20);
             this.textBoxCreateNomeEditora.TabIndex = 26;
@@ -230,7 +232,7 @@
             // buttonAddEditora
             // 
             this.buttonAddEditora.Location = new System.Drawing.Point(298, 139);
-            this.buttonAddEditora.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonAddEditora.Margin = new System.Windows.Forms.Padding(2);
             this.buttonAddEditora.Name = "buttonAddEditora";
             this.buttonAddEditora.Size = new System.Drawing.Size(129, 20);
             this.buttonAddEditora.TabIndex = 27;
@@ -242,7 +244,7 @@
             // 
             this.comboBoxNomeEditora.FormattingEnabled = true;
             this.comboBoxNomeEditora.Location = new System.Drawing.Point(102, 137);
-            this.comboBoxNomeEditora.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBoxNomeEditora.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxNomeEditora.Name = "comboBoxNomeEditora";
             this.comboBoxNomeEditora.Size = new System.Drawing.Size(182, 21);
             this.comboBoxNomeEditora.TabIndex = 28;
@@ -252,7 +254,7 @@
             // textBoxCreateEditoraEndereco
             // 
             this.textBoxCreateEditoraEndereco.Location = new System.Drawing.Point(574, 134);
-            this.textBoxCreateEditoraEndereco.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxCreateEditoraEndereco.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxCreateEditoraEndereco.Name = "textBoxCreateEditoraEndereco";
             this.textBoxCreateEditoraEndereco.Size = new System.Drawing.Size(159, 20);
             this.textBoxCreateEditoraEndereco.TabIndex = 29;
@@ -260,7 +262,7 @@
             // textBoxCreateEditoraTelefone
             // 
             this.textBoxCreateEditoraTelefone.Location = new System.Drawing.Point(574, 158);
-            this.textBoxCreateEditoraTelefone.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxCreateEditoraTelefone.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxCreateEditoraTelefone.Name = "textBoxCreateEditoraTelefone";
             this.textBoxCreateEditoraTelefone.Size = new System.Drawing.Size(112, 20);
             this.textBoxCreateEditoraTelefone.TabIndex = 30;
@@ -348,7 +350,7 @@
             // textBoxCreateTelefoneAutor
             // 
             this.textBoxCreateTelefoneAutor.Location = new System.Drawing.Point(574, 322);
-            this.textBoxCreateTelefoneAutor.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxCreateTelefoneAutor.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxCreateTelefoneAutor.Name = "textBoxCreateTelefoneAutor";
             this.textBoxCreateTelefoneAutor.Size = new System.Drawing.Size(112, 20);
             this.textBoxCreateTelefoneAutor.TabIndex = 37;
@@ -356,7 +358,7 @@
             // textBoxCreateDataAutor
             // 
             this.textBoxCreateDataAutor.Location = new System.Drawing.Point(574, 299);
-            this.textBoxCreateDataAutor.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxCreateDataAutor.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxCreateDataAutor.Name = "textBoxCreateDataAutor";
             this.textBoxCreateDataAutor.Size = new System.Drawing.Size(112, 20);
             this.textBoxCreateDataAutor.TabIndex = 36;
@@ -364,7 +366,7 @@
             // textBoxCreateNomeAutor
             // 
             this.textBoxCreateNomeAutor.Location = new System.Drawing.Point(574, 249);
-            this.textBoxCreateNomeAutor.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxCreateNomeAutor.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxCreateNomeAutor.Name = "textBoxCreateNomeAutor";
             this.textBoxCreateNomeAutor.Size = new System.Drawing.Size(112, 20);
             this.textBoxCreateNomeAutor.TabIndex = 35;
@@ -382,7 +384,7 @@
             // textBoxCreateApelidoAutor
             // 
             this.textBoxCreateApelidoAutor.Location = new System.Drawing.Point(574, 275);
-            this.textBoxCreateApelidoAutor.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxCreateApelidoAutor.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxCreateApelidoAutor.Name = "textBoxCreateApelidoAutor";
             this.textBoxCreateApelidoAutor.Size = new System.Drawing.Size(112, 20);
             this.textBoxCreateApelidoAutor.TabIndex = 43;
@@ -390,7 +392,7 @@
             // buttonAddCreateEditora
             // 
             this.buttonAddCreateEditora.Location = new System.Drawing.Point(688, 184);
-            this.buttonAddCreateEditora.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonAddCreateEditora.Margin = new System.Windows.Forms.Padding(2);
             this.buttonAddCreateEditora.Name = "buttonAddCreateEditora";
             this.buttonAddCreateEditora.Size = new System.Drawing.Size(44, 20);
             this.buttonAddCreateEditora.TabIndex = 44;
@@ -401,7 +403,7 @@
             // buttonAddCreateAutor
             // 
             this.buttonAddCreateAutor.Location = new System.Drawing.Point(688, 349);
-            this.buttonAddCreateAutor.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonAddCreateAutor.Margin = new System.Windows.Forms.Padding(2);
             this.buttonAddCreateAutor.Name = "buttonAddCreateAutor";
             this.buttonAddCreateAutor.Size = new System.Drawing.Size(44, 20);
             this.buttonAddCreateAutor.TabIndex = 45;
@@ -412,7 +414,7 @@
             // buttonAddExemplares
             // 
             this.buttonAddExemplares.Location = new System.Drawing.Point(26, 320);
-            this.buttonAddExemplares.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonAddExemplares.Margin = new System.Windows.Forms.Padding(2);
             this.buttonAddExemplares.Name = "buttonAddExemplares";
             this.buttonAddExemplares.Size = new System.Drawing.Size(194, 37);
             this.buttonAddExemplares.TabIndex = 46;
@@ -420,11 +422,31 @@
             this.buttonAddExemplares.UseVisualStyleBackColor = true;
             this.buttonAddExemplares.Click += new System.EventHandler(this.buttonAddExemplares_Click);
             // 
+            // textBoxIDPessoa
+            // 
+            this.textBoxIDPessoa.Location = new System.Drawing.Point(79, 253);
+            this.textBoxIDPessoa.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxIDPessoa.Name = "textBoxIDPessoa";
+            this.textBoxIDPessoa.Size = new System.Drawing.Size(50, 20);
+            this.textBoxIDPessoa.TabIndex = 47;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(20, 256);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(44, 13);
+            this.label1.TabIndex = 48;
+            this.label1.Text = "Id Autor";
+            // 
             // Form5
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(742, 378);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.textBoxIDPessoa);
             this.Controls.Add(this.buttonAddExemplares);
             this.Controls.Add(this.buttonAddCreateAutor);
             this.Controls.Add(this.buttonAddCreateEditora);
@@ -462,7 +484,7 @@
             this.Controls.Add(this.labelIdEditora);
             this.Controls.Add(this.labelCategoria);
             this.Controls.Add(this.textBoxTitulo);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form5";
             this.Text = "Form5";
             this.Load += new System.EventHandler(this.Form5_Load);
@@ -510,5 +532,7 @@
         private System.Windows.Forms.Button buttonAddCreateEditora;
         private System.Windows.Forms.Button buttonAddCreateAutor;
         private System.Windows.Forms.Button buttonAddExemplares;
+        private System.Windows.Forms.TextBox textBoxIDPessoa;
+        private System.Windows.Forms.Label label1;
     }
 }
