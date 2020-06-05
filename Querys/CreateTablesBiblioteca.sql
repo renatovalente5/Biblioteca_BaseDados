@@ -64,13 +64,13 @@ CREATE TABLE BIBLIOTECA.Emprestimo(
 	data_saida		DATE NOT NULL,
 	data_entrega		DATE NOT NULL,
 	data_chegada		DATE,
-	funcionario		INT REFERENCES BIBLIOTECA.Funcionario(id_funcionario) NOT NULL,
+	funcionario		INT REFERENCES BIBLIOTECA.Funcionario(id_funcionario),
 	cliente			INT REFERENCES BIBLIOTECA.Cliente(id_cliente)
 );
 
 CREATE TABLE BIBLIOTECA.Livros_Exemplares(
 	numero_exemplar		INT IDENTITY(1,1) NOT NULL,
-	n_emprestimo		INT REFERENCES BIBLIOTECA.Emprestimo(n_emprestimo) NOT NULL,
+	n_emprestimo		INT REFERENCES BIBLIOTECA.Emprestimo(n_emprestimo),
 	ISBN			VARCHAR(50) REFERENCES BIBLIOTECA.Livro(ISBN) NOT NULL,
 	data_de_aquisicao 	DATE NOT NULL,
 	estado			VARCHAR(50),

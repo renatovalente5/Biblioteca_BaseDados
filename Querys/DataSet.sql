@@ -613,7 +613,7 @@ insert into BIBLIOTECA.Funcionario (id_funcionario, morada) values (113, '8 Larr
 insert into BIBLIOTECA.Funcionario (id_funcionario, morada) values (114, '82 Norway Maple Avenue');
 insert into BIBLIOTECA.Funcionario (id_funcionario, morada) values (115, '118 Village Plaza');
 
-
+insert into BIBLIOTECA.Emprestimo(data_saida,data_entrega,data_chegada) values (GETDATE(),GETDATE(),GETDATE()) --para poder criar novos livros
 insert into BIBLIOTECA.Emprestimo ( data_saida, data_entrega, data_chegada, funcionario, cliente) values ('2019-08-30', '2019-09-14', '2019-09-03', 111, 16);
 insert into BIBLIOTECA.Emprestimo ( data_saida, data_entrega, data_chegada, funcionario, cliente) values ('2019-05-05', '2019-05-20', '2019-05-16', 115, 44);
 insert into BIBLIOTECA.Emprestimo ( data_saida, data_entrega, data_chegada, funcionario, cliente) values ('2019-09-03', '2019-09-18', '2019-09-11', 105, 54);
@@ -714,6 +714,7 @@ insert into BIBLIOTECA.Emprestimo ( data_saida, data_entrega, data_chegada, func
 insert into BIBLIOTECA.Emprestimo ( data_saida, data_entrega, data_chegada, funcionario, cliente) values ('2020-02-28', '2020-03-14', null, 108, 66);
 insert into BIBLIOTECA.Emprestimo ( data_saida, data_entrega, data_chegada, funcionario, cliente) values ('2020-04-29', '2020-05-14', null, 114, 40);
 insert into BIBLIOTECA.Emprestimo ( data_saida, data_entrega, data_chegada, funcionario, cliente) values ('2020-01-03', '2020-01-18', '2020-01-09', 103, 40);
+
 
 
 insert into BIBLIOTECA.Livros_Exemplares (n_emprestimo, ISBN, data_de_aquisicao, estado, cota) values (1, '602419136-7', '2017-07-01', 'New', 'NQM.34693');
