@@ -74,19 +74,34 @@ as
 	set @n_emprestimo = SCOPE_IDENTITY()
 go
 
-CREATE PROC BIBLIOTECA.FazerEmprestimo (@numero_exemplar int, @id_funcionario int, @id_cliente int)
+CREATE PROC BIBLIOTECA.FazerEmprestimo (@numeros_exemplares varchar(20), @id_funcionario int, @id_cliente int)
 as
 	begin Transaction
 	declare @nu_emprestimo as int;
-	
+	declare @numero_exemplar as int;
+
 	exec BIBLIOTECA.CreateEmprestimo @n_emprestimo=@nu_emprestimo out, @funcionario=@id_funcionario , @cliente=@id_cliente;
-	update BIBLIOTECA.Livros_Exemplares SET n_emprestimo=@nu_emprestimo
-					    WHERE numero_exemplar=@numero_exemplar;
+
+	declare C cursor
+	for select value from string_split(@numeros_exemplares,';') where RTRIM(value) <> '';
+	open C;
+	fetch C into @numero_exemplar;
+
+	while @@FETCH_STATUS = 0
+		begin
+			update BIBLIOTECA.Livros_Exemplares SET n_emprestimo=@nu_emprestimo
+								WHERE numero_exemplar=@numero_exemplar;
+			fetch next from  C into @numero_exemplar;
+		end;
+	close C;
+	Deallocate C;
+
 	if @@ERROR !=0
 		rollback tran
 	else
 		commit tran
 go
 
---EXECUTE BIBLIOTECA.FazerEmprestimo '1', '101', '1';
+--EXECUTE BIBLIOTECA.FazerEmprestimo '1;4;10', '101', '1';
 --go
+

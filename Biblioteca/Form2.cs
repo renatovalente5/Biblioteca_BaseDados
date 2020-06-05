@@ -33,7 +33,7 @@ namespace Biblioteca
             cmd.CommandText = " SELECT li.ISBN, li.titulo, li.ano, li.id_editora, ed.nome_editora , li.categoria,le.cota, le.estado,le.numero_exemplar " +
                               " FROM Biblioteca.Livros_Exemplares as le JOIN Biblioteca.Livro as li ON li.ISBN = le.ISBN " +
                               "                                         JOIN Biblioteca.Editora as ed ON li.id_editora = ed.id_editora " +
-                              "where li.ISBN in (select le.ISBN from BIBLIOTECA.Emprestimo as e join BIBLIOTECA.Livros_Exemplares le on e.n_emprestimo = le.n_emprestimo where e.data_chegada IS NOT null)";
+                              "where le.numero_exemplar in (select le.numero_exemplar from BIBLIOTECA.Emprestimo as e join BIBLIOTECA.Livros_Exemplares le on e.n_emprestimo = le.n_emprestimo where e.data_chegada IS NOT null)";
             cmd.Connection = cn;
             SqlDataReader reader = cmd.ExecuteReader();
             listBox1.Items.Clear();
@@ -139,6 +139,7 @@ namespace Biblioteca
             textCategoria.Text = livro.Categoria.ToString();
             textEditora.Text = livro.Nome_editora.ToString();
             textBoxEstado.Text = livro.Estado.ToString();
+            textBoxID.Text = livro.Numero_exemplar.ToString();
         }
         
         public void ShowLivro2()
@@ -151,6 +152,7 @@ namespace Biblioteca
             textCategoria.Text = livro.Categoria.ToString();
             textEditora.Text = livro.Nome_editora.ToString();
             textBoxEstado.Text = livro.Estado.ToString();
+            textBoxID.Text = livro.Numero_exemplar.ToString();
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
@@ -198,36 +200,39 @@ namespace Biblioteca
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Clear();
 
+            string livros_ids ="";
+
             foreach (var item in listBox2.Items)
             {
                 Livro livro = new Livro();
                 livro = (Livro) item; //Falta fazer um ciclo for aqui ou na query
+                livros_ids += livro.Numero_exemplar + ";";
 
-                cmd.Parameters.Add("@numero_exemplar", SqlDbType.Int).Value = livro.Numero_exemplar;
-                cmd.Parameters.Add("@id_funcionario", SqlDbType.Int).Value = "101"; //Falta ver qual o funcionario
-                cmd.Parameters.Add("@id_cliente", SqlDbType.Int).Value = c.Id;
-
-                cmd.Connection = cn;
-
-                try
-                {
-                    rows = cmd.ExecuteNonQuery();
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception("Failed fazendo emprestimo in database. \n ERROR MESSAGE: \n" + ex.Message);
-                }
-                finally
-                {
-                    if (rows == 2)
-                        MessageBox.Show("Update OK");
-                    else
-                        MessageBox.Show("Update NOT OK");
-
-                    cn.Close();
-                }
             }
-           
+            cmd.Parameters.Add("@numeros_exemplares", SqlDbType.VarChar).Value = livros_ids;
+            cmd.Parameters.Add("@id_funcionario", SqlDbType.Int).Value = "101"; //Falta ver qual o funcionario
+            cmd.Parameters.Add("@id_cliente", SqlDbType.Int).Value = c.Id;
+
+            cmd.Connection = cn;
+            try
+            {
+                rows = cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed fazendo emprestimo in database. \n ERROR MESSAGE: \n" + ex.Message);
+            }
+            finally
+            {
+                if (rows == listBox2.Items.Count+1)
+                    MessageBox.Show("Update OK");
+                else
+                    MessageBox.Show("Update NOT OK");
+
+                cn.Close();
+            }
+
+            Form2_Load(sender, e);
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
