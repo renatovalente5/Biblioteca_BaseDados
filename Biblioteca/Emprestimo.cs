@@ -11,13 +11,13 @@ namespace Biblioteca
         private int n_emprestimo;
         private DateTime data_saida;
         private DateTime data_entrega;
-        private DateTime data_chegada;
+        private DateTime? data_chegada;
 
         public Emprestimo() : base() { }
 
         public override String ToString()
         {
-            return (N_emprestimo.ToString() == null ? "" : N_emprestimo.ToString()) + " " + (Titulo == null ? "" : Titulo);
+            return (N_emprestimo.ToString() == null ? "" : "nº emprestimo: " + N_emprestimo.ToString()) + (Numero_exemplar is null ? "" : ",   nº exemplar: " + Numero_exemplar.ToString()) + (Data_chegada is null ? "" : " - Disponivel")  + (Titulo == null ? "" : " - " + Titulo);
         }
 
         public int N_emprestimo
@@ -34,7 +34,7 @@ namespace Biblioteca
             get { return data_entrega; }
             set { data_entrega = value; }
         }
-        public DateTime Data_chegada
+        public DateTime? Data_chegada
         {
             get { return data_chegada; }
             set { data_chegada = value; }

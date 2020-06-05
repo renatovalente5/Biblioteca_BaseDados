@@ -17,7 +17,7 @@ namespace Biblioteca
         private String _nome_editora;
         private String _cota;
         private String _estado;
-        private int _numero_exemplar;
+        private int? _numero_exemplar;
 
         public Livro() : base() { }
 
@@ -74,7 +74,7 @@ namespace Biblioteca
             set { _estado = value; }
         }
 
-        public int Numero_exemplar
+        public int? Numero_exemplar
         {
             get { return _numero_exemplar; }
             set { _numero_exemplar = value; }

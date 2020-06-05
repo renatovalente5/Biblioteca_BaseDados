@@ -198,32 +198,36 @@ namespace Biblioteca
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Clear();
 
-            Livro livro = new Livro();
-            livro = (Livro)listBox2.Items[listBox2.SelectedIndex]; //Falta fazer um ciclo for aqui ou na query
-
-            cmd.Parameters.Add("@numero_exemplar", SqlDbType.Int).Value = livro.Numero_exemplar;
-            cmd.Parameters.Add("@id_funcionario", SqlDbType.Int).Value = "101"; //Falta ver qual o funcionario
-            cmd.Parameters.Add("@id_cliente", SqlDbType.Int).Value = c.Id;
-
-            cmd.Connection = cn;
-
-            try
+            foreach (var item in listBox2.Items)
             {
-                rows = cmd.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Failed fazendo emprestimo in database. \n ERROR MESSAGE: \n" + ex.Message);
-            }
-            finally
-            {
-                if (rows == 2)
-                    MessageBox.Show("Update OK");
-                else
-                    MessageBox.Show("Update NOT OK");
+                Livro livro = new Livro();
+                livro = (Livro) item; //Falta fazer um ciclo for aqui ou na query
 
-                cn.Close();
+                cmd.Parameters.Add("@numero_exemplar", SqlDbType.Int).Value = livro.Numero_exemplar;
+                cmd.Parameters.Add("@id_funcionario", SqlDbType.Int).Value = "101"; //Falta ver qual o funcionario
+                cmd.Parameters.Add("@id_cliente", SqlDbType.Int).Value = c.Id;
+
+                cmd.Connection = cn;
+
+                try
+                {
+                    rows = cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Failed fazendo emprestimo in database. \n ERROR MESSAGE: \n" + ex.Message);
+                }
+                finally
+                {
+                    if (rows == 2)
+                        MessageBox.Show("Update OK");
+                    else
+                        MessageBox.Show("Update NOT OK");
+
+                    cn.Close();
+                }
             }
+           
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)

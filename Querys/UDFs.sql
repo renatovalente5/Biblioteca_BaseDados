@@ -30,3 +30,29 @@ GO
 
 SELECT * FROM BIBLIOTECA.GetLivrosEmprestados(5)
 GO
+
+
+drop function Biblioteca.listarExemplaresDeUmLivro
+
+CREATE FUNCTION Biblioteca.listarExemplaresDeUmLivro(@ISBN varchar(50)) returns Table
+as
+	return(select le.ISBN,le.cota,le.estado,le.numero_exemplar,le.n_emprestimo,e.data_chegada
+					from BIBLIOTECA.Livros_Exemplares as le join Biblioteca.Emprestimo as e 
+					on le.n_emprestimo=e.n_emprestimo
+					where le.ISBN=@ISBN
+					group by le.ISBN,le.cota,le.estado,le.numero_exemplar,le.n_emprestimo,e.data_chegada)
+go
+
+drop function Biblioteca.ContarLivrosDisponiveis
+CREATE FUNCTION BIBLIOTECA.ContarLivrosDisponiveis(@ISBN varchar(50)) returns Table
+as
+	return(select le.ISBN, count(*) as Disponiveis
+					from BIBLIOTECA.Livros_Exemplares as le join Biblioteca.Emprestimo as e 
+					on le.n_emprestimo=e.n_emprestimo
+					where le.ISBN=@ISBN and e.data_chegada is not null
+					Group by le.ISBN)
+
+go
+
+Select * from Biblioteca.listarExemplaresDeUmLivro('008813803-8')
+Select * from Biblioteca.ContarLivrosDisponiveis('008813803-8')

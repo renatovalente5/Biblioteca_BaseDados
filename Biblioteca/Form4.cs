@@ -140,8 +140,10 @@ namespace Biblioteca
             {
                 Emprestimo em = new Emprestimo();
                 em.ISBN = (String)reader["ISBN"];
-                //em.Titulo = (String)reader["titulo"];
-                //em.Ano = (int)reader["ano"];
+                if (reader["data_chegada"].ToString() != "")
+                    em.Data_chegada = (DateTime)reader["data_chegada"];
+
+                //em.Data_chegada = ((DateTime?)reader["data_chegada"]) == null ? DateTime.Parse("11/11/2020") : (DateTime)reader["data_chegada"];
                 //em.Id_editora = (int)reader["id_editora"];
                 //em.Categoria = (String)reader["categoria"];
                 //em.CountTilulos = (int)reader["countTitulos"];
@@ -155,17 +157,48 @@ namespace Biblioteca
             }
 
             cn.Close();
+            ContarLivrosDisponiveis(livro.ISBN);
+            //ShowLivro();
+        }
 
-            ShowLivro();
-        }
-        public void ShowLivro()
+        private void ContarLivrosDisponiveis(string iSBN)
         {
-            currentLivro = listBox1.SelectedIndex;
-            if (listBox1.Items.Count == 0 | currentLivro < 0) return;
-            Livro livro = new Livro();
-            livro = (Livro)listBox1.Items[currentLivro];
-            textBoxDisponiveis.Text = livro.CountTilulos.ToString();
+            //currentLivro = listBox1.SelectedIndex;
+            //if (listBox1.Items.Count == 0 | currentLivro < 0) return;
+            //Livro livro = new Livro();
+            //livro = (Livro)listBox1.Items[currentLivro];
+
+            cn = getSGBDConnection();
+
+            if (!verifySGBDConnection())
+                return;
+
+            SqlCommand cmd = new SqlCommand("SELECT * FROM BIBLIOTECA.ContarLivrosDisponiveis(@ISBN)", cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@ISBN", iSBN);
+            cmd.Connection = cn;
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                Emprestimo em = new Emprestimo();
+                
+                em.ISBN = (String)reader["ISBN"];
+                em.CountTilulos = (int)reader["Disponiveis"];
+                textBoxDisponiveis.Text = em.CountTilulos.ToString();
+            }
+            
+            cn.Close();
         }
+
+        //public void ShowLivro()
+        //{
+        //    currentLivro = listBox1.SelectedIndex;
+        //    if (listBox1.Items.Count == 0 | currentLivro < 0) return;
+        //    Livro livro = new Livro();
+        //    livro = (Livro)listBox1.Items[currentLivro];
+        //    textBoxDisponiveis.Text = livro.CountTilulos.ToString();
+        //}
 
         private void buttonAddLivros_Click(object sender, EventArgs e)
         {
