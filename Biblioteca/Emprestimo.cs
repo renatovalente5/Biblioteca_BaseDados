@@ -8,7 +8,7 @@ namespace Biblioteca
 {
     class Emprestimo : Livro
     {
-        private int n_emprestimo;
+        private int? n_emprestimo;
         private DateTime data_saida;
         private DateTime data_entrega;
         private DateTime? data_chegada;
@@ -17,10 +17,10 @@ namespace Biblioteca
 
         public override String ToString()
         {
-            return (N_emprestimo.ToString() == null ? "" : "nº emprestimo: " + N_emprestimo.ToString()) + (Numero_exemplar is null ? "" : ",   nº exemplar: " + Numero_exemplar.ToString()) + (Data_chegada is null ? "" : " - Disponivel")  + (Titulo == null ? "" : " - " + Titulo);
+            return (N_emprestimo is null ? "" : "nº emprestimo: " + N_emprestimo.ToString()) + (Numero_exemplar is null ? "" : ",   nº exemplar: " + Numero_exemplar.ToString()) + (Titulo is null ? "" : "  Título: " + Titulo) + (Data_chegada is null ? "" : " - Disponivel");
         }
 
-        public int N_emprestimo
+        public int? N_emprestimo
         {
             get { return n_emprestimo; }
             set { n_emprestimo = value; }

@@ -38,7 +38,7 @@ namespace Biblioteca
 
             while (reader.Read())
             {
-                Livro l = new Livro();
+                Emprestimo l = new Emprestimo();
                 l.ISBN = (String)reader["ISBN"];
                 l.Titulo = (String)reader["titulo"];
                 l.Ano = (int)reader["ano"];
@@ -96,7 +96,7 @@ namespace Biblioteca
 
                 while (reader.Read())
                 {
-                    Livro l = new Livro();
+                    Emprestimo l = new Emprestimo();
                     l.ISBN = (String)reader["ISBN"];
                     l.Titulo = (String)reader["titulo"];
                     l.Ano = (int)reader["ano"];
@@ -104,7 +104,7 @@ namespace Biblioteca
                     l.Categoria = (String)reader["categoria"];
                     l.CountTilulos = (int)reader["countTitulos"];
                     l.Nome_editora = (String)reader["nome_editora"];
-                    l.Estado = (String)reader["estado"];
+                    //l.Estado = (String)reader["estado"];
                     //l.Cota = (String)reader["cota"];
                     l.Numero_exemplar = (int)reader["numero_exemplar"];
                     listBox1.Items.Add(l);
@@ -121,8 +121,8 @@ namespace Biblioteca
         {
             currentLivro = listBox1.SelectedIndex;
             if (listBox1.Items.Count == 0 | currentLivro < 0) return;
-            Livro livro = new Livro();
-            livro = (Livro)listBox1.Items[currentLivro];
+            Emprestimo livro = new Emprestimo();
+            livro = (Emprestimo)listBox1.Items[currentLivro];
 
             cn = getSGBDConnection();
 

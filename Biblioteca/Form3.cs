@@ -136,7 +136,7 @@ namespace Biblioteca
 
                 while (reader.Read())
                 {
-                    Livro l = new Livro();
+                    Emprestimo l = new Emprestimo();
                     l.ISBN = (String)reader["ISBN"];
                     l.Titulo = (String)reader["titulo"];
                     l.Ano = (int)reader["ano"];
@@ -158,8 +158,8 @@ namespace Biblioteca
         {
             currentLivro = listBox1.SelectedIndex;
             if (listBox1.Items.Count == 0 | currentLivro < 0) return;
-            Livro livro = new Livro();
-            livro = (Livro)listBox1.Items[currentLivro];
+            Emprestimo livro = new Emprestimo();
+            livro = (Emprestimo)listBox1.Items[currentLivro];
             textCategoria.Text = livro.Categoria.ToString();
             textEditora.Text = livro.Nome_editora.ToString();
 

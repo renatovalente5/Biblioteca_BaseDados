@@ -51,7 +51,7 @@
             this.listBox1.ItemHeight = 16;
             this.listBox1.Location = new System.Drawing.Point(30, 51);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(313, 324);
+            this.listBox1.Size = new System.Drawing.Size(538, 324);
             this.listBox1.TabIndex = 0;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
@@ -75,7 +75,7 @@
             // labelCategoria
             // 
             this.labelCategoria.AutoSize = true;
-            this.labelCategoria.Location = new System.Drawing.Point(426, 79);
+            this.labelCategoria.Location = new System.Drawing.Point(637, 79);
             this.labelCategoria.Name = "labelCategoria";
             this.labelCategoria.Size = new System.Drawing.Size(69, 17);
             this.labelCategoria.TabIndex = 20;
@@ -84,7 +84,7 @@
             // labelEditora
             // 
             this.labelEditora.AutoSize = true;
-            this.labelEditora.Location = new System.Drawing.Point(426, 110);
+            this.labelEditora.Location = new System.Drawing.Point(637, 110);
             this.labelEditora.Name = "labelEditora";
             this.labelEditora.Size = new System.Drawing.Size(53, 17);
             this.labelEditora.TabIndex = 21;
@@ -92,14 +92,14 @@
             // 
             // textCategoria
             // 
-            this.textCategoria.Location = new System.Drawing.Point(511, 79);
+            this.textCategoria.Location = new System.Drawing.Point(722, 79);
             this.textCategoria.Name = "textCategoria";
             this.textCategoria.Size = new System.Drawing.Size(208, 22);
             this.textCategoria.TabIndex = 22;
             // 
             // textEditora
             // 
-            this.textEditora.Location = new System.Drawing.Point(511, 110);
+            this.textEditora.Location = new System.Drawing.Point(722, 110);
             this.textEditora.Name = "textEditora";
             this.textEditora.Size = new System.Drawing.Size(208, 22);
             this.textEditora.TabIndex = 23;
@@ -107,7 +107,7 @@
             // labelDataSaida
             // 
             this.labelDataSaida.AutoSize = true;
-            this.labelDataSaida.Location = new System.Drawing.Point(426, 191);
+            this.labelDataSaida.Location = new System.Drawing.Point(637, 191);
             this.labelDataSaida.Name = "labelDataSaida";
             this.labelDataSaida.Size = new System.Drawing.Size(98, 17);
             this.labelDataSaida.TabIndex = 24;
@@ -116,7 +116,7 @@
             // labelDataEntrega
             // 
             this.labelDataEntrega.AutoSize = true;
-            this.labelDataEntrega.Location = new System.Drawing.Point(426, 219);
+            this.labelDataEntrega.Location = new System.Drawing.Point(637, 219);
             this.labelDataEntrega.Name = "labelDataEntrega";
             this.labelDataEntrega.Size = new System.Drawing.Size(112, 17);
             this.labelDataEntrega.TabIndex = 25;
@@ -125,7 +125,7 @@
             // labelDataChegada
             // 
             this.labelDataChegada.AutoSize = true;
-            this.labelDataChegada.Location = new System.Drawing.Point(426, 252);
+            this.labelDataChegada.Location = new System.Drawing.Point(637, 252);
             this.labelDataChegada.Name = "labelDataChegada";
             this.labelDataChegada.Size = new System.Drawing.Size(119, 17);
             this.labelDataChegada.TabIndex = 26;
@@ -133,28 +133,28 @@
             // 
             // textBoxDataSaida
             // 
-            this.textBoxDataSaida.Location = new System.Drawing.Point(554, 186);
+            this.textBoxDataSaida.Location = new System.Drawing.Point(765, 186);
             this.textBoxDataSaida.Name = "textBoxDataSaida";
             this.textBoxDataSaida.Size = new System.Drawing.Size(208, 22);
             this.textBoxDataSaida.TabIndex = 27;
             // 
             // textBoxDataEntrada
             // 
-            this.textBoxDataEntrada.Location = new System.Drawing.Point(554, 219);
+            this.textBoxDataEntrada.Location = new System.Drawing.Point(765, 219);
             this.textBoxDataEntrada.Name = "textBoxDataEntrada";
             this.textBoxDataEntrada.Size = new System.Drawing.Size(208, 22);
             this.textBoxDataEntrada.TabIndex = 28;
             // 
             // textBoxDataChegada
             // 
-            this.textBoxDataChegada.Location = new System.Drawing.Point(554, 252);
+            this.textBoxDataChegada.Location = new System.Drawing.Point(765, 252);
             this.textBoxDataChegada.Name = "textBoxDataChegada";
             this.textBoxDataChegada.Size = new System.Drawing.Size(208, 22);
             this.textBoxDataChegada.TabIndex = 29;
             // 
             // buttonOk
             // 
-            this.buttonOk.Location = new System.Drawing.Point(664, 398);
+            this.buttonOk.Location = new System.Drawing.Point(875, 398);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(98, 38);
             this.buttonOk.TabIndex = 30;
@@ -175,7 +175,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(774, 450);
+            this.ClientSize = new System.Drawing.Size(994, 450);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonOk);
             this.Controls.Add(this.textBoxDataChegada);
