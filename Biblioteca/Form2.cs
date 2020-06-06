@@ -45,7 +45,8 @@ namespace Biblioteca
                 l.Titulo = (String)reader["titulo"];
                 l.Ano = (int)reader["ano"];
                 l.Id_editora = (int)reader["id_editora"];
-                l.Categoria = (String)reader["categoria"];
+                if(reader["categoria"].ToString() !="")
+                    l.Categoria = (String)reader["categoria"];
                 //l.CountTilulos = (int)reader["countTitulos"];
                 l.Nome_editora = (String)reader["nome_editora"];
                 l.Estado = (String)reader["estado"];
@@ -114,7 +115,8 @@ namespace Biblioteca
                     l.Titulo = (String)reader["titulo"];
                     l.Ano = (int)reader["ano"];
                     l.Id_editora = (int)reader["id_editora"];
-                    l.Categoria = (String)reader["categoria"];
+                    if (reader["categoria"].ToString() != "")
+                        l.Categoria = (String)reader["categoria"];
                     //l.CountTilulos = (int)reader["countTitulos"];
                     //l.CountTilulos = (int)reader["countTitulos"];
                     l.Nome_editora = (String)reader["nome_editora"];
@@ -138,7 +140,7 @@ namespace Biblioteca
             Livro livro = new Livro();
             livro = (Livro)listBox1.Items[currentLivro];
             textCota.Text = livro.Cota.ToString();
-            textCategoria.Text = livro.Categoria.ToString();
+            textCategoria.Text = livro.Categoria;
             textEditora.Text = livro.Nome_editora.ToString();
             textBoxEstado.Text = livro.Estado.ToString();
             textBoxID.Text = livro.Numero_exemplar.ToString();
@@ -151,7 +153,7 @@ namespace Biblioteca
             Livro livro = new Livro();
             livro = (Livro)listBox2.Items[currentLivro];
             textCota.Text = livro.Cota.ToString();
-            textCategoria.Text = livro.Categoria.ToString();
+            textCategoria.Text = livro.Categoria;
             textEditora.Text = livro.Nome_editora.ToString();
             textBoxEstado.Text = livro.Estado.ToString();
             textBoxID.Text = livro.Numero_exemplar.ToString();

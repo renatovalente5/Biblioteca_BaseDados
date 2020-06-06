@@ -43,7 +43,8 @@ namespace Biblioteca
                 l.Titulo = (String)reader["titulo"];
                 l.Ano = (int)reader["ano"];
                 l.Id_editora = (int)reader["id_editora"];
-                l.Categoria = (String)reader["categoria"];
+                if (reader["categoria"].ToString() != "")
+                    l.Categoria = (String)reader["categoria"];
                 l.CountTilulos = (int)reader["countTitulos"];
                 l.Nome_editora = (String)reader["nome_editora"];
                 //l.Estado = (String)reader["estado"];
@@ -101,7 +102,8 @@ namespace Biblioteca
                     l.Titulo = (String)reader["titulo"];
                     l.Ano = (int)reader["ano"];
                     l.Id_editora = (int)reader["id_editora"];
-                    l.Categoria = (String)reader["categoria"];
+                    if (reader["categoria"].ToString() != "")
+                        l.Categoria = (String)reader["categoria"];
                     l.CountTilulos = (int)reader["countTitulos"];
                     l.Nome_editora = (String)reader["nome_editora"];
                     //l.Estado = (String)reader["estado"];

@@ -80,7 +80,8 @@ namespace Biblioteca
                 em.Titulo = (String)reader["titulo"];
                 em.Ano = (int)reader["ano"];
                 //e.Id_editora = (int)reader["id_editora"];
-                em.Categoria = (String)reader["categoria"];
+                if (reader["categoria"].ToString() != "")
+                    em.Categoria = (String)reader["categoria"];
                 //e.CountTilulos = (int)reader["countTitulos"];
                 em.Nome_editora = (String)reader["nome_editora"];
                 listBox1.Items.Add(em);
@@ -147,7 +148,8 @@ namespace Biblioteca
                     em.Titulo = (String)reader["titulo"];
                     em.Ano = (int)reader["ano"];
                     //e.Id_editora = (int)reader["id_editora"];
-                    em.Categoria = (String)reader["categoria"];
+                    if (reader["categoria"].ToString() != "")
+                        em.Categoria = (String)reader["categoria"];
                     //e.CountTilulos = (int)reader["countTitulos"];
                     em.Nome_editora = (String)reader["nome_editora"];
                     listBox1.Items.Add(em);
@@ -165,7 +167,7 @@ namespace Biblioteca
             if (listBox1.Items.Count == 0 | currentLivro < 0) return;
             Emprestimo livro = new Emprestimo();
             livro = (Emprestimo)listBox1.Items[currentLivro];
-            textCategoria.Text = livro.Categoria.ToString();
+            textCategoria.Text = livro.Categoria;
             textEditora.Text = livro.Nome_editora.ToString();
 
         }
