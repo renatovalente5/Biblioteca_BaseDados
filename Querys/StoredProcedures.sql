@@ -105,3 +105,30 @@ go
 --EXECUTE BIBLIOTECA.FazerEmprestimo '1;4;10', '101', '1';
 --go
 
+--drop proc Biblioteca.CreateLivro
+create proc Biblioteca.CreateLivro (@isbn varchar(50),@titulo varchar(100),@ano int,@editora int,@categoria varchar(75),@autor int,@quantidade int)
+as
+	begin Transaction
+	declare @i as int = 0;
+	declare @id_livvro as int;
+		
+		insert into BIBLIOTECA.Livro(ISBN,titulo,ano,categoria,id_editora) values (@isbn,@titulo,@ano,@categoria,@editora);
+
+		insert into BIBLIOTECA.Escreve(id_autor,id_livro) values (@autor,@isbn);
+
+		while @i < @quantidade
+		begin
+			--gerar uma cota aleatoria
+			declare @cota as varchar(10) = char((RAND()*25+65))+char((RAND()*25+65))+char((RAND()*25+65))+'.'+char((RAND()*9+48))+char((RAND()*9+48))+char((RAND()*9+48))+char((RAND()*9+48))+char((RAND()*9+48))
+			insert into BIBLIOTECA.Livros_Exemplares(n_emprestimo, ISBN,data_de_aquisicao,estado,cota) values('1',@isbn,GETDATE(),'New',@cota);
+			--print @cota
+			set @i=@i+1
+		end
+
+	if @@ERROR !=0
+		rollback tran
+	else
+		commit tran
+go
+
+--exec BIBLIOTECA.CreateLivro 'isbn','titulo','2020','2','samuel','75','2'

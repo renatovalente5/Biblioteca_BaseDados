@@ -124,28 +124,33 @@ namespace Biblioteca
             else
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.CommandText = " SELECT li.ISBN, li.titulo, li.ano, li.id_editora, ed.nome_editora , li.categoria, COUNT(li.titulo) as countTitulos " +
-                             " FROM Biblioteca.Livros_Exemplares as le JOIN Biblioteca.Livro as li ON li.ISBN = le.ISBN " +
-                             "                                         JOIN Biblioteca.Editora as ed ON li.id_editora = ed.id_editora " +
-                             " WHERE titulo LIKE '%" + textSearch.Text + "%' " +
-                             " GROUP BY li.ISBN, li.titulo, li.ano, li.id_editora, ed.nome_editora, li.categoria ";
+                cmd.CommandText = "SELECT * FROM Biblioteca.GetClientHistorico(@id_cliente) where titulo like @varsearch";
                 //cmd.CommandText = "SELECT * FROM Biblioteca.Livro WHERE titulo LIKE '%" + textSearch.Text + "%'";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@varSearch", "%" + textSearch.Text + "%");
+                cmd.Parameters.AddWithValue("@id_cliente", c.Id);
+
                 cmd.Connection = cn;
                 SqlDataReader reader = cmd.ExecuteReader();
                 listBox1.Items.Clear();
 
                 while (reader.Read())
                 {
-                    Emprestimo l = new Emprestimo();
-                    l.ISBN = (String)reader["ISBN"];
-                    l.Titulo = (String)reader["titulo"];
-                    l.Ano = (int)reader["ano"];
-                    l.Id_editora = (int)reader["id_editora"];
-                    l.Categoria = (String)reader["categoria"];
-                    l.CountTilulos = (int)reader["countTitulos"];
-                    l.CountTilulos = (int)reader["countTitulos"];
-                    l.Nome_editora = (String)reader["nome_editora"];
-                    listBox1.Items.Add(l);
+                    Emprestimo em = new Emprestimo();
+                    em.N_emprestimo = (int)reader["n_emprestimo"];
+                    em.Data_Saida = (DateTime)reader["data_Saida"];
+                    em.Data_entrega = (DateTime)reader["data_entrega"];
+                    em.Data_Saida = (DateTime)reader["data_Saida"];
+                    if (reader["data_chegada"].ToString() != "")
+                        em.Data_chegada = (DateTime)reader["data_chegada"];
+                    em.ISBN = (String)reader["ISBN"];
+                    em.Titulo = (String)reader["titulo"];
+                    em.Ano = (int)reader["ano"];
+                    //e.Id_editora = (int)reader["id_editora"];
+                    em.Categoria = (String)reader["categoria"];
+                    //e.CountTilulos = (int)reader["countTitulos"];
+                    em.Nome_editora = (String)reader["nome_editora"];
+                    listBox1.Items.Add(em);
                 }
                 cn.Close();
 

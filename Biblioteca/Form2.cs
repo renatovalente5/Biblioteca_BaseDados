@@ -93,11 +93,13 @@ namespace Biblioteca
                 //             "                                         JOIN Biblioteca.Editora as ed ON li.id_editora = ed.id_editora " +
                 //             " WHERE titulo LIKE '%"+textSearch.Text+"%' " +
                 //             " GROUP BY li.ISBN, li.titulo, li.ano, li.id_editora, ed.nome_editora, li.categoria ";
-                cmd.CommandText = " SELECT li.ISBN, li.titulo, li.ano, li.id_editora, ed.nome_editora , li.categoria, le.cota, le.estado, le.numero_exemplar " +
-                             " FROM Biblioteca.Livros_Exemplares as le JOIN Biblioteca.Livro as li ON li.ISBN = le.ISBN " +
-                             "                                         JOIN Biblioteca.Editora as ed ON li.id_editora = ed.id_editora " +
-                             " WHERE titulo LIKE @varSearch";
-                            
+                cmd.CommandText = " SELECT li.ISBN, li.titulo, li.ano, li.id_editora, ed.nome_editora , li.categoria,le.cota, le.estado,le.numero_exemplar " +
+                              " FROM Biblioteca.Livros_Exemplares as le JOIN Biblioteca.Livro as li ON li.ISBN = le.ISBN " +
+                              "                                         JOIN Biblioteca.Editora as ed ON li.id_editora = ed.id_editora " +
+                              "where le.numero_exemplar in (select le.numero_exemplar from BIBLIOTECA.Emprestimo as e join BIBLIOTECA.Livros_Exemplares le on e.n_emprestimo = le.n_emprestimo where e.data_chegada IS NOT null)" +
+                              "and li.titulo like @varsearch";
+
+
 
                 cmd.Parameters.AddWithValue("@varSearch", "%"+textSearch.Text+"%");
                 //cmd.CommandText = "SELECT * FROM Biblioteca.Livro WHERE titulo LIKE '%" + textSearch.Text + "%'";

@@ -87,7 +87,7 @@ namespace Biblioteca
                 cmd.CommandText = " SELECT li.ISBN, li.titulo, li.ano, li.id_editora, ed.nome_editora , li.categoria, COUNT(li.titulo) as countTitulos " +
                              " FROM Biblioteca.Livros_Exemplares as le JOIN Biblioteca.Livro as li ON li.ISBN = le.ISBN " +
                              "                                         JOIN Biblioteca.Editora as ed ON li.id_editora = ed.id_editora " +
-                             " WHERE titulo LIKE @varSearch " +
+                             " WHERE li.titulo LIKE @varSearch " +
                              " GROUP BY li.ISBN, li.titulo, li.ano, li.id_editora, ed.nome_editora, li.categoria ";
                 cmd.Parameters.AddWithValue("@varSearch", "%" + textSearch.Text + "%");
                 cmd.Connection = cn;
@@ -106,7 +106,7 @@ namespace Biblioteca
                     l.Nome_editora = (String)reader["nome_editora"];
                     //l.Estado = (String)reader["estado"];
                     //l.Cota = (String)reader["cota"];
-                    l.Numero_exemplar = (int)reader["numero_exemplar"];
+                    //l.Numero_exemplar = (int)reader["numero_exemplar"];
                     listBox1.Items.Add(l);
                 }
                 cn.Close();
