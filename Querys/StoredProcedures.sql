@@ -106,16 +106,29 @@ go
 --go
 
 --drop proc Biblioteca.CreateLivro
-create proc Biblioteca.CreateLivro (@isbn varchar(50),@titulo varchar(100),@ano int,@editora int,@categoria varchar(75),@autor int,@quantidade int)
+create proc Biblioteca.CreateLivro (@isbn varchar(50),@titulo varchar(100),@ano int,@editora int,@categoria varchar(75) = null,@autor int)
+as
+	begin Transaction
+	
+	insert into BIBLIOTECA.Livro(ISBN,titulo,ano,categoria,id_editora) values (@isbn,@titulo,@ano,@categoria,@editora);
+
+	insert into BIBLIOTECA.Escreve(id_autor,id_livro) values (@autor,@isbn);
+
+	if @@ERROR !=0
+		rollback tran
+	else
+		commit tran
+go
+
+--exec BIBLIOTECA.CreateLivro @isbn='isbn3',@titulo='titulo',@ano='2020',@editora='2',@autor='75'
+
+create proc Biblioteca.CreateLivroExemplares (@isbn varchar(50),@quantidade int)
 as
 	begin Transaction
 	declare @i as int = 0;
-	declare @id_livvro as int;
 		
-		insert into BIBLIOTECA.Livro(ISBN,titulo,ano,categoria,id_editora) values (@isbn,@titulo,@ano,@categoria,@editora);
-
-		insert into BIBLIOTECA.Escreve(id_autor,id_livro) values (@autor,@isbn);
-
+	if exists (select 1 from BIBLIOTECA.Livro where ISBN=@isbn)
+	begin
 		while @i < @quantidade
 		begin
 			--gerar uma cota aleatoria
@@ -124,6 +137,7 @@ as
 			--print @cota
 			set @i=@i+1
 		end
+	end
 
 	if @@ERROR !=0
 		rollback tran
@@ -131,4 +145,4 @@ as
 		commit tran
 go
 
---exec BIBLIOTECA.CreateLivro 'isbn','titulo','2020','2','samuel','75','2'
+--exec BIBLIOTECA.CreateLivroExemplares 'isbn2','3'

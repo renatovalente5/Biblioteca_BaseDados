@@ -274,6 +274,40 @@ namespace Biblioteca
         private void buttonAddExemplares_Click(object sender, EventArgs e)
         {
             //Adicionar quantidade de Livros Exemplares à BD
+            if (!verifySGBDConnection())
+                return;
+
+            int rows = 0;
+
+            if (textBoxCreateISBNExemplares.Text == "")
+                MessageBox.Show("Selecione um Livro e a quantidade", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else
+            {
+                SqlCommand cmd = new SqlCommand("BIBLIOTECA.CreateLivroExemplares", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add("@isbn", SqlDbType.VarChar).Value = textBoxCreateISBNExemplares.Text;
+                cmd.Parameters.Add("@quantidade", SqlDbType.Int).Value = textBoxQuantidade.Text;
+                cmd.Connection = cn;
+                try
+                {
+                    rows = cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Failed to create livros exemplares in database. \n ERROR MESSAGE: \n" + ex.Message);
+                }
+                finally
+                {
+                    if (rows == Int32.Parse(textBoxQuantidade.Text))
+                        MessageBox.Show("Create OK");
+                    else
+                        MessageBox.Show("Create NOT OK");
+
+                    cn.Close();
+
+                }
+            }
         }
 
         private void label4_Click(object sender, EventArgs e)
@@ -298,18 +332,20 @@ namespace Biblioteca
 
             int rows = 0;
 
-            if (textBoxCreateNomeEditora.Text == "")
-                MessageBox.Show("Adiciona nome do Livro", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if (textBoxCreateISBN.Text == "" || textBoxCreateTitulo.Text == "" || textBoxCreateAno.Text == "" || textBoxIdEditora.Text == "" || textBoxIDPessoa.Text == "")
+                MessageBox.Show("Adiciona nome do Livro, ISBN, Ano, Editora e Autor", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else
             {
-                SqlCommand cmd = new SqlCommand("BIBLIOTECA.CreateEditora", cn);
+                SqlCommand cmd = new SqlCommand("BIBLIOTECA.CreateLivro", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Clear();
-                cmd.Parameters.Add("@nome", SqlDbType.VarChar).Value = textBoxCreateNomeEditora.Text;
-                if (textBoxCreateEditoraEndereco.Text != "")
-                    cmd.Parameters.Add("@morada", SqlDbType.VarChar).Value = textBoxCreateEditoraEndereco.Text;
-                if (textBoxCreateEditoraTelefone.Text != "")
-                    cmd.Parameters.Add("@telefone", SqlDbType.Decimal).Value = Decimal.Parse(textBoxCreateEditoraTelefone.Text);
+                cmd.Parameters.Add("@isbn", SqlDbType.VarChar).Value = textBoxCreateISBN.Text;
+                cmd.Parameters.Add("@titulo", SqlDbType.VarChar).Value = textBoxCreateTitulo.Text;
+                if (comboBoxCategoria.SelectedItem  != null)
+                    cmd.Parameters.Add("@categoria", SqlDbType.VarChar).Value = comboBoxCategoria.SelectedItem.ToString();
+                cmd.Parameters.Add("@ano", SqlDbType.Int).Value = textBoxCreateAno.Text;
+                cmd.Parameters.Add("@editora", SqlDbType.Int).Value = textBoxIdEditora.Text;
+                cmd.Parameters.Add("@autor", SqlDbType.Int).Value = textBoxIDPessoa.Text;
                 cmd.Connection = cn;
                 try
                 {
@@ -317,20 +353,29 @@ namespace Biblioteca
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception("Failed to create editora in database. \n ERROR MESSAGE: \n" + ex.Message);
+                    throw new Exception("Failed to create livro in database. \n ERROR MESSAGE: \n" + ex.Message);
                 }
                 finally
                 {
-                    if (rows == 1)
+                    if (rows == 2)
                         MessageBox.Show("Create OK");
                     else
                         MessageBox.Show("Create NOT OK");
 
                     cn.Close();
 
-                    comboBoxNomeEditora_Click(sender, e);
                 }
             }
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void labelCreateISBN_Click(object sender, EventArgs e)
+        {
 
         }
     }
