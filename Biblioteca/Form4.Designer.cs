@@ -45,7 +45,7 @@
             this.listBox1.ItemHeight = 16;
             this.listBox1.Location = new System.Drawing.Point(37, 52);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(525, 324);
+            this.listBox1.Size = new System.Drawing.Size(500, 324);
             this.listBox1.TabIndex = 0;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
@@ -81,14 +81,14 @@
             // 
             this.listBox2.FormattingEnabled = true;
             this.listBox2.ItemHeight = 16;
-            this.listBox2.Location = new System.Drawing.Point(641, 139);
+            this.listBox2.Location = new System.Drawing.Point(615, 144);
             this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(428, 148);
+            this.listBox2.Size = new System.Drawing.Size(463, 148);
             this.listBox2.TabIndex = 5;
             // 
             // textBoxDisponiveis
             // 
-            this.textBoxDisponiveis.Location = new System.Drawing.Point(820, 48);
+            this.textBoxDisponiveis.Location = new System.Drawing.Point(794, 53);
             this.textBoxDisponiveis.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxDisponiveis.Name = "textBoxDisponiveis";
             this.textBoxDisponiveis.Size = new System.Drawing.Size(66, 22);
@@ -97,7 +97,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(638, 48);
+            this.label2.Location = new System.Drawing.Point(612, 53);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(165, 17);
             this.label2.TabIndex = 7;
@@ -106,7 +106,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(638, 109);
+            this.label3.Location = new System.Drawing.Point(612, 114);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(123, 17);
             this.label3.TabIndex = 8;

@@ -130,7 +130,7 @@ namespace Biblioteca
 
         private void ShowCreateEditora()
         {
-            labelCreateIdEditora.Show();
+            //labelCreateIdEditora.Show();
             labelCreateEditoraNome.Show();
             labelCreateEndercoEditora.Show();
             labelCreateTelefoneEditora.Show();
@@ -153,7 +153,7 @@ namespace Biblioteca
                 MessageBox.Show("Adiciona nome da editora", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else
             {
-                SqlCommand cmd = new SqlCommand("dbo.CreateEditora", cn);
+                SqlCommand cmd = new SqlCommand("BIBLIOTECA.CreateEditora", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Clear();
                 cmd.Parameters.Add("@nome", SqlDbType.VarChar).Value = textBoxCreateNomeEditora.Text;
@@ -186,7 +186,7 @@ namespace Biblioteca
         }
         private void HideCreateEditora()
         {
-            labelCreateIdEditora.Hide();
+            //labelCreateIdEditora.Hide();
             labelCreateEditoraNome.Hide();
             labelCreateEndercoEditora.Hide();
             labelCreateTelefoneEditora.Hide();
@@ -203,7 +203,7 @@ namespace Biblioteca
 
         private void ShowCreateAutor()
         {
-            labelCreateIdAutor.Show();
+            //labelCreateIdAutor.Show();
             labelCreateNomeAutor.Show();
             labelCreateApelidoAutor.Show();
             labelCreateEnderecoAutor.Show();
@@ -226,7 +226,7 @@ namespace Biblioteca
                 MessageBox.Show("Adiciona nome e apelido do autor", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else
             {
-                SqlCommand cmd = new SqlCommand("dbo.CreateAutor", cn);
+                SqlCommand cmd = new SqlCommand("BIBLIOTECA.CreateAutor", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Clear();
                 cmd.Parameters.Add("@first_name", SqlDbType.VarChar).Value = textBoxCreateNomeAutor.Text;
@@ -259,7 +259,7 @@ namespace Biblioteca
         }
         private void HideCreateAutor()
         {
-            labelCreateIdAutor.Hide();
+            //labelCreateIdAutor.Hide();
             labelCreateNomeAutor.Hide();
             labelCreateApelidoAutor.Hide();
             labelCreateEnderecoAutor.Hide();
@@ -274,6 +274,64 @@ namespace Biblioteca
         private void buttonAddExemplares_Click(object sender, EventArgs e)
         {
             //Adicionar quantidade de Livros Exemplares à BD
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBoxIdEditora_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonAddLivro_Click(object sender, EventArgs e) //AQUIII
+        {
+            if (!verifySGBDConnection())
+                return;
+
+            int rows = 0;
+
+            if (textBoxCreateNomeEditora.Text == "")
+                MessageBox.Show("Adiciona nome do Livro", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else
+            {
+                SqlCommand cmd = new SqlCommand("BIBLIOTECA.CreateEditora", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add("@nome", SqlDbType.VarChar).Value = textBoxCreateNomeEditora.Text;
+                if (textBoxCreateEditoraEndereco.Text != "")
+                    cmd.Parameters.Add("@morada", SqlDbType.VarChar).Value = textBoxCreateEditoraEndereco.Text;
+                if (textBoxCreateEditoraTelefone.Text != "")
+                    cmd.Parameters.Add("@telefone", SqlDbType.Decimal).Value = Decimal.Parse(textBoxCreateEditoraTelefone.Text);
+                cmd.Connection = cn;
+                try
+                {
+                    rows = cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Failed to create editora in database. \n ERROR MESSAGE: \n" + ex.Message);
+                }
+                finally
+                {
+                    if (rows == 1)
+                        MessageBox.Show("Create OK");
+                    else
+                        MessageBox.Show("Create NOT OK");
+
+                    cn.Close();
+
+                    comboBoxNomeEditora_Click(sender, e);
+                }
+            }
+
         }
     }
 }

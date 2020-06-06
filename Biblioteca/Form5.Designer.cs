@@ -28,15 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBoxTitulo = new System.Windows.Forms.TextBox();
             this.labelCategoria = new System.Windows.Forms.Label();
             this.labelIdEditora = new System.Windows.Forms.Label();
-            this.labelAno = new System.Windows.Forms.Label();
-            this.labelTitulo = new System.Windows.Forms.Label();
-            this.labelISBN = new System.Windows.Forms.Label();
-            this.textBoxAno = new System.Windows.Forms.TextBox();
             this.textBoxIdEditora = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBoxQuantidade = new System.Windows.Forms.TextBox();
             this.labelQuantidade = new System.Windows.Forms.Label();
             this.comboBoxCategoria = new System.Windows.Forms.ComboBox();
@@ -52,8 +46,6 @@
             this.labelCreateEditoraNome = new System.Windows.Forms.Label();
             this.labelCreateTelefoneEditora = new System.Windows.Forms.Label();
             this.labelCreateEndercoEditora = new System.Windows.Forms.Label();
-            this.labelCreateIdEditora = new System.Windows.Forms.Label();
-            this.labelCreateIdAutor = new System.Windows.Forms.Label();
             this.labelCreateEnderecoAutor = new System.Windows.Forms.Label();
             this.labelCreateTelefoneAutor = new System.Windows.Forms.Label();
             this.labelCreateNomeAutor = new System.Windows.Forms.Label();
@@ -67,20 +59,21 @@
             this.buttonAddExemplares = new System.Windows.Forms.Button();
             this.textBoxIDPessoa = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.buttonAddLivro = new System.Windows.Forms.Button();
+            this.textBoxCreateISBN = new System.Windows.Forms.TextBox();
+            this.labelCreateISBN = new System.Windows.Forms.Label();
+            this.labelCreateTitulo = new System.Windows.Forms.Label();
+            this.textBoxCreateTitulo = new System.Windows.Forms.TextBox();
+            this.textBoxCreateAno = new System.Windows.Forms.TextBox();
+            this.labelCreateAno = new System.Windows.Forms.Label();
+            this.textBoxCreateISBNExemplares = new System.Windows.Forms.TextBox();
+            this.labelAddISBNExemplares = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
-            // textBoxTitulo
-            // 
-            this.textBoxTitulo.Location = new System.Drawing.Point(91, 101);
-            this.textBoxTitulo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBoxTitulo.Name = "textBoxTitulo";
-            this.textBoxTitulo.Size = new System.Drawing.Size(360, 22);
-            this.textBoxTitulo.TabIndex = 8;
             // 
             // labelCategoria
             // 
             this.labelCategoria.AutoSize = true;
-            this.labelCategoria.Location = new System.Drawing.Point(27, 244);
+            this.labelCategoria.Location = new System.Drawing.Point(14, 237);
             this.labelCategoria.Name = "labelCategoria";
             this.labelCategoria.Size = new System.Drawing.Size(69, 17);
             this.labelCategoria.TabIndex = 9;
@@ -89,66 +82,24 @@
             // labelIdEditora
             // 
             this.labelIdEditora.AutoSize = true;
-            this.labelIdEditora.Location = new System.Drawing.Point(27, 208);
+            this.labelIdEditora.Location = new System.Drawing.Point(14, 198);
             this.labelIdEditora.Name = "labelIdEditora";
             this.labelIdEditora.Size = new System.Drawing.Size(68, 17);
             this.labelIdEditora.TabIndex = 10;
             this.labelIdEditora.Text = "Id Editora";
             // 
-            // labelAno
-            // 
-            this.labelAno.AutoSize = true;
-            this.labelAno.Location = new System.Drawing.Point(27, 135);
-            this.labelAno.Name = "labelAno";
-            this.labelAno.Size = new System.Drawing.Size(33, 17);
-            this.labelAno.TabIndex = 11;
-            this.labelAno.Text = "Ano";
-            // 
-            // labelTitulo
-            // 
-            this.labelTitulo.AutoSize = true;
-            this.labelTitulo.Location = new System.Drawing.Point(27, 101);
-            this.labelTitulo.Name = "labelTitulo";
-            this.labelTitulo.Size = new System.Drawing.Size(43, 17);
-            this.labelTitulo.TabIndex = 12;
-            this.labelTitulo.Text = "Titulo";
-            // 
-            // labelISBN
-            // 
-            this.labelISBN.AutoSize = true;
-            this.labelISBN.Location = new System.Drawing.Point(31, 65);
-            this.labelISBN.Name = "labelISBN";
-            this.labelISBN.Size = new System.Drawing.Size(39, 17);
-            this.labelISBN.TabIndex = 13;
-            this.labelISBN.Text = "ISBN";
-            // 
-            // textBoxAno
-            // 
-            this.textBoxAno.Location = new System.Drawing.Point(91, 135);
-            this.textBoxAno.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBoxAno.Name = "textBoxAno";
-            this.textBoxAno.Size = new System.Drawing.Size(73, 22);
-            this.textBoxAno.TabIndex = 15;
-            // 
             // textBoxIdEditora
             // 
-            this.textBoxIdEditora.Location = new System.Drawing.Point(105, 208);
+            this.textBoxIdEditora.Location = new System.Drawing.Point(113, 198);
             this.textBoxIdEditora.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxIdEditora.Name = "textBoxIdEditora";
             this.textBoxIdEditora.Size = new System.Drawing.Size(65, 22);
             this.textBoxIdEditora.TabIndex = 16;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(91, 62);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(116, 22);
-            this.textBox1.TabIndex = 18;
+            this.textBoxIdEditora.TextChanged += new System.EventHandler(this.textBoxIdEditora_TextChanged);
             // 
             // textBoxQuantidade
             // 
-            this.textBoxQuantidade.Location = new System.Drawing.Point(228, 350);
+            this.textBoxQuantidade.Location = new System.Drawing.Point(764, 564);
             this.textBoxQuantidade.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxQuantidade.Name = "textBoxQuantidade";
             this.textBoxQuantidade.Size = new System.Drawing.Size(64, 22);
@@ -157,7 +108,7 @@
             // labelQuantidade
             // 
             this.labelQuantidade.AutoSize = true;
-            this.labelQuantidade.Location = new System.Drawing.Point(31, 352);
+            this.labelQuantidade.Location = new System.Drawing.Point(572, 563);
             this.labelQuantidade.Name = "labelQuantidade";
             this.labelQuantidade.Size = new System.Drawing.Size(179, 17);
             this.labelQuantidade.TabIndex = 20;
@@ -166,7 +117,7 @@
             // comboBoxCategoria
             // 
             this.comboBoxCategoria.FormattingEnabled = true;
-            this.comboBoxCategoria.Location = new System.Drawing.Point(101, 241);
+            this.comboBoxCategoria.Location = new System.Drawing.Point(114, 237);
             this.comboBoxCategoria.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBoxCategoria.Name = "comboBoxCategoria";
             this.comboBoxCategoria.Size = new System.Drawing.Size(224, 24);
@@ -176,7 +127,7 @@
             // labelAutor
             // 
             this.labelAutor.AutoSize = true;
-            this.labelAutor.Location = new System.Drawing.Point(31, 281);
+            this.labelAutor.Location = new System.Drawing.Point(18, 275);
             this.labelAutor.Name = "labelAutor";
             this.labelAutor.Size = new System.Drawing.Size(42, 17);
             this.labelAutor.TabIndex = 21;
@@ -185,7 +136,7 @@
             // comboBoxAutores
             // 
             this.comboBoxAutores.FormattingEnabled = true;
-            this.comboBoxAutores.Location = new System.Drawing.Point(85, 278);
+            this.comboBoxAutores.Location = new System.Drawing.Point(114, 275);
             this.comboBoxAutores.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBoxAutores.Name = "comboBoxAutores";
             this.comboBoxAutores.Size = new System.Drawing.Size(366, 24);
@@ -195,7 +146,7 @@
             // 
             // buttonAddAutor
             // 
-            this.buttonAddAutor.Location = new System.Drawing.Point(489, 277);
+            this.buttonAddAutor.Location = new System.Drawing.Point(935, 203);
             this.buttonAddAutor.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonAddAutor.Name = "buttonAddAutor";
             this.buttonAddAutor.Size = new System.Drawing.Size(172, 25);
@@ -207,7 +158,7 @@
             // labelNomeEditora
             // 
             this.labelNomeEditora.AutoSize = true;
-            this.labelNomeEditora.Location = new System.Drawing.Point(27, 171);
+            this.labelNomeEditora.Location = new System.Drawing.Point(14, 160);
             this.labelNomeEditora.Name = "labelNomeEditora";
             this.labelNomeEditora.Size = new System.Drawing.Size(94, 17);
             this.labelNomeEditora.TabIndex = 25;
@@ -215,7 +166,7 @@
             // 
             // textBoxCreateNomeEditora
             // 
-            this.textBoxCreateNomeEditora.Location = new System.Drawing.Point(905, 118);
+            this.textBoxCreateNomeEditora.Location = new System.Drawing.Point(117, 434);
             this.textBoxCreateNomeEditora.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxCreateNomeEditora.Name = "textBoxCreateNomeEditora";
             this.textBoxCreateNomeEditora.Size = new System.Drawing.Size(181, 22);
@@ -223,7 +174,7 @@
             // 
             // buttonAddEditora
             // 
-            this.buttonAddEditora.Location = new System.Drawing.Point(489, 169);
+            this.buttonAddEditora.Location = new System.Drawing.Point(282, 564);
             this.buttonAddEditora.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonAddEditora.Name = "buttonAddEditora";
             this.buttonAddEditora.Size = new System.Drawing.Size(172, 25);
@@ -235,7 +186,7 @@
             // comboBoxNomeEditora
             // 
             this.comboBoxNomeEditora.FormattingEnabled = true;
-            this.comboBoxNomeEditora.Location = new System.Drawing.Point(136, 169);
+            this.comboBoxNomeEditora.Location = new System.Drawing.Point(114, 157);
             this.comboBoxNomeEditora.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBoxNomeEditora.Name = "comboBoxNomeEditora";
             this.comboBoxNomeEditora.Size = new System.Drawing.Size(315, 24);
@@ -245,7 +196,7 @@
             // 
             // textBoxCreateEditoraEndereco
             // 
-            this.textBoxCreateEditoraEndereco.Location = new System.Drawing.Point(905, 150);
+            this.textBoxCreateEditoraEndereco.Location = new System.Drawing.Point(117, 466);
             this.textBoxCreateEditoraEndereco.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxCreateEditoraEndereco.Name = "textBoxCreateEditoraEndereco";
             this.textBoxCreateEditoraEndereco.Size = new System.Drawing.Size(224, 22);
@@ -253,7 +204,7 @@
             // 
             // textBoxCreateEditoraTelefone
             // 
-            this.textBoxCreateEditoraTelefone.Location = new System.Drawing.Point(905, 179);
+            this.textBoxCreateEditoraTelefone.Location = new System.Drawing.Point(117, 495);
             this.textBoxCreateEditoraTelefone.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxCreateEditoraTelefone.Name = "textBoxCreateEditoraTelefone";
             this.textBoxCreateEditoraTelefone.Size = new System.Drawing.Size(148, 22);
@@ -262,7 +213,7 @@
             // labelCreateEditoraNome
             // 
             this.labelCreateEditoraNome.AutoSize = true;
-            this.labelCreateEditoraNome.Location = new System.Drawing.Point(791, 118);
+            this.labelCreateEditoraNome.Location = new System.Drawing.Point(12, 434);
             this.labelCreateEditoraNome.Name = "labelCreateEditoraNome";
             this.labelCreateEditoraNome.Size = new System.Drawing.Size(94, 17);
             this.labelCreateEditoraNome.TabIndex = 31;
@@ -271,7 +222,7 @@
             // labelCreateTelefoneEditora
             // 
             this.labelCreateTelefoneEditora.AutoSize = true;
-            this.labelCreateTelefoneEditora.Location = new System.Drawing.Point(820, 179);
+            this.labelCreateTelefoneEditora.Location = new System.Drawing.Point(12, 495);
             this.labelCreateTelefoneEditora.Name = "labelCreateTelefoneEditora";
             this.labelCreateTelefoneEditora.Size = new System.Drawing.Size(64, 17);
             this.labelCreateTelefoneEditora.TabIndex = 32;
@@ -280,34 +231,16 @@
             // labelCreateEndercoEditora
             // 
             this.labelCreateEndercoEditora.AutoSize = true;
-            this.labelCreateEndercoEditora.Location = new System.Drawing.Point(815, 150);
+            this.labelCreateEndercoEditora.Location = new System.Drawing.Point(12, 466);
             this.labelCreateEndercoEditora.Name = "labelCreateEndercoEditora";
             this.labelCreateEndercoEditora.Size = new System.Drawing.Size(69, 17);
             this.labelCreateEndercoEditora.TabIndex = 33;
             this.labelCreateEndercoEditora.Text = "Endereço";
             // 
-            // labelCreateIdEditora
-            // 
-            this.labelCreateIdEditora.AutoSize = true;
-            this.labelCreateIdEditora.Location = new System.Drawing.Point(816, 90);
-            this.labelCreateIdEditora.Name = "labelCreateIdEditora";
-            this.labelCreateIdEditora.Size = new System.Drawing.Size(68, 17);
-            this.labelCreateIdEditora.TabIndex = 34;
-            this.labelCreateIdEditora.Text = "Id Editora";
-            // 
-            // labelCreateIdAutor
-            // 
-            this.labelCreateIdAutor.AutoSize = true;
-            this.labelCreateIdAutor.Location = new System.Drawing.Point(831, 266);
-            this.labelCreateIdAutor.Name = "labelCreateIdAutor";
-            this.labelCreateIdAutor.Size = new System.Drawing.Size(57, 17);
-            this.labelCreateIdAutor.TabIndex = 41;
-            this.labelCreateIdAutor.Text = "Id Autor";
-            // 
             // labelCreateEnderecoAutor
             // 
             this.labelCreateEnderecoAutor.AutoSize = true;
-            this.labelCreateEnderecoAutor.Location = new System.Drawing.Point(767, 357);
+            this.labelCreateEnderecoAutor.Location = new System.Drawing.Point(645, 116);
             this.labelCreateEnderecoAutor.Name = "labelCreateEnderecoAutor";
             this.labelCreateEnderecoAutor.Size = new System.Drawing.Size(116, 17);
             this.labelCreateEnderecoAutor.TabIndex = 40;
@@ -316,7 +249,7 @@
             // labelCreateTelefoneAutor
             // 
             this.labelCreateTelefoneAutor.AutoSize = true;
-            this.labelCreateTelefoneAutor.Location = new System.Drawing.Point(820, 385);
+            this.labelCreateTelefoneAutor.Location = new System.Drawing.Point(698, 144);
             this.labelCreateTelefoneAutor.Name = "labelCreateTelefoneAutor";
             this.labelCreateTelefoneAutor.Size = new System.Drawing.Size(64, 17);
             this.labelCreateTelefoneAutor.TabIndex = 39;
@@ -325,7 +258,7 @@
             // labelCreateNomeAutor
             // 
             this.labelCreateNomeAutor.AutoSize = true;
-            this.labelCreateNomeAutor.Location = new System.Drawing.Point(839, 296);
+            this.labelCreateNomeAutor.Location = new System.Drawing.Point(717, 55);
             this.labelCreateNomeAutor.Name = "labelCreateNomeAutor";
             this.labelCreateNomeAutor.Size = new System.Drawing.Size(45, 17);
             this.labelCreateNomeAutor.TabIndex = 38;
@@ -333,7 +266,7 @@
             // 
             // textBoxCreateTelefoneAutor
             // 
-            this.textBoxCreateTelefoneAutor.Location = new System.Drawing.Point(905, 381);
+            this.textBoxCreateTelefoneAutor.Location = new System.Drawing.Point(783, 140);
             this.textBoxCreateTelefoneAutor.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxCreateTelefoneAutor.Name = "textBoxCreateTelefoneAutor";
             this.textBoxCreateTelefoneAutor.Size = new System.Drawing.Size(148, 22);
@@ -341,7 +274,7 @@
             // 
             // textBoxCreateDataAutor
             // 
-            this.textBoxCreateDataAutor.Location = new System.Drawing.Point(905, 353);
+            this.textBoxCreateDataAutor.Location = new System.Drawing.Point(783, 112);
             this.textBoxCreateDataAutor.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxCreateDataAutor.Name = "textBoxCreateDataAutor";
             this.textBoxCreateDataAutor.Size = new System.Drawing.Size(148, 22);
@@ -349,7 +282,7 @@
             // 
             // textBoxCreateNomeAutor
             // 
-            this.textBoxCreateNomeAutor.Location = new System.Drawing.Point(905, 291);
+            this.textBoxCreateNomeAutor.Location = new System.Drawing.Point(783, 50);
             this.textBoxCreateNomeAutor.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxCreateNomeAutor.Name = "textBoxCreateNomeAutor";
             this.textBoxCreateNomeAutor.Size = new System.Drawing.Size(181, 22);
@@ -358,7 +291,7 @@
             // labelCreateApelidoAutor
             // 
             this.labelCreateApelidoAutor.AutoSize = true;
-            this.labelCreateApelidoAutor.Location = new System.Drawing.Point(832, 326);
+            this.labelCreateApelidoAutor.Location = new System.Drawing.Point(710, 85);
             this.labelCreateApelidoAutor.Name = "labelCreateApelidoAutor";
             this.labelCreateApelidoAutor.Size = new System.Drawing.Size(55, 17);
             this.labelCreateApelidoAutor.TabIndex = 42;
@@ -366,7 +299,7 @@
             // 
             // textBoxCreateApelidoAutor
             // 
-            this.textBoxCreateApelidoAutor.Location = new System.Drawing.Point(905, 323);
+            this.textBoxCreateApelidoAutor.Location = new System.Drawing.Point(783, 82);
             this.textBoxCreateApelidoAutor.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxCreateApelidoAutor.Name = "textBoxCreateApelidoAutor";
             this.textBoxCreateApelidoAutor.Size = new System.Drawing.Size(181, 22);
@@ -374,7 +307,7 @@
             // 
             // buttonAddCreateEditora
             // 
-            this.buttonAddCreateEditora.Location = new System.Drawing.Point(1070, 208);
+            this.buttonAddCreateEditora.Location = new System.Drawing.Point(282, 524);
             this.buttonAddCreateEditora.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonAddCreateEditora.Name = "buttonAddCreateEditora";
             this.buttonAddCreateEditora.Size = new System.Drawing.Size(59, 25);
@@ -385,7 +318,7 @@
             // 
             // buttonAddCreateAutor
             // 
-            this.buttonAddCreateAutor.Location = new System.Drawing.Point(1057, 415);
+            this.buttonAddCreateAutor.Location = new System.Drawing.Point(935, 174);
             this.buttonAddCreateAutor.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonAddCreateAutor.Name = "buttonAddCreateAutor";
             this.buttonAddCreateAutor.Size = new System.Drawing.Size(59, 25);
@@ -396,7 +329,7 @@
             // 
             // buttonAddExemplares
             // 
-            this.buttonAddExemplares.Location = new System.Drawing.Point(35, 394);
+            this.buttonAddExemplares.Location = new System.Drawing.Point(880, 552);
             this.buttonAddExemplares.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonAddExemplares.Name = "buttonAddExemplares";
             this.buttonAddExemplares.Size = new System.Drawing.Size(259, 46);
@@ -407,7 +340,7 @@
             // 
             // textBoxIDPessoa
             // 
-            this.textBoxIDPessoa.Location = new System.Drawing.Point(105, 311);
+            this.textBoxIDPessoa.Location = new System.Drawing.Point(113, 306);
             this.textBoxIDPessoa.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxIDPessoa.Name = "textBoxIDPessoa";
             this.textBoxIDPessoa.Size = new System.Drawing.Size(81, 22);
@@ -416,17 +349,105 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(27, 315);
+            this.label1.Location = new System.Drawing.Point(14, 309);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(57, 17);
             this.label1.TabIndex = 48;
             this.label1.Text = "Id Autor";
             // 
+            // buttonAddLivro
+            // 
+            this.buttonAddLivro.Location = new System.Drawing.Point(318, 339);
+            this.buttonAddLivro.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonAddLivro.Name = "buttonAddLivro";
+            this.buttonAddLivro.Size = new System.Drawing.Size(172, 25);
+            this.buttonAddLivro.TabIndex = 49;
+            this.buttonAddLivro.Text = "Adicionar Livro";
+            this.buttonAddLivro.UseVisualStyleBackColor = true;
+            this.buttonAddLivro.Click += new System.EventHandler(this.buttonAddLivro_Click);
+            // 
+            // textBoxCreateISBN
+            // 
+            this.textBoxCreateISBN.Location = new System.Drawing.Point(114, 54);
+            this.textBoxCreateISBN.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxCreateISBN.Name = "textBoxCreateISBN";
+            this.textBoxCreateISBN.Size = new System.Drawing.Size(116, 22);
+            this.textBoxCreateISBN.TabIndex = 53;
+            // 
+            // labelCreateISBN
+            // 
+            this.labelCreateISBN.AutoSize = true;
+            this.labelCreateISBN.Location = new System.Drawing.Point(18, 57);
+            this.labelCreateISBN.Name = "labelCreateISBN";
+            this.labelCreateISBN.Size = new System.Drawing.Size(39, 17);
+            this.labelCreateISBN.TabIndex = 52;
+            this.labelCreateISBN.Text = "ISBN";
+            // 
+            // labelCreateTitulo
+            // 
+            this.labelCreateTitulo.AutoSize = true;
+            this.labelCreateTitulo.Location = new System.Drawing.Point(698, 500);
+            this.labelCreateTitulo.Name = "labelCreateTitulo";
+            this.labelCreateTitulo.Size = new System.Drawing.Size(43, 17);
+            this.labelCreateTitulo.TabIndex = 51;
+            this.labelCreateTitulo.Text = "Titulo";
+            // 
+            // textBoxCreateTitulo
+            // 
+            this.textBoxCreateTitulo.Location = new System.Drawing.Point(764, 500);
+            this.textBoxCreateTitulo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxCreateTitulo.Name = "textBoxCreateTitulo";
+            this.textBoxCreateTitulo.Size = new System.Drawing.Size(360, 22);
+            this.textBoxCreateTitulo.TabIndex = 50;
+            // 
+            // textBoxCreateAno
+            // 
+            this.textBoxCreateAno.Location = new System.Drawing.Point(114, 121);
+            this.textBoxCreateAno.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxCreateAno.Name = "textBoxCreateAno";
+            this.textBoxCreateAno.Size = new System.Drawing.Size(116, 22);
+            this.textBoxCreateAno.TabIndex = 55;
+            // 
+            // labelCreateAno
+            // 
+            this.labelCreateAno.AutoSize = true;
+            this.labelCreateAno.Location = new System.Drawing.Point(14, 126);
+            this.labelCreateAno.Name = "labelCreateAno";
+            this.labelCreateAno.Size = new System.Drawing.Size(33, 17);
+            this.labelCreateAno.TabIndex = 54;
+            this.labelCreateAno.Text = "Ano";
+            // 
+            // textBoxCreateISBNExemplares
+            // 
+            this.textBoxCreateISBNExemplares.Location = new System.Drawing.Point(764, 529);
+            this.textBoxCreateISBNExemplares.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxCreateISBNExemplares.Name = "textBoxCreateISBNExemplares";
+            this.textBoxCreateISBNExemplares.Size = new System.Drawing.Size(64, 22);
+            this.textBoxCreateISBNExemplares.TabIndex = 56;
+            // 
+            // labelAddISBNExemplares
+            // 
+            this.labelAddISBNExemplares.AutoSize = true;
+            this.labelAddISBNExemplares.Location = new System.Drawing.Point(698, 532);
+            this.labelAddISBNExemplares.Name = "labelAddISBNExemplares";
+            this.labelAddISBNExemplares.Size = new System.Drawing.Size(39, 17);
+            this.labelAddISBNExemplares.TabIndex = 57;
+            this.labelAddISBNExemplares.Text = "ISBN";
+            // 
             // Form5
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1160, 465);
+            this.ClientSize = new System.Drawing.Size(1160, 625);
+            this.Controls.Add(this.labelAddISBNExemplares);
+            this.Controls.Add(this.textBoxCreateISBNExemplares);
+            this.Controls.Add(this.textBoxCreateAno);
+            this.Controls.Add(this.labelCreateAno);
+            this.Controls.Add(this.textBoxCreateISBN);
+            this.Controls.Add(this.labelCreateISBN);
+            this.Controls.Add(this.labelCreateTitulo);
+            this.Controls.Add(this.textBoxCreateTitulo);
+            this.Controls.Add(this.buttonAddLivro);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBoxIDPessoa);
             this.Controls.Add(this.buttonAddExemplares);
@@ -434,14 +455,12 @@
             this.Controls.Add(this.buttonAddCreateEditora);
             this.Controls.Add(this.textBoxCreateApelidoAutor);
             this.Controls.Add(this.labelCreateApelidoAutor);
-            this.Controls.Add(this.labelCreateIdAutor);
             this.Controls.Add(this.labelCreateEnderecoAutor);
             this.Controls.Add(this.labelCreateTelefoneAutor);
             this.Controls.Add(this.labelCreateNomeAutor);
             this.Controls.Add(this.textBoxCreateTelefoneAutor);
             this.Controls.Add(this.textBoxCreateDataAutor);
             this.Controls.Add(this.textBoxCreateNomeAutor);
-            this.Controls.Add(this.labelCreateIdEditora);
             this.Controls.Add(this.labelCreateEndercoEditora);
             this.Controls.Add(this.labelCreateTelefoneEditora);
             this.Controls.Add(this.labelCreateEditoraNome);
@@ -456,16 +475,10 @@
             this.Controls.Add(this.labelAutor);
             this.Controls.Add(this.labelQuantidade);
             this.Controls.Add(this.textBoxQuantidade);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.comboBoxCategoria);
             this.Controls.Add(this.textBoxIdEditora);
-            this.Controls.Add(this.textBoxAno);
-            this.Controls.Add(this.labelISBN);
-            this.Controls.Add(this.labelTitulo);
-            this.Controls.Add(this.labelAno);
             this.Controls.Add(this.labelIdEditora);
             this.Controls.Add(this.labelCategoria);
-            this.Controls.Add(this.textBoxTitulo);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form5";
             this.Text = "Form5";
@@ -476,16 +489,9 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox textBoxTitulo;
         private System.Windows.Forms.Label labelCategoria;
         private System.Windows.Forms.Label labelIdEditora;
-        private System.Windows.Forms.Label labelAno;
-        private System.Windows.Forms.Label labelTitulo;
-        private System.Windows.Forms.Label labelISBN;
-        private System.Windows.Forms.TextBox textBoxAno;
         private System.Windows.Forms.TextBox textBoxIdEditora;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBoxQuantidade;
         private System.Windows.Forms.Label labelQuantidade;
         private System.Windows.Forms.ComboBox comboBoxCategoria;
@@ -501,8 +507,6 @@
         private System.Windows.Forms.Label labelCreateEditoraNome;
         private System.Windows.Forms.Label labelCreateTelefoneEditora;
         private System.Windows.Forms.Label labelCreateEndercoEditora;
-        private System.Windows.Forms.Label labelCreateIdEditora;
-        private System.Windows.Forms.Label labelCreateIdAutor;
         private System.Windows.Forms.Label labelCreateEnderecoAutor;
         private System.Windows.Forms.Label labelCreateTelefoneAutor;
         private System.Windows.Forms.Label labelCreateNomeAutor;
@@ -516,5 +520,14 @@
         private System.Windows.Forms.Button buttonAddExemplares;
         private System.Windows.Forms.TextBox textBoxIDPessoa;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button buttonAddLivro;
+        private System.Windows.Forms.TextBox textBoxCreateISBN;
+        private System.Windows.Forms.Label labelCreateISBN;
+        private System.Windows.Forms.Label labelCreateTitulo;
+        private System.Windows.Forms.TextBox textBoxCreateTitulo;
+        private System.Windows.Forms.TextBox textBoxCreateAno;
+        private System.Windows.Forms.Label labelCreateAno;
+        private System.Windows.Forms.TextBox textBoxCreateISBNExemplares;
+        private System.Windows.Forms.Label labelAddISBNExemplares;
     }
 }

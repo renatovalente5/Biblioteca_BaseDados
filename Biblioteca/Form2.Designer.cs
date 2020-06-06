@@ -80,7 +80,7 @@
             // 
             // buttonAdd
             // 
-            this.buttonAdd.Location = new System.Drawing.Point(638, 306);
+            this.buttonAdd.Location = new System.Drawing.Point(631, 344);
             this.buttonAdd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(99, 38);
@@ -91,7 +91,7 @@
             // 
             // buttonRemove
             // 
-            this.buttonRemove.Location = new System.Drawing.Point(927, 306);
+            this.buttonRemove.Location = new System.Drawing.Point(920, 344);
             this.buttonRemove.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonRemove.Name = "buttonRemove";
             this.buttonRemove.Size = new System.Drawing.Size(99, 38);
@@ -104,7 +104,7 @@
             // 
             this.listBox2.FormattingEnabled = true;
             this.listBox2.ItemHeight = 16;
-            this.listBox2.Location = new System.Drawing.Point(638, 201);
+            this.listBox2.Location = new System.Drawing.Point(631, 239);
             this.listBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.listBox2.Name = "listBox2";
             this.listBox2.Size = new System.Drawing.Size(380, 100);
@@ -124,7 +124,7 @@
             // 
             // textCota
             // 
-            this.textCota.Location = new System.Drawing.Point(720, 54);
+            this.textCota.Location = new System.Drawing.Point(713, 92);
             this.textCota.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textCota.Name = "textCota";
             this.textCota.Size = new System.Drawing.Size(92, 22);
@@ -133,7 +133,7 @@
             // labelCota
             // 
             this.labelCota.AutoSize = true;
-            this.labelCota.Location = new System.Drawing.Point(635, 58);
+            this.labelCota.Location = new System.Drawing.Point(628, 96);
             this.labelCota.Name = "labelCota";
             this.labelCota.Size = new System.Drawing.Size(37, 17);
             this.labelCota.TabIndex = 8;
@@ -141,7 +141,7 @@
             // 
             // textCategoria
             // 
-            this.textCategoria.Location = new System.Drawing.Point(720, 92);
+            this.textCategoria.Location = new System.Drawing.Point(713, 130);
             this.textCategoria.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textCategoria.Name = "textCategoria";
             this.textCategoria.Size = new System.Drawing.Size(208, 22);
@@ -149,7 +149,7 @@
             // 
             // textEditora
             // 
-            this.textEditora.Location = new System.Drawing.Point(720, 127);
+            this.textEditora.Location = new System.Drawing.Point(713, 165);
             this.textEditora.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textEditora.Name = "textEditora";
             this.textEditora.Size = new System.Drawing.Size(208, 22);
@@ -158,7 +158,7 @@
             // labelCategoria
             // 
             this.labelCategoria.AutoSize = true;
-            this.labelCategoria.Location = new System.Drawing.Point(635, 92);
+            this.labelCategoria.Location = new System.Drawing.Point(628, 130);
             this.labelCategoria.Name = "labelCategoria";
             this.labelCategoria.Size = new System.Drawing.Size(69, 17);
             this.labelCategoria.TabIndex = 11;
@@ -167,7 +167,7 @@
             // labelEditora
             // 
             this.labelEditora.AutoSize = true;
-            this.labelEditora.Location = new System.Drawing.Point(635, 130);
+            this.labelEditora.Location = new System.Drawing.Point(628, 168);
             this.labelEditora.Name = "labelEditora";
             this.labelEditora.Size = new System.Drawing.Size(53, 17);
             this.labelEditora.TabIndex = 12;
@@ -185,7 +185,7 @@
             // labelEstado
             // 
             this.labelEstado.AutoSize = true;
-            this.labelEstado.Location = new System.Drawing.Point(635, 171);
+            this.labelEstado.Location = new System.Drawing.Point(628, 209);
             this.labelEstado.Name = "labelEstado";
             this.labelEstado.Size = new System.Drawing.Size(52, 17);
             this.labelEstado.TabIndex = 33;
@@ -193,7 +193,7 @@
             // 
             // textBoxEstado
             // 
-            this.textBoxEstado.Location = new System.Drawing.Point(720, 167);
+            this.textBoxEstado.Location = new System.Drawing.Point(713, 205);
             this.textBoxEstado.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxEstado.Name = "textBoxEstado";
             this.textBoxEstado.Size = new System.Drawing.Size(208, 22);
@@ -202,7 +202,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(635, 22);
+            this.label2.Location = new System.Drawing.Point(628, 60);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(21, 17);
             this.label2.TabIndex = 35;
@@ -210,10 +210,10 @@
             // 
             // textBoxID
             // 
-            this.textBoxID.Location = new System.Drawing.Point(720, 18);
+            this.textBoxID.Location = new System.Drawing.Point(713, 56);
             this.textBoxID.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxID.Name = "textBoxID";
-            this.textBoxID.Size = new System.Drawing.Size(60, 22);
+            this.textBoxID.Size = new System.Drawing.Size(92, 22);
             this.textBoxID.TabIndex = 36;
             // 
             // Form2

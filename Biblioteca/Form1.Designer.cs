@@ -67,13 +67,13 @@ namespace Biblioteca
             this.listBox1.Location = new System.Drawing.Point(24, 55);
             this.listBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(512, 324);
+            this.listBox1.Size = new System.Drawing.Size(325, 356);
             this.listBox1.TabIndex = 0;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // buttonSearch
             // 
-            this.buttonSearch.Location = new System.Drawing.Point(232, 399);
+            this.buttonSearch.Location = new System.Drawing.Point(232, 438);
             this.buttonSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonSearch.Name = "buttonSearch";
             this.buttonSearch.Size = new System.Drawing.Size(117, 39);
@@ -84,7 +84,7 @@ namespace Biblioteca
             // 
             // textID
             // 
-            this.textID.Location = new System.Drawing.Point(603, 75);
+            this.textID.Location = new System.Drawing.Point(440, 74);
             this.textID.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textID.Name = "textID";
             this.textID.Size = new System.Drawing.Size(133, 22);
@@ -94,7 +94,7 @@ namespace Biblioteca
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(600, 55);
+            this.label2.Location = new System.Drawing.Point(437, 54);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(21, 17);
             this.label2.TabIndex = 4;
@@ -102,7 +102,7 @@ namespace Biblioteca
             // 
             // buttonAdd
             // 
-            this.buttonAdd.Location = new System.Drawing.Point(571, 399);
+            this.buttonAdd.Location = new System.Drawing.Point(570, 444);
             this.buttonAdd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(101, 34);
@@ -113,7 +113,7 @@ namespace Biblioteca
             // 
             // textFirstName
             // 
-            this.textFirstName.Location = new System.Drawing.Point(603, 129);
+            this.textFirstName.Location = new System.Drawing.Point(440, 128);
             this.textFirstName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textFirstName.Name = "textFirstName";
             this.textFirstName.Size = new System.Drawing.Size(133, 22);
@@ -123,17 +123,17 @@ namespace Biblioteca
             // textLastName
             // 
             this.textLastName.BackColor = System.Drawing.SystemColors.Window;
-            this.textLastName.Location = new System.Drawing.Point(780, 129);
+            this.textLastName.Location = new System.Drawing.Point(617, 128);
             this.textLastName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textLastName.Name = "textLastName";
-            this.textLastName.Size = new System.Drawing.Size(111, 22);
+            this.textLastName.Size = new System.Drawing.Size(130, 22);
             this.textLastName.TabIndex = 7;
             this.textLastName.TextChanged += new System.EventHandler(this.textLastName_TextChanged);
             // 
             // labelFirstName
             // 
             this.labelFirstName.AutoSize = true;
-            this.labelFirstName.Location = new System.Drawing.Point(600, 110);
+            this.labelFirstName.Location = new System.Drawing.Point(437, 109);
             this.labelFirstName.Name = "labelFirstName";
             this.labelFirstName.Size = new System.Drawing.Size(76, 17);
             this.labelFirstName.TabIndex = 8;
@@ -142,7 +142,7 @@ namespace Biblioteca
             // labelLastName
             // 
             this.labelLastName.AutoSize = true;
-            this.labelLastName.Location = new System.Drawing.Point(778, 110);
+            this.labelLastName.Location = new System.Drawing.Point(615, 109);
             this.labelLastName.Name = "labelLastName";
             this.labelLastName.Size = new System.Drawing.Size(76, 17);
             this.labelLastName.TabIndex = 9;
@@ -150,7 +150,7 @@ namespace Biblioteca
             // 
             // textDataNascimento
             // 
-            this.textDataNascimento.Location = new System.Drawing.Point(603, 185);
+            this.textDataNascimento.Location = new System.Drawing.Point(440, 184);
             this.textDataNascimento.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textDataNascimento.Name = "textDataNascimento";
             this.textDataNascimento.Size = new System.Drawing.Size(133, 22);
@@ -158,7 +158,7 @@ namespace Biblioteca
             // 
             // textTelefone
             // 
-            this.textTelefone.Location = new System.Drawing.Point(603, 239);
+            this.textTelefone.Location = new System.Drawing.Point(440, 238);
             this.textTelefone.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textTelefone.Name = "textTelefone";
             this.textTelefone.Size = new System.Drawing.Size(133, 22);
@@ -168,7 +168,7 @@ namespace Biblioteca
             // labelDataNascimento
             // 
             this.labelDataNascimento.AutoSize = true;
-            this.labelDataNascimento.Location = new System.Drawing.Point(600, 165);
+            this.labelDataNascimento.Location = new System.Drawing.Point(437, 164);
             this.labelDataNascimento.Name = "labelDataNascimento";
             this.labelDataNascimento.Size = new System.Drawing.Size(136, 17);
             this.labelDataNascimento.TabIndex = 12;
@@ -177,7 +177,7 @@ namespace Biblioteca
             // labelTelefone
             // 
             this.labelTelefone.AutoSize = true;
-            this.labelTelefone.Location = new System.Drawing.Point(600, 219);
+            this.labelTelefone.Location = new System.Drawing.Point(437, 218);
             this.labelTelefone.Name = "labelTelefone";
             this.labelTelefone.Size = new System.Drawing.Size(64, 17);
             this.labelTelefone.TabIndex = 13;
@@ -185,7 +185,7 @@ namespace Biblioteca
             // 
             // buttonEdit
             // 
-            this.buttonEdit.Location = new System.Drawing.Point(678, 399);
+            this.buttonEdit.Location = new System.Drawing.Point(677, 444);
             this.buttonEdit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonEdit.Name = "buttonEdit";
             this.buttonEdit.Size = new System.Drawing.Size(101, 34);
@@ -196,7 +196,7 @@ namespace Biblioteca
             // 
             // buttonRemove
             // 
-            this.buttonRemove.Location = new System.Drawing.Point(786, 399);
+            this.buttonRemove.Location = new System.Drawing.Point(785, 444);
             this.buttonRemove.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonRemove.Name = "buttonRemove";
             this.buttonRemove.Size = new System.Drawing.Size(101, 34);
@@ -207,7 +207,7 @@ namespace Biblioteca
             // 
             // buttonOk
             // 
-            this.buttonOk.Location = new System.Drawing.Point(892, 399);
+            this.buttonOk.Location = new System.Drawing.Point(892, 443);
             this.buttonOk.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(101, 34);
@@ -218,7 +218,7 @@ namespace Biblioteca
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(892, 359);
+            this.buttonCancel.Location = new System.Drawing.Point(892, 395);
             this.buttonCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(101, 34);
@@ -229,7 +229,7 @@ namespace Biblioteca
             // 
             // textSearch
             // 
-            this.textSearch.Location = new System.Drawing.Point(24, 407);
+            this.textSearch.Location = new System.Drawing.Point(24, 446);
             this.textSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textSearch.Name = "textSearch";
             this.textSearch.Size = new System.Drawing.Size(201, 22);
@@ -238,7 +238,7 @@ namespace Biblioteca
             // 
             // buttonEmprestimo
             // 
-            this.buttonEmprestimo.Location = new System.Drawing.Point(603, 346);
+            this.buttonEmprestimo.Location = new System.Drawing.Point(434, 345);
             this.buttonEmprestimo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonEmprestimo.Name = "buttonEmprestimo";
             this.buttonEmprestimo.Size = new System.Drawing.Size(101, 34);
@@ -249,7 +249,7 @@ namespace Biblioteca
             // 
             // buttonHistorico
             // 
-            this.buttonHistorico.Location = new System.Drawing.Point(710, 346);
+            this.buttonHistorico.Location = new System.Drawing.Point(541, 345);
             this.buttonHistorico.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonHistorico.Name = "buttonHistorico";
             this.buttonHistorico.Size = new System.Drawing.Size(101, 34);
@@ -281,7 +281,7 @@ namespace Biblioteca
             // labelNIF
             // 
             this.labelNIF.AutoSize = true;
-            this.labelNIF.Location = new System.Drawing.Point(776, 165);
+            this.labelNIF.Location = new System.Drawing.Point(613, 164);
             this.labelNIF.Name = "labelNIF";
             this.labelNIF.Size = new System.Drawing.Size(29, 17);
             this.labelNIF.TabIndex = 34;
@@ -290,34 +290,34 @@ namespace Biblioteca
             // textBoxNIF
             // 
             this.textBoxNIF.BackColor = System.Drawing.SystemColors.Window;
-            this.textBoxNIF.Location = new System.Drawing.Point(780, 185);
+            this.textBoxNIF.Location = new System.Drawing.Point(617, 184);
             this.textBoxNIF.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxNIF.Name = "textBoxNIF";
-            this.textBoxNIF.Size = new System.Drawing.Size(111, 22);
+            this.textBoxNIF.Size = new System.Drawing.Size(130, 22);
             this.textBoxNIF.TabIndex = 35;
             // 
             // textBoxMail
             // 
             this.textBoxMail.BackColor = System.Drawing.SystemColors.Window;
-            this.textBoxMail.Location = new System.Drawing.Point(780, 239);
+            this.textBoxMail.Location = new System.Drawing.Point(617, 238);
             this.textBoxMail.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxMail.Name = "textBoxMail";
-            this.textBoxMail.Size = new System.Drawing.Size(188, 22);
+            this.textBoxMail.Size = new System.Drawing.Size(247, 22);
             this.textBoxMail.TabIndex = 36;
             // 
             // textBoxMorada
             // 
             this.textBoxMorada.BackColor = System.Drawing.SystemColors.Window;
-            this.textBoxMorada.Location = new System.Drawing.Point(604, 299);
+            this.textBoxMorada.Location = new System.Drawing.Point(441, 298);
             this.textBoxMorada.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxMorada.Name = "textBoxMorada";
-            this.textBoxMorada.Size = new System.Drawing.Size(328, 22);
+            this.textBoxMorada.Size = new System.Drawing.Size(423, 22);
             this.textBoxMorada.TabIndex = 37;
             // 
             // labelMail
             // 
             this.labelMail.AutoSize = true;
-            this.labelMail.Location = new System.Drawing.Point(778, 219);
+            this.labelMail.Location = new System.Drawing.Point(615, 218);
             this.labelMail.Name = "labelMail";
             this.labelMail.Size = new System.Drawing.Size(42, 17);
             this.labelMail.TabIndex = 38;
@@ -326,7 +326,7 @@ namespace Biblioteca
             // labelMorada
             // 
             this.labelMorada.AutoSize = true;
-            this.labelMorada.Location = new System.Drawing.Point(600, 281);
+            this.labelMorada.Location = new System.Drawing.Point(437, 280);
             this.labelMorada.Name = "labelMorada";
             this.labelMorada.Size = new System.Drawing.Size(69, 17);
             this.labelMorada.TabIndex = 39;
@@ -336,7 +336,7 @@ namespace Biblioteca
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1016, 450);
+            this.ClientSize = new System.Drawing.Size(1016, 488);
             this.Controls.Add(this.labelMorada);
             this.Controls.Add(this.labelMail);
             this.Controls.Add(this.textBoxMorada);

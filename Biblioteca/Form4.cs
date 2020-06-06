@@ -179,6 +179,8 @@ namespace Biblioteca
             cmd.Connection = cn;
             SqlDataReader reader = cmd.ExecuteReader();
 
+            textBoxDisponiveis.Text = "0";
+
             while (reader.Read())
             {
                 Emprestimo em = new Emprestimo();

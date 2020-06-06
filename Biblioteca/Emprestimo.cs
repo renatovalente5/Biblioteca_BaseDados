@@ -17,7 +17,7 @@ namespace Biblioteca
 
         public override String ToString()
         {
-            return (N_emprestimo is null ? "" : "nº emprestimo: " + N_emprestimo.ToString()) + (Numero_exemplar is null ? "" : ",   nº exemplar: " + Numero_exemplar.ToString()) + (Titulo is null ? "" : "  Título: " + Titulo) + (Data_chegada is null ? "" : " - Disponivel");
+            return (N_emprestimo is null ? "" : "Nº Emprestimo: " + N_emprestimo.ToString()) + (Numero_exemplar is null ? "" : ",   Nº Exemplar: " + Numero_exemplar.ToString()) + (Titulo is null ? "" : "  TÍTULO: " + Titulo) + (Data_chegada is null ? "" : " - Disponivel");
         }
 
         public int? N_emprestimo
