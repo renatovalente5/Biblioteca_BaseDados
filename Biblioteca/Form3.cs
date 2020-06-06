@@ -111,6 +111,10 @@ namespace Biblioteca
             textBoxDataEntrada.Text = emprestimo.Data_entrega.ToString().Split(' ')[0];
             textBoxDataChegada.Text = emprestimo.Data_chegada.ToString().Split(' ')[0];
             textCategoria.Text = emprestimo.Categoria;
+            if (textBoxDataChegada.Text != "")
+                buttonEntrega.Hide();
+            else
+                buttonEntrega.Show();
         }
 
         private void buttonSearch_Click(object sender, EventArgs e)
@@ -185,5 +189,42 @@ namespace Biblioteca
                 ShowEmprestimo();
             }
         }
+
+        private void buttonEntrega_Click(object sender, EventArgs e)
+        {
+            int rows = 0;
+            if (listBox1.Items.Count == 0 | currentLivro < 0) return;
+            Emprestimo emprestimo = new Emprestimo();
+            emprestimo = (Emprestimo)listBox1.Items[currentLivro];
+
+            if (!verifySGBDConnection())
+                return;
+
+            SqlCommand cmd = new SqlCommand("Biblioteca.FazerEntrega",cn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Clear();
+            cmd.Parameters.Add("@emprestimo", SqlDbType.Int).Value = emprestimo.N_emprestimo;
+
+            try
+            {
+                rows = cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed fazendo entrega in database. \n ERROR MESSAGE: \n" + ex.Message);
+            }
+            finally
+            {
+                if (rows == 1)
+                    MessageBox.Show("Update OK");
+                else
+                    MessageBox.Show("Update NOT OK");
+
+                cn.Close();
+            }
+
+            Form3_Load(sender, e);
+        }
+
     }
 }

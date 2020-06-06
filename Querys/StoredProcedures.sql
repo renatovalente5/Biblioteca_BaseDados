@@ -146,3 +146,7 @@ as
 go
 
 --exec BIBLIOTECA.CreateLivroExemplares 'isbn2','3'
+
+create proc Biblioteca.FazerEntrega (@emprestimo int)
+as
+	update Biblioteca.Emprestimo set data_chegada = GETDATE() where n_emprestimo=@emprestimo;
