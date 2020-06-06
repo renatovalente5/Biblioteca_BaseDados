@@ -24,6 +24,7 @@ namespace Biblioteca
         {
             HideCreateAutor();
             HideCreateEditora();
+            HideCreateLivro();
 
             String[] categorias = new String[] { "Action", "Adventure", "Animation", "Comedy", "Crime", "Drama", "Ficção" };
             comboBoxCategoria.Items.AddRange(categorias);
@@ -149,7 +150,7 @@ namespace Biblioteca
 
             int rows = 0;
 
-            if(textBoxCreateNomeEditora.Text == "")
+            if (textBoxCreateNomeEditora.Text == "")
                 MessageBox.Show("Adiciona nome da editora", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else
             {
@@ -159,8 +160,8 @@ namespace Biblioteca
                 cmd.Parameters.Add("@nome", SqlDbType.VarChar).Value = textBoxCreateNomeEditora.Text;
                 if (textBoxCreateEditoraEndereco.Text != "")
                     cmd.Parameters.Add("@morada", SqlDbType.VarChar).Value = textBoxCreateEditoraEndereco.Text;
-                if(textBoxCreateEditoraTelefone.Text !="")
-                    cmd.Parameters.Add("@telefone",SqlDbType.Decimal).Value = Decimal.Parse(textBoxCreateEditoraTelefone.Text);
+                if (textBoxCreateEditoraTelefone.Text != "")
+                    cmd.Parameters.Add("@telefone", SqlDbType.Decimal).Value = Decimal.Parse(textBoxCreateEditoraTelefone.Text);
                 cmd.Connection = cn;
                 try
                 {
@@ -195,6 +196,26 @@ namespace Biblioteca
             textBoxCreateEditoraTelefone.Hide();
             buttonAddCreateEditora.Hide();
         }
+        private void HideCreateLivro()
+        {
+            labelCreateISBN.Hide();
+            label2.Hide();
+            labelCreateAno.Hide();
+            labelNomeEditora.Hide();
+            labelIdEditora.Hide();
+            labelCategoria.Hide();
+            labelAutor.Hide();
+            label1.Hide();
+            textBoxCreateISBN.Hide();
+            textBoxCreateTitulo.Hide();
+            textBoxCreateAno.Hide();
+            comboBoxNomeEditora.Hide();
+            textBoxIdEditora.Hide();
+            comboBoxCategoria.Hide();
+            comboBoxAutores.Hide();
+            textBoxIDPessoa.Hide();
+            buttonAddLivro.Hide();
+        }
 
         private void buttonAddAutor_Click(object sender, EventArgs e)
         {
@@ -213,6 +234,27 @@ namespace Biblioteca
             textBoxCreateDataAutor.Show();
             textBoxCreateTelefoneAutor.Show();
             buttonAddCreateAutor.Show();
+        }
+
+        private void ShowCreateLivro()
+        {
+            labelCreateISBN.Show();
+            label2.Show();
+            labelCreateAno.Show();
+            labelNomeEditora.Show();
+            labelIdEditora.Show();
+            labelCategoria.Show();
+            labelAutor.Show();
+            label1.Show();
+            textBoxCreateISBN.Show();
+            textBoxCreateTitulo.Show();
+            textBoxCreateAno.Show();
+            comboBoxNomeEditora.Show();
+            textBoxIdEditora.Show();
+            comboBoxCategoria.Show();
+            comboBoxAutores.Show();
+            textBoxIDPessoa.Show();
+            buttonAddLivro.Show();
         }
 
         private void buttonAddCreateAutor_Click(object sender, EventArgs e)
@@ -268,6 +310,7 @@ namespace Biblioteca
             textBoxCreateApelidoAutor.Hide();
             textBoxCreateDataAutor.Hide();
             textBoxCreateTelefoneAutor.Hide();
+            buttonAddCreateAutor.Hide();
             buttonAddCreateAutor.Hide();
         }
 
@@ -327,6 +370,8 @@ namespace Biblioteca
 
         private void buttonAddLivro_Click(object sender, EventArgs e) //AQUIII
         {
+            HideCreateLivro();
+
             if (!verifySGBDConnection())
                 return;
 
@@ -341,7 +386,7 @@ namespace Biblioteca
                 cmd.Parameters.Clear();
                 cmd.Parameters.Add("@isbn", SqlDbType.VarChar).Value = textBoxCreateISBN.Text;
                 cmd.Parameters.Add("@titulo", SqlDbType.VarChar).Value = textBoxCreateTitulo.Text;
-                if (comboBoxCategoria.SelectedItem  != null)
+                if (comboBoxCategoria.SelectedItem != null)
                     cmd.Parameters.Add("@categoria", SqlDbType.VarChar).Value = comboBoxCategoria.SelectedItem.ToString();
                 cmd.Parameters.Add("@ano", SqlDbType.Int).Value = textBoxCreateAno.Text;
                 cmd.Parameters.Add("@editora", SqlDbType.Int).Value = textBoxIdEditora.Text;
@@ -367,6 +412,7 @@ namespace Biblioteca
                 }
             }
 
+
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -377,6 +423,46 @@ namespace Biblioteca
         private void labelCreateISBN_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void comboBoxCreateTitulo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBoxCreateTitulo.Items.Count == 0 | comboBoxCreateTitulo.SelectedIndex == -1) return;
+
+            currentLivro = comboBoxCreateTitulo.SelectedIndex;
+
+            Livro livro = new Livro();
+            livro = (Livro)comboBoxCreateTitulo.Items[currentLivro];
+            textBoxCreateISBNExemplares.Text = livro.ISBN.ToString();
+        }
+
+        private void comboBoxCreateTitulo_Click(object sender, EventArgs e)
+        {
+            if (!verifySGBDConnection())
+                return;
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = " SELECT DISTINCT l.ISBN, l.titulo " +
+                              " FROM Biblioteca.Livro as l " +
+                              " ORDER BY l.titulo";
+            cmd.Connection = cn;
+            SqlDataReader reader = cmd.ExecuteReader();
+            //comboBoxCreateTitulo.Items.Clear();
+
+            while (reader.Read())
+            {
+                Livro l = new Livro();
+                l.ISBN = (String)reader["ISBN"];
+                l.Titulo = (String)reader["titulo"];
+                comboBoxCreateTitulo.Items.Add(l);
+            }
+            //comboBoxAutores.Sorted = true;
+            cn.Close();
+        }
+
+        private void buttonShowLivro_Click(object sender, EventArgs e)
+        {
+            ShowCreateLivro();
         }
     }
 }
