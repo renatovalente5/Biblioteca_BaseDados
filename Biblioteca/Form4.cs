@@ -29,7 +29,7 @@ namespace Biblioteca
             SqlCommand cmd = new SqlCommand();
 
             cmd.CommandText = " SELECT li.ISBN, li.titulo, li.ano, li.id_editora, ed.nome_editora , li.categoria, COUNT(li.titulo) as countTitulos " +
-                         " FROM Biblioteca.Livros_Exemplares as le JOIN Biblioteca.Livro as li ON li.ISBN = le.ISBN " +
+                         " FROM Biblioteca.Livro as li  " +
                          "                                         JOIN Biblioteca.Editora as ed ON li.id_editora = ed.id_editora " +
                          " GROUP BY li.ISBN, li.titulo, li.ano, li.id_editora, ed.nome_editora, li.categoria ";
             cmd.Connection = cn;
@@ -86,7 +86,7 @@ namespace Biblioteca
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = " SELECT li.ISBN, li.titulo, li.ano, li.id_editora, ed.nome_editora , li.categoria, COUNT(li.titulo) as countTitulos " +
-                             " FROM Biblioteca.Livros_Exemplares as le JOIN Biblioteca.Livro as li ON li.ISBN = le.ISBN " +
+                             " FROM Biblioteca.Livro as li " +
                              "                                         JOIN Biblioteca.Editora as ed ON li.id_editora = ed.id_editora " +
                              " WHERE li.titulo LIKE @varSearch " +
                              " GROUP BY li.ISBN, li.titulo, li.ano, li.id_editora, ed.nome_editora, li.categoria ";
