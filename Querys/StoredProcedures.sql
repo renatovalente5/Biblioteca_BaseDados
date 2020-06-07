@@ -42,6 +42,7 @@ as
 go
 --exec BIBLIOTECA.CreateAutor 'oi', 'tanto'
 
+--drop proc BIBLIOTECA.EditCliente
 CREATE PROC BIBLIOTECA.EditCliente (@pessoaId int, @first_Name varchar(100), @last_Name varchar(100), @nas_Data date = null, @telemovel decimal(9,0) = null, @morada varchar(255), @mail varchar(100), @nif decimal(9,0))
 as
 	begin Transaction
@@ -76,33 +77,40 @@ go
 
 CREATE PROC BIBLIOTECA.FazerEmprestimo (@numeros_exemplares varchar(20), @id_funcionario int, @id_cliente int)
 as
-	begin Transaction
-	declare @nu_emprestimo as int;
-	declare @numero_exemplar as int;
-
-	exec BIBLIOTECA.CreateEmprestimo @n_emprestimo=@nu_emprestimo out, @funcionario=@id_funcionario , @cliente=@id_cliente;
-
 	declare C cursor
-	for select value from string_split(@numeros_exemplares,';') where RTRIM(value) <> '';
-	open C;
-	fetch C into @numero_exemplar;
+		for select value from string_split(@numeros_exemplares,';') where RTRIM(value) <> '';
+	begin try
+		begin Transaction
+		declare @nu_emprestimo as int;
+		declare @numero_exemplar as int;
 
-	while @@FETCH_STATUS = 0
-		begin
-			update BIBLIOTECA.Livros_Exemplares SET n_emprestimo=@nu_emprestimo
-								WHERE numero_exemplar=@numero_exemplar;
-			fetch next from  C into @numero_exemplar;
-		end;
-	close C;
-	Deallocate C;
+		exec BIBLIOTECA.CreateEmprestimo @n_emprestimo=@nu_emprestimo out, @funcionario=@id_funcionario , @cliente=@id_cliente;
 
-	if @@ERROR !=0
-		rollback tran
-	else
+	
+		open C;
+		fetch C into @numero_exemplar;
+
+		while @@FETCH_STATUS = 0
+			begin
+				update BIBLIOTECA.Livros_Exemplares SET n_emprestimo=@nu_emprestimo
+									WHERE numero_exemplar=@numero_exemplar;
+				fetch next from  C into @numero_exemplar;
+			end;
+		close C;
+		Deallocate C;
 		commit tran
+	end try
+	begin catch
+		IF CURSOR_STATUS('local', 'C') = 1 BEGIN
+
+			CLOSE C;
+			DEALLOCATE C;
+		end;
+		rollback tran
+	end catch
 go
 
---EXECUTE BIBLIOTECA.FazerEmprestimo '1;4;10', '101', '1';
+--EXECUTE BIBLIOTECA.FazerEmprestimo '1;4;10', '104', '2';
 --go
 
 --drop proc Biblioteca.CreateLivro
@@ -114,16 +122,19 @@ as
 
 	insert into BIBLIOTECA.Escreve(id_autor,id_livro) values (@autor,@isbn);
 
-	if @@ERROR !=0
+	if @@ERROR !=0 begin
 		rollback tran
+		end
 	else
 		commit tran
 go
 
---exec BIBLIOTECA.CreateLivro @isbn='isbn3',@titulo='titulo',@ano='2020',@editora='2',@autor='75'
+--exec BIBLIOTECA.CreateLivro @isbn='isbn2',@titulo='titulo',@ano='2020',@editora='2',@autor='75'
 
+--drop proc Biblioteca.CreateLivroExemplares
 create proc Biblioteca.CreateLivroExemplares (@isbn varchar(50),@quantidade int)
 as
+	begin Try
 	begin Transaction
 	declare @i as int = 0;
 		
@@ -138,16 +149,58 @@ as
 			set @i=@i+1
 		end
 	end
+	CLOSE C;
+	DEALLOCATE C;
+	commit tran
+	end try
+	begin catch
+		IF CURSOR_STATUS('local', 'C') = 1 BEGIN
 
-	if @@ERROR !=0
+			CLOSE C;
+			DEALLOCATE C;
+		end
 		rollback tran
-	else
-		commit tran
+	end catch
 go
 
---exec BIBLIOTECA.CreateLivroExemplares 'isbn2','3'
+--exec BIBLIOTECA.CreateLivroExemplares 'isbn','3'
 
 create proc Biblioteca.FazerEntrega (@emprestimo int)
 as
 	update Biblioteca.Emprestimo set data_chegada = GETDATE() where n_emprestimo=@emprestimo;
 go
+
+--drop proc Biblioteca.EditarLivroAutores
+create proc Biblioteca.EditarLivroAutores(@isbn varchar(50), @ids varchar(30))
+as
+	declare C cursor
+		for select value from string_split(@ids,';') where RTRIM(value) <> '';
+	BEGIN TRY
+		begin Transaction
+		declare @id as int;
+		delete from BIBLIOTECA.Escreve where id_livro=@isbn;
+		
+		open C;
+		fetch C into @id;
+		print @ids
+		while @@FETCH_STATUS = 0
+		begin
+			print @id
+			insert into BIBLIOTECA.Escreve(id_autor,id_livro) values(@id,@isbn);
+			fetch next from  C into @id;
+		end
+		close C;
+		Deallocate C;
+		commit tran
+	END TRY
+	BEGIN CATCH
+		IF CURSOR_STATUS('local', 'C') = 1 BEGIN
+
+			CLOSE C;
+			DEALLOCATE C;
+		end
+		rollback tran
+	END CATCH		
+go
+
+--exec Biblioteca.EditarLivroAutores 'isbn','75;1;90;'
