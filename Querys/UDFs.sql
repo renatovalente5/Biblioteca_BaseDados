@@ -10,13 +10,6 @@ create function Biblioteca.GetClientHistorico(@clienteId int) returns Table
 			where cliente = @clienteId )
 go
 
---SELECT * FROM Biblioteca.GetClientHistorico('1')
-
-CREATE FUNCTION Biblioteca.listarExemplaresDeUmLivro(@ISBN varchar(50)) returns Table
-as
-	return(select * from BIBLIOTECA.Livros_Exemplares as le where le.ISBN=@ISBN)
-go
-
 
 --UDF to get todos os livros exemplare de um determinado livro
 --DROP FUNCTION BIBLIOTECA.GetLivrosEmprestados
@@ -70,3 +63,34 @@ go
 
 --Select * from Biblioteca.listarExemplaresDeUmLivro('008813803-8')
 --Select * from Biblioteca.ContarLivrosDisponiveis('008813803-8')
+
+--drop function BIBLIOTECA.CheckRemoveLivro
+create Function BIBLIOTECA.CheckRemoveLivro(@isbn varchar(50)) returns bit
+as
+begin
+	declare @date as date;
+	declare @remove as bit = 1;
+
+	declare C cursor
+	for select e.data_chegada from BIBLIOTECA.Livro as l join BIBLIOTECA.Livros_Exemplares as le on l.ISBN=le.ISBN
+				join BIBLIOTECA.Emprestimo as e on le.n_emprestimo=e.n_emprestimo 
+				where l.ISBN = @isbn
+	open C;
+	fetch C into @date;
+
+	while @@FETCH_STATUS = 0
+		begin
+			if @date is null
+			begin
+				set @remove = 0;
+			end
+			fetch next from  C into @date;
+		end;
+	close C;
+	Deallocate C;
+
+	return @remove
+end
+go
+
+select Biblioteca.CheckRemoveLivro('036176734-X')

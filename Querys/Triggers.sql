@@ -13,3 +13,14 @@ as
 	delete from BIBLIOTECA.Pessoa where id=@id
 
 go
+
+create Trigger DeleteLivro on Biblioteca.Livro instead of Delete
+as
+	declare @isbn as varchar(50);
+	select @isbn=ISBN from deleted;
+	delete from BIBLIOTECA.Escreve where id_livro=@isbn;
+	delete from BIBLIOTECA.Livros_Exemplares where ISBN=@isbn;
+	delete from BIBLIOTECA.Livro where ISBN=@isbn;
+go
+
+delete from BIBLIOTECA.Livro where ISBN='isbn4'

@@ -37,41 +37,43 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.buttonAddLivros = new System.Windows.Forms.Button();
+            this.buttonRemoveLivro = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 16;
-            this.listBox1.Location = new System.Drawing.Point(37, 52);
+            this.listBox1.Location = new System.Drawing.Point(28, 42);
+            this.listBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(500, 324);
+            this.listBox1.Size = new System.Drawing.Size(376, 264);
             this.listBox1.TabIndex = 0;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(91, 22);
+            this.label1.Location = new System.Drawing.Point(68, 18);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(155, 17);
+            this.label1.Size = new System.Drawing.Size(118, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Inventário da Biblioteca";
             // 
             // textSearch
             // 
-            this.textSearch.Location = new System.Drawing.Point(37, 404);
-            this.textSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textSearch.Location = new System.Drawing.Point(28, 328);
+            this.textSearch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textSearch.Name = "textSearch";
-            this.textSearch.Size = new System.Drawing.Size(195, 22);
+            this.textSearch.Size = new System.Drawing.Size(147, 20);
             this.textSearch.TabIndex = 3;
             // 
             // buttonSearch
             // 
-            this.buttonSearch.Location = new System.Drawing.Point(249, 396);
-            this.buttonSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonSearch.Location = new System.Drawing.Point(187, 322);
+            this.buttonSearch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonSearch.Name = "buttonSearch";
-            this.buttonSearch.Size = new System.Drawing.Size(99, 38);
+            this.buttonSearch.Size = new System.Drawing.Size(74, 31);
             this.buttonSearch.TabIndex = 4;
             this.buttonSearch.Text = "Search";
             this.buttonSearch.UseVisualStyleBackColor = true;
@@ -80,54 +82,67 @@
             // listBox2
             // 
             this.listBox2.FormattingEnabled = true;
-            this.listBox2.ItemHeight = 16;
-            this.listBox2.Location = new System.Drawing.Point(615, 144);
+            this.listBox2.Location = new System.Drawing.Point(461, 117);
+            this.listBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(463, 148);
+            this.listBox2.Size = new System.Drawing.Size(348, 121);
             this.listBox2.TabIndex = 5;
             // 
             // textBoxDisponiveis
             // 
-            this.textBoxDisponiveis.Location = new System.Drawing.Point(794, 53);
-            this.textBoxDisponiveis.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxDisponiveis.Location = new System.Drawing.Point(596, 43);
+            this.textBoxDisponiveis.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBoxDisponiveis.Name = "textBoxDisponiveis";
-            this.textBoxDisponiveis.Size = new System.Drawing.Size(66, 22);
+            this.textBoxDisponiveis.Size = new System.Drawing.Size(50, 20);
             this.textBoxDisponiveis.TabIndex = 6;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(612, 53);
+            this.label2.Location = new System.Drawing.Point(459, 43);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(165, 17);
+            this.label2.Size = new System.Drawing.Size(127, 13);
             this.label2.TabIndex = 7;
             this.label2.Text = "Disponíveis na Biblioteca";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(612, 114);
+            this.label3.Location = new System.Drawing.Point(459, 93);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(123, 17);
+            this.label3.Size = new System.Drawing.Size(92, 13);
             this.label3.TabIndex = 8;
             this.label3.Text = "Livros Exemplares";
             // 
             // buttonAddLivros
             // 
-            this.buttonAddLivros.Location = new System.Drawing.Point(844, 378);
-            this.buttonAddLivros.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonAddLivros.Location = new System.Drawing.Point(633, 307);
+            this.buttonAddLivros.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonAddLivros.Name = "buttonAddLivros";
-            this.buttonAddLivros.Size = new System.Drawing.Size(234, 48);
+            this.buttonAddLivros.Size = new System.Drawing.Size(176, 39);
             this.buttonAddLivros.TabIndex = 10;
             this.buttonAddLivros.Text = "Adicionar Livros à Biblioteca";
             this.buttonAddLivros.UseVisualStyleBackColor = true;
             this.buttonAddLivros.Click += new System.EventHandler(this.buttonAddLivros_Click);
             // 
+            // buttonRemoveLivro
+            // 
+            this.buttonRemoveLivro.Location = new System.Drawing.Point(462, 307);
+            this.buttonRemoveLivro.Name = "buttonRemoveLivro";
+            this.buttonRemoveLivro.Size = new System.Drawing.Size(153, 39);
+            this.buttonRemoveLivro.TabIndex = 11;
+            this.buttonRemoveLivro.Text = "Remover Livro";
+            this.buttonRemoveLivro.UseVisualStyleBackColor = true;
+            this.buttonRemoveLivro.Click += new System.EventHandler(this.buttonRemoveLivro_Click);
+            // 
             // Form4
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1117, 450);
+            this.ClientSize = new System.Drawing.Size(838, 366);
+            this.Controls.Add(this.buttonRemoveLivro);
             this.Controls.Add(this.buttonAddLivros);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -137,6 +152,7 @@
             this.Controls.Add(this.textSearch);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.listBox1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Form4";
             this.Text = "Form4";
             this.Load += new System.EventHandler(this.Form4_Load);
@@ -156,5 +172,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button buttonAddLivros;
+        private System.Windows.Forms.Button buttonRemoveLivro;
     }
 }

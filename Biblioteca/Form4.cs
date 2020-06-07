@@ -160,7 +160,24 @@ namespace Biblioteca
 
             cn.Close();
             ContarLivrosDisponiveis(livro.ISBN);
+            PossoRemover(livro.ISBN);
             //ShowLivro();
+        }
+
+        private void PossoRemover(string isbn)
+        {
+            if (!verifySGBDConnection())
+                return;
+
+            SqlCommand cmd = new SqlCommand("SELECT BIBLIOTECA.CheckRemoveLivro(@ISBN)", cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.Add("@ISBN", SqlDbType.VarChar).Value=isbn;
+            cmd.Connection = cn;
+            bool remove = (bool)cmd.ExecuteScalar();
+            if (remove)
+                buttonRemoveLivro.Show();
+            else
+                buttonRemoveLivro.Hide();
         }
 
         private void ContarLivrosDisponiveis(string iSBN)
@@ -208,6 +225,39 @@ namespace Biblioteca
         {
             var form5 = new Form5();
             form5.Show();
+        }
+
+        private void buttonRemoveLivro_Click(object sender, EventArgs e)
+        {
+            currentLivro = listBox1.SelectedIndex;
+            if (listBox1.Items.Count == 0 | currentLivro < 0) return;
+            Emprestimo livro = new Emprestimo();
+            livro = (Emprestimo)listBox1.Items[currentLivro];
+
+            if (!verifySGBDConnection())
+                return;
+
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.CommandText = "DELETE Biblioteca.Livro WHERE ISBN=@isbn ";
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@isbn", livro.ISBN);
+            cmd.Connection = cn;
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to delete livro in database. \n ERROR MESSAGE: \n" + ex.Message);
+            }
+            finally
+            {
+                MessageBox.Show("Livro removido com sucesso", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                listBox1.Items.RemoveAt(listBox1.SelectedIndex);
+                cn.Close();
+            }
         }
     }
 }
