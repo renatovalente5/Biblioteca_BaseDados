@@ -122,7 +122,7 @@ namespace Biblioteca
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             currentLivro = listBox1.SelectedIndex;
-            if (listBox1.Items.Count == 0 | currentLivro < 0) return;
+            if (listBox1.Items.Count == 0 || currentLivro < 0) return;
             Emprestimo livro = new Emprestimo();
             livro = (Emprestimo)listBox1.Items[currentLivro];
 
@@ -230,7 +230,11 @@ namespace Biblioteca
         private void buttonRemoveLivro_Click(object sender, EventArgs e)
         {
             currentLivro = listBox1.SelectedIndex;
-            if (listBox1.Items.Count == 0 | currentLivro < 0) return;
+            if (listBox1.Items.Count == 0 || currentLivro < 0)
+            {
+                MessageBox.Show("Escolhe um livro", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             Emprestimo livro = new Emprestimo();
             livro = (Emprestimo)listBox1.Items[currentLivro];
 
@@ -258,6 +262,20 @@ namespace Biblioteca
                 listBox1.Items.RemoveAt(listBox1.SelectedIndex);
                 cn.Close();
             }
+        }
+
+        private void buttonEditar_Click(object sender, EventArgs e)
+        {
+            currentLivro = listBox1.SelectedIndex;
+            if (listBox1.Items.Count == 0 || currentLivro < 0)
+            {
+                MessageBox.Show("Escolhe um livro", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            Emprestimo livro = new Emprestimo();
+            livro = (Emprestimo)listBox1.Items[currentLivro];
+            var form6 = new Form6(livro.ISBN);
+            form6.Show();
         }
     }
 }

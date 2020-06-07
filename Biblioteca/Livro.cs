@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,6 +19,7 @@ namespace Biblioteca
         private String _cota;
         private String _estado;
         private int? _numero_exemplar;
+        private List<Pessoa> _autores;
 
         public Livro() : base() { }
 
@@ -78,6 +80,12 @@ namespace Biblioteca
         {
             get { return _numero_exemplar; }
             set { _numero_exemplar = value; }
+        }
+
+        public List<Pessoa> Autores
+        {
+            get { return _autores; }
+            set { _autores = value; }
         }
     }
 }

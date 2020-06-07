@@ -38,13 +38,14 @@
             this.label3 = new System.Windows.Forms.Label();
             this.buttonAddLivros = new System.Windows.Forms.Button();
             this.buttonRemoveLivro = new System.Windows.Forms.Button();
+            this.buttonEditar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
             this.listBox1.Location = new System.Drawing.Point(28, 42);
-            this.listBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.listBox1.Margin = new System.Windows.Forms.Padding(2);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(376, 264);
             this.listBox1.TabIndex = 0;
@@ -63,7 +64,7 @@
             // textSearch
             // 
             this.textSearch.Location = new System.Drawing.Point(28, 328);
-            this.textSearch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textSearch.Margin = new System.Windows.Forms.Padding(2);
             this.textSearch.Name = "textSearch";
             this.textSearch.Size = new System.Drawing.Size(147, 20);
             this.textSearch.TabIndex = 3;
@@ -71,7 +72,7 @@
             // buttonSearch
             // 
             this.buttonSearch.Location = new System.Drawing.Point(187, 322);
-            this.buttonSearch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonSearch.Margin = new System.Windows.Forms.Padding(2);
             this.buttonSearch.Name = "buttonSearch";
             this.buttonSearch.Size = new System.Drawing.Size(74, 31);
             this.buttonSearch.TabIndex = 4;
@@ -83,7 +84,7 @@
             // 
             this.listBox2.FormattingEnabled = true;
             this.listBox2.Location = new System.Drawing.Point(461, 117);
-            this.listBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.listBox2.Margin = new System.Windows.Forms.Padding(2);
             this.listBox2.Name = "listBox2";
             this.listBox2.Size = new System.Drawing.Size(348, 121);
             this.listBox2.TabIndex = 5;
@@ -91,7 +92,7 @@
             // textBoxDisponiveis
             // 
             this.textBoxDisponiveis.Location = new System.Drawing.Point(596, 43);
-            this.textBoxDisponiveis.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxDisponiveis.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxDisponiveis.Name = "textBoxDisponiveis";
             this.textBoxDisponiveis.Size = new System.Drawing.Size(50, 20);
             this.textBoxDisponiveis.TabIndex = 6;
@@ -118,10 +119,10 @@
             // 
             // buttonAddLivros
             // 
-            this.buttonAddLivros.Location = new System.Drawing.Point(633, 307);
-            this.buttonAddLivros.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonAddLivros.Location = new System.Drawing.Point(646, 314);
+            this.buttonAddLivros.Margin = new System.Windows.Forms.Padding(2);
             this.buttonAddLivros.Name = "buttonAddLivros";
-            this.buttonAddLivros.Size = new System.Drawing.Size(176, 39);
+            this.buttonAddLivros.Size = new System.Drawing.Size(163, 39);
             this.buttonAddLivros.TabIndex = 10;
             this.buttonAddLivros.Text = "Adicionar Livros à Biblioteca";
             this.buttonAddLivros.UseVisualStyleBackColor = true;
@@ -129,19 +130,30 @@
             // 
             // buttonRemoveLivro
             // 
-            this.buttonRemoveLivro.Location = new System.Drawing.Point(462, 307);
+            this.buttonRemoveLivro.Location = new System.Drawing.Point(510, 314);
             this.buttonRemoveLivro.Name = "buttonRemoveLivro";
-            this.buttonRemoveLivro.Size = new System.Drawing.Size(153, 39);
+            this.buttonRemoveLivro.Size = new System.Drawing.Size(122, 39);
             this.buttonRemoveLivro.TabIndex = 11;
             this.buttonRemoveLivro.Text = "Remover Livro";
             this.buttonRemoveLivro.UseVisualStyleBackColor = true;
             this.buttonRemoveLivro.Click += new System.EventHandler(this.buttonRemoveLivro_Click);
+            // 
+            // buttonEditar
+            // 
+            this.buttonEditar.Location = new System.Drawing.Point(375, 314);
+            this.buttonEditar.Name = "buttonEditar";
+            this.buttonEditar.Size = new System.Drawing.Size(117, 39);
+            this.buttonEditar.TabIndex = 12;
+            this.buttonEditar.Text = "Editar Livro";
+            this.buttonEditar.UseVisualStyleBackColor = true;
+            this.buttonEditar.Click += new System.EventHandler(this.buttonEditar_Click);
             // 
             // Form4
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(838, 366);
+            this.Controls.Add(this.buttonEditar);
             this.Controls.Add(this.buttonRemoveLivro);
             this.Controls.Add(this.buttonAddLivros);
             this.Controls.Add(this.label3);
@@ -152,7 +164,7 @@
             this.Controls.Add(this.textSearch);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.listBox1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form4";
             this.Text = "Form4";
             this.Load += new System.EventHandler(this.Form4_Load);
@@ -173,5 +185,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button buttonAddLivros;
         private System.Windows.Forms.Button buttonRemoveLivro;
+        private System.Windows.Forms.Button buttonEditar;
     }
 }
