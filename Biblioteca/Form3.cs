@@ -88,8 +88,16 @@ namespace Biblioteca
             }
             cn.Close();
 
+            var list = listBox1.Items.Cast<Emprestimo>().OrderBy(item => item.N_emprestimo).ToList(); //Order ListBox by N_Emprestimo
+            listBox1.Items.Clear();
+            foreach (Emprestimo listItem in list)
+            {
+                listBox1.Items.Add(listItem);
+            }
+
             ShowEmprestimo();
             ClearFields();
+            CountLivrosEmFalta();
         }
 
         private void ClearFields()
@@ -115,6 +123,30 @@ namespace Biblioteca
                 buttonEntrega.Hide();
             else
                 buttonEntrega.Show();
+        }
+
+        private void CountLivrosEmFalta()
+        {
+            if (!verifySGBDConnection())
+                return;
+
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.CommandText = "SELECT * FROM Biblioteca.ContarLivrosEmFalta(@id_cliente)";
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@id_cliente", c.Id);
+            cmd.Connection = cn;
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            labelEmFalta.Text = "0";
+
+            while (reader.Read())
+            {
+                Emprestimo em = new Emprestimo();
+                em.CountTilulos = (int)reader["EmFalta"];
+                labelEmFalta.Text = em.CountTilulos.ToString();
+            }
+            cn.Close();
         }
 
         private void buttonSearch_Click(object sender, EventArgs e)

@@ -128,7 +128,7 @@ namespace Biblioteca
         {
             if (!verifySGBDConnection())
                 return null;
-            SqlCommand cmd = new SqlCommand("dbo.CreateCliente",cn);
+            SqlCommand cmd = new SqlCommand("BIBLIOTECA.CreateCliente",cn);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Clear();
 
@@ -259,6 +259,8 @@ namespace Biblioteca
             buttonRemove.Visible = true;
             buttonOk.Visible = false;
             buttonCancel.Visible = false;
+            buttonEmprestimo.Visible = true;
+            buttonHistorico.Visible = true;
 
         }
 
@@ -270,6 +272,8 @@ namespace Biblioteca
             buttonRemove.Visible = false;
             buttonOk.Visible = true;
             buttonCancel.Visible = true;
+            buttonEmprestimo.Visible = false;
+            buttonHistorico.Visible = false;
         }
 
         public void LockControls()
@@ -303,6 +307,8 @@ namespace Biblioteca
             ClearFields();
             HideButtons();
             listBox1.Enabled = false;
+            textID.Visible = false;
+            label2.Visible = false;
         }
 
 
@@ -320,6 +326,8 @@ namespace Biblioteca
             int idx = listBox1.FindString(textID.Text);
             listBox1.SelectedIndex = idx;
             ShowButtons();
+            textID.Visible = true;
+            label2.Visible = true;
         }
 
         private void buttonEdit_Click(object sender, EventArgs e)
@@ -380,6 +388,8 @@ namespace Biblioteca
                 LockControls();
             }
             ShowButtons();
+            textID.Visible = true;
+            label2.Visible = true;
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -479,7 +489,11 @@ namespace Biblioteca
         private void buttonEmprestimo_Click(object sender, EventArgs e)
         {
             currentPessoa = listBox1.SelectedIndex;
-            if (listBox1.Items.Count == 0 | currentPessoa < 0) return;
+            if (listBox1.Items.Count == 0 | currentPessoa < 0)
+            {
+                MessageBox.Show("Selecione um Cliente");
+                return;
+            }
             Cliente cliente = new Cliente();
             cliente = (Cliente)listBox1.Items[currentPessoa];
 
@@ -494,7 +508,11 @@ namespace Biblioteca
         private void buttonHistorico_Click(object sender, EventArgs e)
         {
             currentPessoa = listBox1.SelectedIndex;
-            if (listBox1.Items.Count == 0 | currentPessoa < 0) return;
+            if (listBox1.Items.Count == 0 | currentPessoa < 0)
+            {
+                MessageBox.Show("Selecione um Cliente");
+                return;
+            }
             Cliente cliente = new Cliente();
             cliente = (Cliente)listBox1.Items[currentPessoa];
 

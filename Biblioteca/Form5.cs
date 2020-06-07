@@ -343,9 +343,9 @@ namespace Biblioteca
                 finally
                 {
                     if (rows == Int32.Parse(textBoxQuantidade.Text))
-                        MessageBox.Show("Create OK");
+                        MessageBox.Show("Livros adicionados com Sucesso!");
                     else
-                        MessageBox.Show("Create NOT OK");
+                        MessageBox.Show("Erro ao adicionar Livros!");
 
                     cn.Close();
 

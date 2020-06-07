@@ -39,7 +39,7 @@ go
 create proc BIBLIOTECA.CreateEditora (@nome varchar(50), @morada varchar(255)=null,@telefone decimal(9,0)=null)
 as
 	insert into BIBLIOTECA.Editora(nome_editora,endereco,telefone) values (@nome,@morada,@telefone)
-
+go
 --exec BIBLIOTECA.CreateAutor 'oi', 'tanto'
 
 CREATE PROC BIBLIOTECA.EditCliente (@pessoaId int, @first_Name varchar(100), @last_Name varchar(100), @nas_Data date = null, @telemovel decimal(9,0) = null, @morada varchar(255), @mail varchar(100), @nif decimal(9,0))
@@ -150,3 +150,4 @@ go
 create proc Biblioteca.FazerEntrega (@emprestimo int)
 as
 	update Biblioteca.Emprestimo set data_chegada = GETDATE() where n_emprestimo=@emprestimo;
+go

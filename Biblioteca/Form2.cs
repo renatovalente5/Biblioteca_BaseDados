@@ -229,13 +229,14 @@ namespace Biblioteca
             finally
             {
                 if (rows == listBox2.Items.Count+1)
-                    MessageBox.Show("Update OK");
+                    MessageBox.Show("Requesitados com Sucesso!");
                 else
-                    MessageBox.Show("Update NOT OK");
+                    MessageBox.Show("Não foi possivel Requesitar estes livros!");
 
                 cn.Close();
             }
 
+            this.Close();  //Fechar o Form dos Emprestimo
             Form2_Load(sender, e);
         }
 
