@@ -393,6 +393,7 @@ namespace Biblioteca
                 return;
 
             int rows = 0;
+            string ids = "";
 
             if (textBoxCreateISBN.Text == "" || textBoxCreateTitulo.Text == "" || textBoxCreateAno.Text == "" || textBoxIdEditora.Text == "" || textBoxIDPessoa.Text == "")
                 MessageBox.Show("Adiciona nome do Livro, ISBN, Ano, Editora e Autor", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -407,7 +408,9 @@ namespace Biblioteca
                     cmd.Parameters.Add("@categoria", SqlDbType.VarChar).Value = comboBoxCategoria.SelectedItem.ToString();
                 cmd.Parameters.Add("@ano", SqlDbType.Int).Value = textBoxCreateAno.Text;
                 cmd.Parameters.Add("@editora", SqlDbType.Int).Value = textBoxIdEditora.Text;
-                cmd.Parameters.Add("@autor", SqlDbType.Int).Value = textBoxIDPessoa.Text;
+                listBox1.Items.Cast<Pessoa>().ToList().ForEach(p => ids = ids + p.Id + ";");
+
+                cmd.Parameters.Add("@autores", SqlDbType.VarChar).Value = ids;
                 cmd.Connection = cn;
                 try
                 {
@@ -419,7 +422,7 @@ namespace Biblioteca
                 }
                 finally
                 {
-                    if (rows == 2)
+                    if (rows == 1 + listBox1.Items.Count)
                         MessageBox.Show("Create OK");
                     else
                         MessageBox.Show("Create NOT OK");

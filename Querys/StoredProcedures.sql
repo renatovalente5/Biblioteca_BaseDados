@@ -111,22 +111,33 @@ go
 --go
 
 --drop proc Biblioteca.CreateLivro
-create proc Biblioteca.CreateLivro (@isbn varchar(50),@titulo varchar(100),@ano int,@editora int,@categoria varchar(75) = null,@autor int)
+create proc Biblioteca.CreateLivro (@isbn varchar(50),@titulo varchar(100),@ano int,@editora int,@categoria varchar(75) = null,@autores varchar(30))
 as
-	begin Transaction
-	
-	insert into BIBLIOTECA.Livro(ISBN,titulo,ano,categoria,id_editora) values (@isbn,@titulo,@ano,@categoria,@editora);
+	declare C cursor
+		for select value from string_split(@autores,';') where RTRIM(value) <> '';
+	begin try
+		begin Transaction
+		declare @id as int;
 
-	insert into BIBLIOTECA.Escreve(id_autor,id_livro) values (@autor,@isbn);
+		insert into BIBLIOTECA.Livro(ISBN,titulo,ano,categoria,id_editora) values (@isbn,@titulo,@ano,@categoria,@editora);
 
-	if @@ERROR !=0 begin
-		rollback tran
+		open C;
+		fetch C into @id;
+		while @@FETCH_STATUS = 0
+		begin
+			insert into BIBLIOTECA.Escreve(id_autor,id_livro) values(@id,@isbn);
+			fetch next from  C into @id;
 		end
-	else
+		close C;
+		Deallocate C;
 		commit tran
+	end try
+	begin catch
+		rollback tran
+	end catch
 go
 
---exec BIBLIOTECA.CreateLivro @isbn='isbn2',@titulo='titulo',@ano='2020',@editora='2',@autor='75'
+--exec BIBLIOTECA.CreateLivro @isbn='isbn7',@titulo='titulo',@ano='2020',@editora='2',@autores='75;80;85'
 
 --drop proc Biblioteca.CreateLivroExemplares
 create proc Biblioteca.CreateLivroExemplares (@isbn varchar(50),@quantidade int)
