@@ -455,7 +455,7 @@ namespace Biblioteca
 
                 SqlCommand cmd = new SqlCommand();
 
-                cmd.CommandText = "SELECT * FROM Biblioteca.Pessoa as p join Biblioteca.Cliente as c on c.id_cliente=p.id WHERE first_name = @varSearch";
+                cmd.CommandText = "SELECT * FROM Biblioteca.Pessoa as p join Biblioteca.Cliente as c on c.id_cliente=p.id WHERE first_name like @varSearch";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@varSearch", "%" + textSearch.Text + "%");
                 cmd.Connection = cn;

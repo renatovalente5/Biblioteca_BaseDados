@@ -71,7 +71,7 @@ go
 
 CREATE PROC BIBLIOTECA.CreateEmprestimo (@n_emprestimo int out, @funcionario int, @cliente int)
 as
-	insert into BIBLIOTECA.Emprestimo(data_saida,data_entrega,data_chegada,funcionario,cliente) values (GETDATE(),GETDATE(),null,@funcionario,@cliente);
+	insert into BIBLIOTECA.Emprestimo(data_saida,data_entrega,data_chegada,funcionario,cliente) values (GETDATE(),(GETDATE()+15),null,@funcionario,@cliente);
 	set @n_emprestimo = SCOPE_IDENTITY()
 go
 
