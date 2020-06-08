@@ -77,13 +77,13 @@ go
 
 CREATE PROC BIBLIOTECA.FazerEmprestimo (@numeros_exemplares varchar(20), @id_funcionario int, @id_cliente int)
 as
+	
 	declare C cursor
 		for select value from string_split(@numeros_exemplares,';') where RTRIM(value) <> '';
 	begin try
-		begin Transaction
 		declare @nu_emprestimo as int;
 		declare @numero_exemplar as int;
-
+		begin Transaction
 		exec BIBLIOTECA.CreateEmprestimo @n_emprestimo=@nu_emprestimo out, @funcionario=@id_funcionario , @cliente=@id_cliente;
 
 	
@@ -101,11 +101,8 @@ as
 		commit tran
 	end try
 	begin catch
-		IF CURSOR_STATUS('local', 'C') = 1 BEGIN
-
-			CLOSE C;
-			DEALLOCATE C;
-		end;
+		CLOSE C;
+		DEALLOCATE C;
 		rollback tran
 	end catch
 go
@@ -134,31 +131,28 @@ go
 --drop proc Biblioteca.CreateLivroExemplares
 create proc Biblioteca.CreateLivroExemplares (@isbn varchar(50),@quantidade int)
 as
+	
 	begin Try
-	begin Transaction
-	declare @i as int = 0;
-		
-	if exists (select 1 from BIBLIOTECA.Livro where ISBN=@isbn)
-	begin
-		while @i < @quantidade
+		declare @i as int = 0;
+		begin Transaction
+		if exists (select 1 from BIBLIOTECA.Livro where ISBN=@isbn)
 		begin
-			--gerar uma cota aleatoria
-			declare @cota as varchar(10) = char((RAND()*25+65))+char((RAND()*25+65))+char((RAND()*25+65))+'.'+char((RAND()*9+48))+char((RAND()*9+48))+char((RAND()*9+48))+char((RAND()*9+48))+char((RAND()*9+48))
-			insert into BIBLIOTECA.Livros_Exemplares(n_emprestimo, ISBN,data_de_aquisicao,estado,cota) values('1',@isbn,GETDATE(),'New',@cota);
-			--print @cota
-			set @i=@i+1
+			while @i < @quantidade
+			begin
+				--gerar uma cota aleatoria
+				declare @cota as varchar(10) = char((RAND()*25+65))+char((RAND()*25+65))+char((RAND()*25+65))+'.'+char((RAND()*9+48))+char((RAND()*9+48))+char((RAND()*9+48))+char((RAND()*9+48))+char((RAND()*9+48))
+				insert into BIBLIOTECA.Livros_Exemplares(n_emprestimo, ISBN,data_de_aquisicao,estado,cota) values('1',@isbn,GETDATE(),'New',@cota);
+				--print @cota
+				set @i=@i+1
+			end
 		end
-	end
-	CLOSE C;
-	DEALLOCATE C;
-	commit tran
+		CLOSE C;
+		DEALLOCATE C;
+		commit tran
 	end try
 	begin catch
-		IF CURSOR_STATUS('local', 'C') = 1 BEGIN
-
-			CLOSE C;
-			DEALLOCATE C;
-		end
+		CLOSE C;
+		DEALLOCATE C;
 		rollback tran
 	end catch
 go
@@ -173,6 +167,7 @@ go
 --drop proc Biblioteca.EditarLivroAutores
 create proc Biblioteca.EditarLivroAutores(@isbn varchar(50), @ids varchar(30))
 as
+	
 	declare C cursor
 		for select value from string_split(@ids,';') where RTRIM(value) <> '';
 	BEGIN TRY
@@ -182,25 +177,43 @@ as
 		
 		open C;
 		fetch C into @id;
-		print @ids
 		while @@FETCH_STATUS = 0
 		begin
-			print @id
 			insert into BIBLIOTECA.Escreve(id_autor,id_livro) values(@id,@isbn);
 			fetch next from  C into @id;
 		end
 		close C;
 		Deallocate C;
-		commit tran
+		IF @@TRANCOUNT > 0
+			commit tran
 	END TRY
 	BEGIN CATCH
-		IF CURSOR_STATUS('local', 'C') = 1 BEGIN
-
-			CLOSE C;
-			DEALLOCATE C;
-		end
-		rollback tran
-	END CATCH		
+		CLOSE C;
+		DEALLOCATE C;
+		IF @@TRANCOUNT > 0
+			rollback tran
+	END CATCH
 go
 
---exec Biblioteca.EditarLivroAutores 'isbn','75;1;90;'
+--exec Biblioteca.EditarLivroAutores 'isbn','85;1;80;'
+
+--drop proc Biblioteca.EditarLivro
+create proc Biblioteca.EditarLivro (@isbn varchar(50),@titulo varchar(100),@ano int,@editora int,@categoria varchar(75) = null,@autores varchar(30))
+as
+	begin try
+		begin transaction
+
+		update BIBLIOTECA.Livro set titulo=@titulo,ano=@ano,id_editora=@editora,categoria=@categoria where ISBN=@isbn;
+		exec BIBLIOTECA.EditarLivroAutores @isbn,@autores
+
+		IF @@TRANCOUNT > 0
+			COMMIT TRAN;
+	end try
+	begin catch
+		IF @@TRANCOUNT > 0
+			rollback tran
+	end catch
+go
+		
+
+--exec Biblioteca.EditarLivro 'isbn','titulo',2019,5,'adeus', '75;85;1'

@@ -246,6 +246,7 @@
             this.buttonAddLivro.TabIndex = 90;
             this.buttonAddLivro.Text = "Editar";
             this.buttonAddLivro.UseVisualStyleBackColor = true;
+            this.buttonAddLivro.Click += new System.EventHandler(this.buttonAddLivro_Click);
             // 
             // listBox1
             // 
@@ -297,6 +298,7 @@
             this.textBoxISBN.Location = new System.Drawing.Point(116, 19);
             this.textBoxISBN.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxISBN.Name = "textBoxISBN";
+            this.textBoxISBN.ReadOnly = true;
             this.textBoxISBN.Size = new System.Drawing.Size(88, 20);
             this.textBoxISBN.TabIndex = 106;
             // 

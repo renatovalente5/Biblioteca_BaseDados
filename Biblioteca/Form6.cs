@@ -312,5 +312,44 @@ namespace Biblioteca
                 buttonRemoverAutor.Visible = false;
             }
         }
+
+        private void buttonAddLivro_Click(object sender, EventArgs e)
+        {
+            if (!verifySGBDConnection())
+                return;
+
+            int rows = 0;
+            string ids = "";
+            SqlCommand cmd = new SqlCommand("BIBLIOTECA.EditarLivro", cn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Clear();
+            cmd.Parameters.Add("@isbn", SqlDbType.VarChar).Value = textBoxISBN.Text;
+            cmd.Parameters.Add("@titulo", SqlDbType.VarChar).Value = textBoxTitulo.Text;
+            cmd.Parameters.Add("@ano", SqlDbType.Int).Value = textBoxAno.Text;
+            cmd.Parameters.Add("@editora", SqlDbType.Int).Value = textBoxIdEditora.Text;
+            cmd.Parameters.Add("@categoria", SqlDbType.VarChar).Value = comboBoxCategoria.SelectedItem;
+            listBox1.Items.Cast<Pessoa>().ToList().ForEach(p => ids = ids + p.Id + ";");
+
+            cmd.Parameters.Add("@autores", SqlDbType.VarChar).Value = ids;
+            cmd.Connection = cn;
+
+            try
+            {
+                rows = cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to create author in database. \n ERROR MESSAGE: \n" + ex.Message);
+            }
+            finally
+            {
+                if (rows != 4)
+                    MessageBox.Show("Create OK"+rows);
+                else
+                    MessageBox.Show("Create NOT OK");
+
+                cn.Close();
+            }
+        }
     }
 }
