@@ -54,13 +54,22 @@ namespace Biblioteca
 
         private void comboBoxAutores_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBoxAutores.Items.Count == 0 | comboBoxAutores.SelectedIndex == -1) return;
+            if (comboBoxAutores.SelectedIndex == -1)
+            {
+                buttonAdicionarAutor.Visible = false;
+                buttonRemoverAutor.Visible = false;
+            }
+            else
+            {
+                buttonAdicionarAutor.Visible = true;
+                buttonRemoverAutor.Visible = false;
 
-            currentLivro = comboBoxAutores.SelectedIndex;
+                currentLivro = comboBoxAutores.SelectedIndex;
 
-            Pessoa pessoa = new Pessoa();
-            pessoa = (Pessoa)comboBoxAutores.Items[currentLivro];
-            textBoxIDPessoa.Text = pessoa.Id.ToString();
+                Pessoa pessoa = new Pessoa();
+                pessoa = (Pessoa)comboBoxAutores.Items[currentLivro];
+                textBoxIDPessoa.Text = pessoa.Id.ToString();
+            }
         }
 
         private void comboBoxNomeEditora_SelectedIndexChanged(object sender, EventArgs e)
@@ -215,6 +224,10 @@ namespace Biblioteca
             comboBoxAutores.Hide();
             textBoxIDPessoa.Hide();
             buttonAddLivro.Hide();
+            buttonAdicionarAutor.Hide();
+            buttonRemoverAutor.Hide();
+            listBox1.Hide();
+            label4.Hide();
         }
 
         private void buttonAddAutor_Click(object sender, EventArgs e)
@@ -255,6 +268,10 @@ namespace Biblioteca
             comboBoxAutores.Show();
             textBoxIDPessoa.Show();
             buttonAddLivro.Show();
+            listBox1.Show();
+            label4.Show();
+            buttonAdicionarAutor.Hide();
+            buttonRemoverAutor.Hide();
         }
 
         private void buttonAddCreateAutor_Click(object sender, EventArgs e)
@@ -463,6 +480,53 @@ namespace Biblioteca
         private void buttonShowLivro_Click(object sender, EventArgs e)
         {
             ShowCreateLivro();
+        }
+
+        private void buttonAdicionarAutor_Click(object sender, EventArgs e)
+        {
+            int index = comboBoxAutores.SelectedIndex;
+            if (comboBoxAutores.Items.Count == 0 || index < 0)
+            {
+                MessageBox.Show("Escolha um autor", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (!listBox1.Items.Contains(comboBoxAutores.Items[index]))
+                listBox1.Items.Add(comboBoxAutores.Items[index]);
+        }
+
+        private void buttonRemoverAutor_Click(object sender, EventArgs e)
+        {
+            currentLivro = listBox1.SelectedIndex;
+            if (listBox1.Items.Count == 0 | currentLivro < 0)
+            {
+                MessageBox.Show("Escolha um autor", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            listBox1.Items.RemoveAt(currentLivro);
+        }
+
+        private void textBoxIDPessoa_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedIndex == -1)
+            {
+                buttonAdicionarAutor.Visible = true;
+                buttonRemoverAutor.Visible = false;
+            }
+            else
+            {
+                buttonAdicionarAutor.Visible = false;
+                buttonRemoverAutor.Visible = true;
+            }
         }
     }
 }

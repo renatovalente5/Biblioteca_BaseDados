@@ -71,6 +71,10 @@
             this.textBoxCreateTitulo = new System.Windows.Forms.TextBox();
             this.comboBoxCreateTitulo = new System.Windows.Forms.ComboBox();
             this.buttonShowLivro = new System.Windows.Forms.Button();
+            this.buttonRemoverAutor = new System.Windows.Forms.Button();
+            this.buttonAdicionarAutor = new System.Windows.Forms.Button();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // labelCategoria
@@ -130,7 +134,7 @@
             // labelAutor
             // 
             this.labelAutor.AutoSize = true;
-            this.labelAutor.Location = new System.Drawing.Point(27, 343);
+            this.labelAutor.Location = new System.Drawing.Point(283, 350);
             this.labelAutor.Name = "labelAutor";
             this.labelAutor.Size = new System.Drawing.Size(42, 17);
             this.labelAutor.TabIndex = 21;
@@ -139,10 +143,10 @@
             // comboBoxAutores
             // 
             this.comboBoxAutores.FormattingEnabled = true;
-            this.comboBoxAutores.Location = new System.Drawing.Point(137, 343);
+            this.comboBoxAutores.Location = new System.Drawing.Point(286, 380);
             this.comboBoxAutores.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBoxAutores.Name = "comboBoxAutores";
-            this.comboBoxAutores.Size = new System.Drawing.Size(367, 24);
+            this.comboBoxAutores.Size = new System.Drawing.Size(285, 24);
             this.comboBoxAutores.TabIndex = 23;
             this.comboBoxAutores.SelectedIndexChanged += new System.EventHandler(this.comboBoxAutores_SelectedIndexChanged);
             this.comboBoxAutores.Click += new System.EventHandler(this.comboBoxAutores_Click);
@@ -343,24 +347,26 @@
             // 
             // textBoxIDPessoa
             // 
-            this.textBoxIDPessoa.Location = new System.Drawing.Point(137, 386);
+            this.textBoxIDPessoa.Location = new System.Drawing.Point(346, 413);
             this.textBoxIDPessoa.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxIDPessoa.Name = "textBoxIDPessoa";
-            this.textBoxIDPessoa.Size = new System.Drawing.Size(81, 22);
+            this.textBoxIDPessoa.Size = new System.Drawing.Size(42, 22);
             this.textBoxIDPessoa.TabIndex = 47;
+            this.textBoxIDPessoa.TextChanged += new System.EventHandler(this.textBoxIDPessoa_TextChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(27, 386);
+            this.label1.Location = new System.Drawing.Point(283, 416);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(57, 17);
             this.label1.TabIndex = 48;
             this.label1.Text = "Id Autor";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // buttonAddLivro
             // 
-            this.buttonAddLivro.Location = new System.Drawing.Point(137, 431);
+            this.buttonAddLivro.Location = new System.Drawing.Point(30, 509);
             this.buttonAddLivro.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonAddLivro.Name = "buttonAddLivro";
             this.buttonAddLivro.Size = new System.Drawing.Size(59, 25);
@@ -469,11 +475,57 @@
             this.buttonShowLivro.UseVisualStyleBackColor = true;
             this.buttonShowLivro.Click += new System.EventHandler(this.buttonShowLivro_Click);
             // 
+            // buttonRemoverAutor
+            // 
+            this.buttonRemoverAutor.Location = new System.Drawing.Point(286, 455);
+            this.buttonRemoverAutor.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonRemoverAutor.Name = "buttonRemoverAutor";
+            this.buttonRemoverAutor.Size = new System.Drawing.Size(131, 25);
+            this.buttonRemoverAutor.TabIndex = 121;
+            this.buttonRemoverAutor.Text = "Remover Autor";
+            this.buttonRemoverAutor.UseVisualStyleBackColor = true;
+            this.buttonRemoverAutor.Click += new System.EventHandler(this.buttonRemoverAutor_Click);
+            // 
+            // buttonAdicionarAutor
+            // 
+            this.buttonAdicionarAutor.Location = new System.Drawing.Point(438, 455);
+            this.buttonAdicionarAutor.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonAdicionarAutor.Name = "buttonAdicionarAutor";
+            this.buttonAdicionarAutor.Size = new System.Drawing.Size(133, 25);
+            this.buttonAdicionarAutor.TabIndex = 120;
+            this.buttonAdicionarAutor.Text = "Adicionar Autor";
+            this.buttonAdicionarAutor.UseVisualStyleBackColor = true;
+            this.buttonAdicionarAutor.Click += new System.EventHandler(this.buttonAdicionarAutor_Click);
+            // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 16;
+            this.listBox1.Location = new System.Drawing.Point(29, 380);
+            this.listBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(224, 100);
+            this.listBox1.TabIndex = 117;
+            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(26, 350);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(57, 17);
+            this.label4.TabIndex = 116;
+            this.label4.Text = "Autores";
+            // 
             // Form5
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1160, 727);
+            this.Controls.Add(this.buttonRemoverAutor);
+            this.Controls.Add(this.buttonAdicionarAutor);
+            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.buttonShowLivro);
             this.Controls.Add(this.comboBoxCreateTitulo);
             this.Controls.Add(this.label2);
@@ -570,5 +622,9 @@
         private System.Windows.Forms.TextBox textBoxCreateTitulo;
         private System.Windows.Forms.ComboBox comboBoxCreateTitulo;
         private System.Windows.Forms.Button buttonShowLivro;
+        private System.Windows.Forms.Button buttonRemoverAutor;
+        private System.Windows.Forms.Button buttonAdicionarAutor;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Label label4;
     }
 }

@@ -310,7 +310,23 @@ namespace Biblioteca
             {
                 buttonAdicionarAutor.Visible = true;
                 buttonRemoverAutor.Visible = false;
-            }
+
+                currentLivro = comboBoxAutores.SelectedIndex;
+
+                Pessoa pessoa = new Pessoa();
+                pessoa = (Pessoa)comboBoxAutores.Items[currentLivro];
+                textBoxIDPessoa.Text = pessoa.Id.ToString();
+            }           
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void labelAutor_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void buttonAddLivro_Click(object sender, EventArgs e)
