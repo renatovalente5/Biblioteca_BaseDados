@@ -178,11 +178,11 @@ go
 --drop proc Biblioteca.EditarLivroAutores
 create proc Biblioteca.EditarLivroAutores(@isbn varchar(50), @ids varchar(30))
 as
-	
+	begin Transaction
 	declare C cursor
 		for select value from string_split(@ids,';') where RTRIM(value) <> '';
 	BEGIN TRY
-		begin Transaction
+		
 		declare @id as int;
 		delete from BIBLIOTECA.Escreve where id_livro=@isbn;
 		
@@ -227,4 +227,4 @@ as
 go
 		
 
---exec Biblioteca.EditarLivro 'isbn','titulo',2019,5,'adeus', '75;85;1'
+--exec Biblioteca.EditarLivro '264328182-9','titulo',2019,5,'adeus', '75;85;'

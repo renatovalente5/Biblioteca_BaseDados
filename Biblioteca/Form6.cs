@@ -173,7 +173,46 @@ namespace Biblioteca
 
         private void buttonAddCreateEditora_Click(object sender, EventArgs e)
         {
+            HideCreateEditora();
+            //Falta Adicionar a Editora à BD e atualizar o ComboBox
+            if (!verifySGBDConnection())
+                return;
 
+            int rows = 0;
+
+            if (textBoxCreateNomeEditora.Text == "")
+                MessageBox.Show("Adiciona nome da editora", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else
+            {
+                SqlCommand cmd = new SqlCommand("BIBLIOTECA.CreateEditora", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add("@nome", SqlDbType.VarChar).Value = textBoxCreateNomeEditora.Text;
+                if (textBoxCreateEditoraEndereco.Text != "")
+                    cmd.Parameters.Add("@morada", SqlDbType.VarChar).Value = textBoxCreateEditoraEndereco.Text;
+                if (textBoxCreateEditoraTelefone.Text != "")
+                    cmd.Parameters.Add("@telefone", SqlDbType.Decimal).Value = Decimal.Parse(textBoxCreateEditoraTelefone.Text);
+                cmd.Connection = cn;
+                try
+                {
+                    rows = cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Failed to create editora in database. \n ERROR MESSAGE: \n" + ex.Message);
+                }
+                finally
+                {
+                    if (rows == 1)
+                        MessageBox.Show("Create OK");
+                    else
+                        MessageBox.Show("Create NOT OK");
+
+                    cn.Close();
+
+                    comboBoxNomeEditora_Click(sender, e);
+                }
+            }
         }
         private void HideCreateEditora()
         {
@@ -360,7 +399,7 @@ namespace Biblioteca
             finally
             {
                 if (rows != 4)
-                    MessageBox.Show("Create OK"+rows);
+                    MessageBox.Show("Create OK");
                 else
                     MessageBox.Show("Create NOT OK");
 

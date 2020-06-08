@@ -16,6 +16,7 @@ namespace Biblioteca
 
         public Pessoa() : base() { }
         public Pessoa(int id, String first_name, String last_name) : base() {
+            this.Id = id;
             this.First_name = first_name;
             this.Last_name = last_name;
         }

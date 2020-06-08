@@ -457,7 +457,7 @@ namespace Biblioteca
 
                 cmd.CommandText = "SELECT * FROM Biblioteca.Pessoa as p join Biblioteca.Cliente as c on c.id_cliente=p.id WHERE first_name = @varSearch";
                 cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@varSearch", textSearch.Text);
+                cmd.Parameters.AddWithValue("@varSearch", "%" + textSearch.Text + "%");
                 cmd.Connection = cn;
                 SqlDataReader reader = cmd.ExecuteReader();
                 listBox1.Items.Clear();
