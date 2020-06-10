@@ -16,6 +16,7 @@ namespace Biblioteca
         private SqlConnection cn;
         private int currentPessoa;
         private bool adding;
+        private string connectionString = "data source= localhost;integrated security=true;initial catalog=Biblioteca";
 
         public Form1()
         {
@@ -60,9 +61,8 @@ namespace Biblioteca
 
         private SqlConnection getSGBDConnection()
         {
-            return new SqlConnection("data source= localhost;integrated security=true;initial catalog=Biblioteca");
+            return new SqlConnection(connectionString);
             //return new SqlConnection("Data Source = tcp:mednat.ieeta.pt\\SQLSERVER,8101; Initial Catalog = p1g2; uid = p1g2;" + "password = Sqlgang.99");
-            //return new SqlConnection("data source= localhost;integrated security=true;");// initial catalog=Biblioteca");
         }
         private bool verifySGBDConnection()
         {
@@ -149,7 +149,7 @@ namespace Biblioteca
             }
             catch (Exception ex)
             {
-                throw new Exception("Failed to update contact in database. \n ERROR MESSAGE: \n" + ex.Message);
+                MessageBox.Show("Erro ao adicionar novo cliente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
@@ -169,20 +169,6 @@ namespace Biblioteca
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Clear();
 
-            //cmd.CommandText = "CREATE PROC BIBLIOTECA.EditCliente (@pessoaId int, @first_Name varchar(100), @last_Name varchar(100), @nas_Data date = null, @telemovel decimal(9,0) = null, @morada varchar(255), @mail varchar(100), @nif decimal(9,0)) " +
-            //    " as " +
-            //    "	    begin Transaction " +
-            //    "	    update BIBLIOTECA.Pessoa SET first_name=@first_Name, last_name=@last_Name, data_nascimento=@nas_Data, telefone=@telemovel WHERE id=@pessoaId; " +
-            //    "     update BIBLIOTECA.Cliente SET mail=@mail, morada=@morada, nif= @nif WHERE id_cliente = @pessoaId; " +
-            //    "     if @@ERROR !=0 " +
-            //    "         rollback tran " +
-            //    "     else " +
-            //    "         commit tran " +
-            //    "     go " +
-
-            //cmd.CommandText = " Biblioteca.EditCliente @id, @first_name, @last_name, @data_nascimento, @telefone, @morada, @mail, @nif; ";
-            //"UPDATE Biblioteca.Pessoa " + "SET first_name = @first_name, " + "    last_name = @last_name, " + "    data_nascimento = @data_nascimento, " + "    telefone = @telefone " + " WHERE id = @id";
-
             cmd.Parameters.Add("@pessoaId", SqlDbType.Int).Value = c.Id;
             cmd.Parameters.Add("@first_name", SqlDbType.VarChar).Value = c.First_name;
             cmd.Parameters.Add("@last_name", SqlDbType.VarChar).Value = c.Last_name;
@@ -197,18 +183,14 @@ namespace Biblioteca
             try
             {
                 rows = cmd.ExecuteNonQuery();
+                MessageBox.Show("Update OK");
             }
             catch (Exception ex)
             {
-                throw new Exception("Failed to update contact in database. \n ERROR MESSAGE: \n" + ex.Message);
+                MessageBox.Show("Erro ao adicionar novo cliente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
-                if (rows == 2)
-                    MessageBox.Show("Update OK");
-                else
-                    MessageBox.Show("Update NOT OK");
-
                 cn.Close();
             }
         }
@@ -230,7 +212,7 @@ namespace Biblioteca
             }
             catch (Exception ex)
             {
-                throw new Exception("Failed to delete contact in database. \n ERROR MESSAGE: \n" + ex.Message);
+                MessageBox.Show("Erro ao eliminar cliente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
@@ -314,14 +296,7 @@ namespace Biblioteca
 
         private void buttonOk_Click(object sender, EventArgs e)
         {
-            try
-            {
-                SavePessoa();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            SavePessoa();
             listBox1.Enabled = true;
             int idx = listBox1.FindString(textID.Text);
             listBox1.SelectedIndex = idx;
@@ -347,15 +322,7 @@ namespace Biblioteca
         {
             if (listBox1.SelectedIndex > -1)
             {
-                try
-                {
-                    RemovePessoa(((Pessoa)listBox1.SelectedItem).Id);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                    return;
-                }
+                RemovePessoa(((Pessoa)listBox1.SelectedItem).Id);
 
                 listBox1.Items.RemoveAt(listBox1.SelectedIndex);
                 if (currentPessoa == listBox1.Items.Count)
@@ -497,7 +464,7 @@ namespace Biblioteca
             Cliente cliente = new Cliente();
             cliente = (Cliente)listBox1.Items[currentPessoa];
 
-            var form2 = new Form2(cliente);
+            var form2 = new Form2(connectionString,cliente);
             form2.Show();
 
             //currentPessoa = 0;
@@ -516,13 +483,13 @@ namespace Biblioteca
             Cliente cliente = new Cliente();
             cliente = (Cliente)listBox1.Items[currentPessoa];
 
-            var form3 = new Form3(cliente);
+            var form3 = new Form3(connectionString,cliente);
             form3.Show();
         }
 
         private void buttonInventartio_Click(object sender, EventArgs e)
         {
-            var form4 = new Form4();
+            var form4 = new Form4(connectionString);
             form4.Show();
         }
 

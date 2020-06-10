@@ -19,12 +19,14 @@ namespace Biblioteca
         private SqlConnection cn;
         private int currentLivro;
         private string isbn;
-        public Form6(string livro)
+        private static string connectionString;
+        public Form6(string livro, string conection)
         {
             isbn = livro;
             InitializeComponent();
             String[] categorias = new String[] { "Action", "Adventure", "Animation", "Comedy", "Crime", "Drama", "Ficção" };
             comboBoxCategoria.Items.AddRange(categorias);
+            connectionString = conection;
         }
 
         private void Form6_Load(object sender, EventArgs e)
@@ -77,9 +79,8 @@ namespace Biblioteca
 
         public static SqlConnection getSGBDConnection()
         {
-            return new SqlConnection("data source= localhost;integrated security=true;initial catalog=Biblioteca");
+            return new SqlConnection(connectionString);
             //return new SqlConnection("Data Source = tcp:mednat.ieeta.pt\\SQLSERVER,8101; Initial Catalog = p1g2; uid = p1g2;" + "password = Sqlgang.99");
-            //return new SqlConnection("data source= localhost;integrated security=true;");// initial catalog=Biblioteca");
         }
         private bool verifySGBDConnection()
         {
@@ -196,18 +197,14 @@ namespace Biblioteca
                 try
                 {
                     rows = cmd.ExecuteNonQuery();
+                    MessageBox.Show("Create OK", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception("Failed to create editora in database. \n ERROR MESSAGE: \n" + ex.Message);
+                    MessageBox.Show("Create NOT OK", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 finally
                 {
-                    if (rows == 1)
-                        MessageBox.Show("Create OK");
-                    else
-                        MessageBox.Show("Create NOT OK");
-
                     cn.Close();
 
                     comboBoxNomeEditora_Click(sender, e);
@@ -270,18 +267,14 @@ namespace Biblioteca
                 try
                 {
                     rows = cmd.ExecuteNonQuery();
+                    MessageBox.Show("Create OK", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception("Failed to create author in database. \n ERROR MESSAGE: \n" + ex.Message);
+                    MessageBox.Show("Create NOT OK", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 finally
                 {
-                    if (rows == 2)
-                        MessageBox.Show("Create OK");
-                    else
-                        MessageBox.Show("Create NOT OK");
-
                     cn.Close();
                 }
             }
@@ -391,18 +384,14 @@ namespace Biblioteca
             try
             {
                 rows = cmd.ExecuteNonQuery();
+                MessageBox.Show("Update OK", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
-                throw new Exception("Failed to create author in database. \n ERROR MESSAGE: \n" + ex.Message);
+                MessageBox.Show("Update NOT OK", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
-                if (rows != 4)
-                    MessageBox.Show("Create OK");
-                else
-                    MessageBox.Show("Create NOT OK");
-
                 cn.Close();
             }
         }

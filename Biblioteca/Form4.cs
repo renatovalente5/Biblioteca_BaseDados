@@ -15,10 +15,11 @@ namespace Biblioteca
     {
         private SqlConnection cn;
         private int currentLivro;
-
-        public Form4()
+        private static string connectionString;
+        public Form4(string conection)
         {
             InitializeComponent();
+            connectionString = conection;
         }
 
         private void Form4_Load(object sender, EventArgs e)
@@ -58,9 +59,8 @@ namespace Biblioteca
 
         public static SqlConnection getSGBDConnection()
         {
-            return new SqlConnection("data source= localhost;integrated security=true;initial catalog=Biblioteca");
+            return new SqlConnection(connectionString);
             //return new SqlConnection("Data Source = tcp:mednat.ieeta.pt\\SQLSERVER,8101; Initial Catalog = p1g2; uid = p1g2;" + "password = Sqlgang.99");
-            //return new SqlConnection("data source= localhost;integrated security=true;");// initial catalog=Biblioteca");
         }
         private bool verifySGBDConnection()
         {
@@ -223,7 +223,7 @@ namespace Biblioteca
 
         private void buttonAddLivros_Click(object sender, EventArgs e)
         {
-            var form5 = new Form5();
+            var form5 = new Form5(connectionString);
             form5.Show();
         }
 
@@ -251,15 +251,15 @@ namespace Biblioteca
             try
             {
                 cmd.ExecuteNonQuery();
+                MessageBox.Show("Livro removido com sucesso", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                listBox1.Items.RemoveAt(listBox1.SelectedIndex);
             }
             catch (Exception ex)
             {
-                throw new Exception("Failed to delete livro in database. \n ERROR MESSAGE: \n" + ex.Message);
+                MessageBox.Show("Não foi possivel remover o livro!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
-                MessageBox.Show("Livro removido com sucesso", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                listBox1.Items.RemoveAt(listBox1.SelectedIndex);
                 cn.Close();
             }
         }
@@ -274,7 +274,7 @@ namespace Biblioteca
             }
             Emprestimo livro = new Emprestimo();
             livro = (Emprestimo)listBox1.Items[currentLivro];
-            var form6 = new Form6(livro.ISBN);
+            var form6 = new Form6(livro.ISBN,connectionString);
             form6.Show();
         }
     }

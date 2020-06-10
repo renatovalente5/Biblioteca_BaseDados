@@ -15,9 +15,11 @@ namespace Biblioteca
     {
         private SqlConnection cn;
         private int currentLivro;
-        public Form5()
+        private static string connectionString;
+        public Form5(string conection)
         {
             InitializeComponent();
+            connectionString = conection;
         }
 
         private void Form5_Load(object sender, EventArgs e)
@@ -32,9 +34,8 @@ namespace Biblioteca
 
         public static SqlConnection getSGBDConnection()
         {
-            return new SqlConnection("data source= localhost;integrated security=true;initial catalog=Biblioteca");
+            return new SqlConnection(connectionString);
             //return new SqlConnection("Data Source = tcp:mednat.ieeta.pt\\SQLSERVER,8101; Initial Catalog = p1g2; uid = p1g2;" + "password = Sqlgang.99");
-            //return new SqlConnection("data source= localhost;integrated security=true;");// initial catalog=Biblioteca");
         }
         private bool verifySGBDConnection()
         {
@@ -175,20 +176,15 @@ namespace Biblioteca
                 try
                 {
                     rows = cmd.ExecuteNonQuery();
+                    MessageBox.Show("Create OK","Info",MessageBoxButtons.OK,MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception("Failed to create editora in database. \n ERROR MESSAGE: \n" + ex.Message);
+                    MessageBox.Show("Create NOT OK","Erro",MessageBoxButtons.OK,MessageBoxIcon.Error);
                 }
                 finally
                 {
-                    if (rows == 1)
-                        MessageBox.Show("Create OK");
-                    else
-                        MessageBox.Show("Create NOT OK");
-
                     cn.Close();
-
                     comboBoxNomeEditora_Click(sender, e);
                 }
             }
@@ -295,22 +291,17 @@ namespace Biblioteca
                 if (textBoxCreateTelefoneAutor.Text != "")
                     cmd.Parameters.Add("@telemovel", SqlDbType.Decimal).Value = Decimal.Parse(textBoxCreateTelefoneAutor.Text);
                 cmd.Connection = cn;
-
                 try
                 {
                     rows = cmd.ExecuteNonQuery();
+                    MessageBox.Show("Create OK", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception("Failed to create author in database. \n ERROR MESSAGE: \n" + ex.Message);
+                    MessageBox.Show("Create NOT OK", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 finally
                 {
-                    if (rows == 2)
-                        MessageBox.Show("Create OK");
-                    else
-                        MessageBox.Show("Create NOT OK");
-
                     cn.Close();
                 }
             }
@@ -352,18 +343,14 @@ namespace Biblioteca
                 try
                 {
                     rows = cmd.ExecuteNonQuery();
+                    MessageBox.Show("Livros adicionados com Sucesso!","Info",MessageBoxButtons.OK,MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception("Failed to create livros exemplares in database. \n ERROR MESSAGE: \n" + ex.Message);
+                    MessageBox.Show("Erro ao adicionar Livros!","Erro",MessageBoxButtons.OK,MessageBoxIcon.Error);
                 }
                 finally
                 {
-                    if (rows == Int32.Parse(textBoxQuantidade.Text))
-                        MessageBox.Show("Livros adicionados com Sucesso!");
-                    else
-                        MessageBox.Show("Erro ao adicionar Livros!");
-
                     cn.Close();
 
                 }
@@ -415,20 +402,15 @@ namespace Biblioteca
                 try
                 {
                     rows = cmd.ExecuteNonQuery();
+                    MessageBox.Show("Create OK", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception("Failed to create livro in database. \n ERROR MESSAGE: \n" + ex.Message);
+                    MessageBox.Show("Create NOT OK", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 finally
                 {
-                    if (rows == 1 + listBox1.Items.Count)
-                        MessageBox.Show("Create OK");
-                    else
-                        MessageBox.Show("Create NOT OK");
-
                     cn.Close();
-
                 }
             }
 

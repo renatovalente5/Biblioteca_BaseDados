@@ -16,11 +16,13 @@ namespace Biblioteca
         private SqlConnection cn;
         private int currentLivro;
         private int currentLivroAdded = 0;
+        private static string connectionString;
         Cliente c;
-        public Form2(Cliente c = null)
+        public Form2(string conection,Cliente c = null )
         {
             InitializeComponent();
             this.c = c;
+            connectionString = conection;
         }
 
         private void Form2_Load(object sender, EventArgs e)
@@ -61,9 +63,8 @@ namespace Biblioteca
 
         public static SqlConnection getSGBDConnection()
         {
-            return new SqlConnection("data source= localhost;integrated security=true;initial catalog=Biblioteca");
+            return new SqlConnection(connectionString);
             //return new SqlConnection("Data Source = tcp:mednat.ieeta.pt\\SQLSERVER,8101; Initial Catalog = p1g2; uid = p1g2;" + "password = Sqlgang.99");
-            //return new SqlConnection("data source= localhost;integrated security=true;");// initial catalog=Biblioteca");
         }
         private bool verifySGBDConnection()
         {
@@ -89,11 +90,7 @@ namespace Biblioteca
             else
             {
                 SqlCommand cmd = new SqlCommand();
-                //cmd.CommandText = " SELECT li.ISBN, li.titulo, li.ano, li.id_editora, ed.nome_editora , li.categoria, COUNT(li.titulo) as countTitulos " +
-                //             " FROM Biblioteca.Livros_Exemplares as le JOIN Biblioteca.Livro as li ON li.ISBN = le.ISBN " +
-                //             "                                         JOIN Biblioteca.Editora as ed ON li.id_editora = ed.id_editora " +
-                //             " WHERE titulo LIKE '%"+textSearch.Text+"%' " +
-                //             " GROUP BY li.ISBN, li.titulo, li.ano, li.id_editora, ed.nome_editora, li.categoria ";
+                
                 cmd.CommandText = " SELECT li.ISBN, li.titulo, li.ano, li.id_editora, ed.nome_editora , li.categoria,le.cota, le.estado,le.numero_exemplar " +
                               " FROM Biblioteca.Livros_Exemplares as le JOIN Biblioteca.Livro as li ON li.ISBN = le.ISBN " +
                               "                                         JOIN Biblioteca.Editora as ed ON li.id_editora = ed.id_editora " +
@@ -103,7 +100,6 @@ namespace Biblioteca
 
 
                 cmd.Parameters.AddWithValue("@varSearch", "%"+textSearch.Text+"%");
-                //cmd.CommandText = "SELECT * FROM Biblioteca.Livro WHERE titulo LIKE '%" + textSearch.Text + "%'";
                 cmd.Connection = cn;
                 SqlDataReader reader = cmd.ExecuteReader();
                 listBox1.Items.Clear();
@@ -221,18 +217,14 @@ namespace Biblioteca
             try
             {
                 rows = cmd.ExecuteNonQuery();
+                MessageBox.Show("Requesitados com Sucesso!","Info",MessageBoxButtons.OK,MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
-                throw new Exception("Failed fazendo emprestimo in database. \n ERROR MESSAGE: \n" + ex.Message);
+                MessageBox.Show("Não foi possivel Requesitar estes livros!","Erro",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
             finally
             {
-                if (rows == listBox2.Items.Count+1)
-                    MessageBox.Show("Requesitados com Sucesso!");
-                else
-                    MessageBox.Show("Não foi possivel Requesitar estes livros!");
-
                 cn.Close();
             }
 

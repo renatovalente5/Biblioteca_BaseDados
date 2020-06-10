@@ -17,18 +17,19 @@ namespace Biblioteca
         private int currentLivro;
         private Cliente c;
         private int selectedIndex;
+        private static string connectionString;
 
-        public Form3(Cliente c = null)
+        public Form3(string conection,Cliente c = null)
         {
             InitializeComponent();
             this.c = c;
+            connectionString = conection;
         }
 
         public static SqlConnection getSGBDConnection()
         {
-            return new SqlConnection("data source= localhost;integrated security=true;initial catalog=Biblioteca");
+            return new SqlConnection(connectionString);
             //return new SqlConnection("Data Source = tcp:mednat.ieeta.pt\\SQLSERVER,8101; Initial Catalog = p1g2; uid = p1g2;" + "password = Sqlgang.99");
-            //return new SqlConnection("data source= localhost;integrated security=true;");// initial catalog=Biblioteca");
         }
         private bool verifySGBDConnection()
         {
@@ -240,18 +241,14 @@ namespace Biblioteca
             try
             {
                 rows = cmd.ExecuteNonQuery();
+                MessageBox.Show("Entrega feita com Sucesso!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
-                throw new Exception("Failed fazendo entrega in database. \n ERROR MESSAGE: \n" + ex.Message);
+                MessageBox.Show("Não foi possivel fazer entrega!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
-                if (rows == 1)
-                    MessageBox.Show("Update OK");
-                else
-                    MessageBox.Show("Update NOT OK");
-
                 cn.Close();
             }
 
