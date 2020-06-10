@@ -16,7 +16,7 @@ namespace Biblioteca
         private SqlConnection cn;
         private int currentPessoa;
         private bool adding;
-        private string connectionString = "data source= localhost;integrated security=true;initial catalog=Biblioteca";
+        private string connectionString = "Data Source = tcp:mednat.ieeta.pt\\SQLSERVER,8101; Initial Catalog = p1g2; uid = p1g2;" + "password = Sqlgang.99";//"data source= localhost;integrated security=true;initial catalog=Biblioteca";
 
         public Form1()
         {
@@ -114,12 +114,12 @@ namespace Biblioteca
             if (adding)
             {
                 cliente = SubmitPessoa(cliente);
-                listBox1.Items.Add(cliente);
+                
             }
             else
             {
                 UpdatePessoa(cliente);
-                listBox1.Items[currentPessoa] = cliente;
+                
             }
             return true;
         }
@@ -146,6 +146,7 @@ namespace Biblioteca
             {
                 cmd.ExecuteNonQuery();
                 c.Id = Convert.ToInt32(cmd.Parameters["@id"].Value);
+                listBox1.Items.Add(c);
             }
             catch (Exception ex)
             {
@@ -184,6 +185,7 @@ namespace Biblioteca
             {
                 rows = cmd.ExecuteNonQuery();
                 MessageBox.Show("Update OK");
+                listBox1.Items[currentPessoa] = c;
             }
             catch (Exception ex)
             {
