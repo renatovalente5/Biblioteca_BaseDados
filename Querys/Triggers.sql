@@ -22,5 +22,3 @@ as
 	delete from BIBLIOTECA.Livros_Exemplares where ISBN=@isbn;
 	delete from BIBLIOTECA.Livro where ISBN=@isbn;
 go
-
-delete from BIBLIOTECA.Livro where ISBN='isbn4'

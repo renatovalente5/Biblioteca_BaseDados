@@ -10,25 +10,7 @@ create function Biblioteca.GetClientHistorico(@clienteId int) returns Table
 			where cliente = @clienteId )
 go
 
-
---UDF to get todos os livros exemplare de um determinado livro
---DROP FUNCTION BIBLIOTECA.GetLivrosEmprestados
---GO
-
-CREATE FUNCTION BIBLIOTECA.GetLivrosEmprestados(@idCliente INT) RETURNS TABLE
-AS
-	RETURN ( Select *
-				FROM  BIBLIOTECA.Emprestimo as e inner join BIBLIOTECA.Livros_Exemplares as le ON e.n_emprestimo=le.n_emprestimo
-				--using (n_emprestimo)
-				WHERE e.cliente=@idCliente)
-GO
-
---SELECT * FROM BIBLIOTECA.GetLivrosEmprestados(5)
---GO
-
-
 --drop function Biblioteca.listarExemplaresDeUmLivro
-
 CREATE FUNCTION Biblioteca.listarExemplaresDeUmLivro(@ISBN varchar(50)) returns Table
 as
 	return(select le.ISBN,le.cota,le.estado,le.numero_exemplar,le.n_emprestimo,e.data_chegada
@@ -93,4 +75,4 @@ begin
 end
 go
 
-select Biblioteca.CheckRemoveLivro('036176734-X')
+--select Biblioteca.CheckRemoveLivro('036176734-X')
