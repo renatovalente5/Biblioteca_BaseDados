@@ -1,3 +1,3 @@
-# BD_Biblioteca
+# Biblioteca_ProjetoBaseDados
 
 Biblioteca Databases Project
